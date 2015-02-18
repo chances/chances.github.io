@@ -1,0 +1,56 @@
+# Title, decription, tagline and URL for your site
+# Can be used in your theme by calling 'site.title' and so on
+title: Chance Snow
+description: Chance Snow's personal website
+tagline: Student, redhead, web developer
+url: localhost:4000
+
+# Used so Jekyll outputs the site correctly so Gulp can do what it wants
+source: src
+destination: serve
+
+# Same as the title etc for your site but can instead be
+# called by using 'site.author.name' and so on
+author:
+  name: Chance Snow
+  email: chances@cat.pdx.edu
+  # TODO: rewite this for the main about page and implement a Chance Snow @ PSU page
+  bio:
+  bio_psu: I am a second year sophomore undergraduate student of Computer Science at Portland State University. My interests lie mainly in web development and software engineering.
+  facebook: http://www.facebook.com/chancexsnow
+  twitter: ChancesOfSnow
+  google_plus: https://plus.google.com/113414184061295490862
+  tumblr: http://chancesnow.tumblr.com/
+  github: chances
+  dribbble: chance (http://www.dribbble.com/chance)
+
+# general setting for Jekyll
+googleAnalytics: UA-XXXXX-X
+
+# exclude uncompiled SASS from build
+exclude: ['assets/scss']
+
+# _config.build.yml overwrites these options when you run `gulp build`
+# Enables future posts (posts with dates in the future) and drafts
+future: true
+show_drafts: true
+# Disables the more accurate related posts for faster generating of the site
+lsi: false
+# Only make the last 10 posts so generating isn't slow
+limit_posts: 10
+
+# Permalink structure and pagination options
+relative_permalinks: false
+#relative_permalinks: true
+permalink: none
+paginate: 10
+paginate_path: 'blog/page:num'
+excerpt_separator: '<!--more-->'
+
+# Markdown library
+markdown: redcarpet
+# Markdown library options
+redcarpet:
+  extensions: ['no_intra_emphasis', 'tables', 'fenced_code_blocks', 'autolink', 'smart',
+              'strikethrough', 'superscript', 'underline', 'highlight', 'footnotes']
+highlighter: true
