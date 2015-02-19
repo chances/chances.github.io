@@ -1,0 +1,31 @@
+.post, .page {
+  margin-bottom: 3rem;
+}
+
+#social {
+  margin: 2rem 0;
+}
+
+.social-row {
+  text-align: center;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+
+  a {
+    margin: 0 0.25rem;
+    cursor: pointer;
+
+    img {
+      display: inline;
+      margin: 0;
+      width: 2.75rem;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+      &:active {
+        transform: scale(0.9);
+      }
+    }
+  }
+}

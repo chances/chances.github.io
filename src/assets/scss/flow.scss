@@ -1,0 +1,43 @@
+// Custom styles for things other than main content
+// (i.e. header, footer, sidebar)
+
+// Header
+.masthead {
+  margin-bottom: 2rem;
+}
+
+.masthead-title {
+
+  img {
+    display: inline;
+    margin: -0.6rem 0.5rem -1rem 0;
+    width: 3rem;
+    border-radius: 3rem;
+  }
+
+  small {
+    margin-left: 0.125rem;
+  }
+}
+
+//Sidebar
+.sidebar-nav-separator {
+  display: block;
+  border-top: 0.175rem solid rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-nav-item .devicons {
+  font-size: 150%;
+  position: relative;
+  top: 0.125rem;
+  margin-right: 0.125rem;
+}
+
+.sidebar-item p:not(:nth-last-child(2)) {
+  margin-bottom: 0.5rem;
+}
+
+//Footer
+footer {
+  margin-bottom: 2em;
+}
