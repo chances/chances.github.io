@@ -183,6 +183,9 @@ gulp.task('default', ['serve:dev', 'watch']);
 // Perform all updates
 gulp.task('update', ['update:jekyll', 'update:npm', 'update:bower']);
 
+// Perform all cleansing
+gulp.task('clean', ['clean:dev', 'clean:prod']);
+
 // Checks your CSS, JS and Jekyll for errors
 gulp.task('check', ['jslint', 'doctor'], function () {
   // Better hope nothing is wrong.
