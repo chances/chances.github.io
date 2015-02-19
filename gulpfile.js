@@ -29,7 +29,9 @@ gulp.task('update:jekyll', $.shell.task('bundle update'));
 gulp.task('update:npm', $.shell.task('npm update'));
 
 // Runs the bower update command to update required Bower packages
-gulp.task('update:bower', $.shell.task('bower update'));
+gulp.task('update:bower', ['update:npm'], $.shell.task('bower update'));
+
+// TODO: Write some tasks to quickly create/undraft/publish/delete posts
 
 // Runs the build command for Jekyll to compile the site locally
 // This will build the site with the production settings
