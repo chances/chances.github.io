@@ -4,9 +4,25 @@ title: Projects
 permalink: /projects/
 ---
 
-* Runaway from enigma! <small>A web-based runaway script. Bringing the sexy back to runaway scripts.</small> <a href="https:github.com/chances/runaway">GitHub</a>
-* YouTunes <small>Turn YouTube into your own personal music player.</small> <a href="https:github.com/chances/YouTunes">GitHub</a>
-* Animatum <small>An application providing a simpler alternative for animating RCT3 custom scenery.</small> <a href="https:github.com/chances/Animatum">GitHub</a>
-* InsultBot <small>An IRC bot that insults its users.</small> <a href="https:github.com/chances/insultbot">GitHub</a>
-* DictionaryBot <small>An IRC bot that defines words.</small> <a href="https:github.com/chances/dictionarybot">GitHub</a>
-* libASE-sharp <small>A C# port of <a href="http://interreality.sourceforge.net/software/libASE/">libASE</a>.</small> <a href="https:github.com/chances/libASE-sharp"></span> GitHub</a>
+<div id="projects">
+  <ul>
+    {% for project in site.data.projects %}
+    <li>
+      <h3>
+        {% if project.github %}
+        {% comment %} <!-- Conditionally get a short name for the project. --> {% endcomment %}
+        {% assign short_name = project.short_name %}
+        {% unless short_name %}
+          {% assign short_name = project.name %}
+        {% endunless %}
+        <a href="https://github.com/chances/{{ project.github }}" class="project-link github">
+          <span class="devicons devicons-github_badge" title="View {{ short_name }} on GitHub"></span>
+        </a>
+        {% endif %}
+        {{ project.name }}
+        <small>{{ project.description }}</small>
+      </h3>
+    </li>
+    {% endfor %}
+  </ul>
+</div>

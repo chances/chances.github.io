@@ -1,0 +1,24 @@
+- name: Runaway from enigma!
+  short_name: runaway
+  description: 'A web-based runaway script. Bringing the sexy back to runaway scripts.'
+  github: runaway
+
+- name: YouTunes
+  description: 'Turn YouTube into your own personal music player.'
+  github: YouTunes
+
+- name: Animatum
+  description: 'An application providing a simpler alternative for animating RCT3 custom scenery.'
+  github: Animatum
+
+- name: libASE-sharp
+  description: 'A C# port of <a href="http://interreality.sourceforge.net/software/libASE/">libASE</a>.'
+  github: libASE-sharp
+
+- name: InsultBot
+  description: 'An IRC bot that insults its users.'
+  github: insultbot
+
+- name: DictionaryBot
+  description: 'An IRC bot that defines words.'
+  github: dictionarybot
