@@ -13,19 +13,18 @@
       <header class="masthead">
         <div class="container">
           <h3 class="masthead-title">
-            <img src="/assets/images/avatar.png" />
-            <a href="/" title="Home">{{ site.title }}</a>
+            <a href="/" title="Home"><img src="/assets/images/avatar.png" /> {{ site.title }}</a>
             <small>{{ site.tagline }}</small>
           </h3>
         </div>
       </header>
 
-      <div class="container content">
+      <main class="container content">
         {{ content }}
-      </div>
+      </main>
 
-      <footer>
-
+      <footer class="container">
+        <small>Copyright &copy; {{ site.time | date: '%Y' }} {{ site.author.name }}. All rights reserved.</small>
       </footer>
     </div>
 

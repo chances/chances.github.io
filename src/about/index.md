@@ -4,28 +4,38 @@ title: About
 permalink: /about/
 ---
 
-<p class="message">
-  Hey there! This page is included as an example. Feel free to customize it for your own use upon downloading. Carry on!
-</p>
+{{ site.author.bio }}
 
-In the novel, *The Strange Case of Dr. Jeykll and Mr. Hyde*, Mr. Poole is Dr. Jekyll's virtuous and loyal butler. Similarly, Poole is an upstanding and effective butler that helps you build Jekyll themes. It's made by [@mdo](https://twitter.com/mdo).
+## Contact Me
 
-There are currently two themes built on Poole:
+Stay social and find me all over the internet:
 
-* [Hyde](http://hyde.getpoole.com)
-* [Lanyon](http://lanyon.getpoole.com)
+<div id="social">
+  <div class="social-row">
+    <a href="mailto:hello@chancesnow.me" title="Email"><img src="/assets/icons/email.png" alt="Email"></a>
+    <a href="http://www.linkedin.com/in/{{ site.author.linked_in }}" title="LinkedIn"><img src="/assets/icons/linked-in.png" alt="LinkedIn"></a>
+    <a href="https://www.github.com/{{ site.author.github }}" title="GitHub"><img src="/assets/icons/github.png" alt="GitHub"></a>
+    <a href="https://www.npmjs.org/~{{ site.author.npm }}" title="npm"><img src="/assets/icons/npm.png" alt="npm"></a>
+    <a href="http://www.dribbble.com/{{ site.author.dribbble }}" title="Dribbble"><img src="/assets/icons/dribbble.png" alt="Dribbble"></a>
+  </div>
+  <div class="social-row">
+    <a href="http://www.facebook.com/{{ site.author.facebook }}" title="Facebook"><img src="/assets/icons/facebook.png" alt="Facebook"></a>
+    <a href="https://www.twitter.com/{{ site.author.twitter }}" title="Twitter"><img src="/assets/icons/twitter.png" alt="Twitter"></a>
+    <a href="https://plus.google.com/{{ site.author.google_plus }}" title="Google Plus"><img src="/assets/icons/google-plus.png" alt="Google Plus"></a>
+    <a href="http://{{ site.author.tumblr }}.tumblr.com" title="Tumblr"><img src="/assets/icons/tumblr.png" alt="Tumblr"></a>
+    <a href="http://www.last.fm/user/{{ site.author.lastfm }}" title="last.fm"><img src="/assets/icons/lastfm.png" alt="last.fm"></a>
+  </div>
+</div>
 
-Learn more and contribute on [GitHub](https://github.com/poole).
-
-## Site Implementation Details
+## Website Setup
 
 Some fun facts about this website include:
 
 * Built for [Jekyll](http://jekyllrb.com)
 * Developed on GitHub and hosted for free on [GitHub Pages](https://pages.github.com)
-* Coded with [Brackets](http://brackets.io), an amazing open-source code editor
-* Designed and developed while listening to music like [Blood Bros Trilogy](https://soundcloud.com/maddecent/sets/blood-bros-series)
+* Scaffolded with [Yeoman](http://yeoman.io) and [Jekyllized](https://github.com/sondr3/generator-jekyllized)
+* Coded with [Brackets](http://brackets.io), an amazing modern, open-source text editor
 
-Have questions or suggestions? Feel free to [open an issue on GitHub](https://github.com/chances/chances.github.io/issues/new) or [ask me on Twitter](https://twitter.com/{{ site.author.twitter }}).
+Found a problem with the site? Feel free to [open an issue on GitHub](https://github.com/chances/chances.github.io/issues/new) or [ask me on Twitter](https://twitter.com/{{ site.author.twitter }}).
 
 Thanks for reading!
