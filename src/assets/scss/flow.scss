@@ -40,4 +40,12 @@
 //Footer
 footer {
   margin-bottom: 2em;
+
+  a.atom-feed img {
+    display: inline;
+    margin-bottom: 0;
+    position: relative;
+    top: 0.25rem;
+    width: 1rem;
+  }
 }
