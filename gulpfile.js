@@ -61,7 +61,7 @@ gulp.task('styles', function () {
     .pipe(reload({stream: true}));
 });
 
-// Optimizes the images that exists
+// Optimizes the images that exist
 gulp.task('images', function () {
   return gulp.src('src/assets/images/**')
     .pipe($.changed('site/assets/images'))
@@ -73,6 +73,20 @@ gulp.task('images', function () {
     }))
     .pipe(gulp.dest('site/assets/images'))
     .pipe($.size({title: 'images'}));
+});
+
+// Optimizes the icons that exist
+gulp.task('icons', function () {
+  return gulp.src('src/assets/icons/**')
+    .pipe($.changed('site/assets/icons'))
+    .pipe($.imagemin({
+      // Lossless conversion to progressive JPGs
+      progressive: true,
+      // Interlace GIFs for progressive rendering
+      interlaced: true
+    }))
+    .pipe(gulp.dest('site/assets/icons'))
+    .pipe($.size({title: 'icons'}));
 });
 
 // Copy over fonts to the "site" directory
@@ -197,5 +211,5 @@ gulp.task('build', ['jekyll:prod', 'styles'], function () {});
 // Builds your site with the "build" command and then runs all the optimizations on
 // it and outputs it to "./site"
 gulp.task('publish', ['build'], function () {
-  gulp.start('html', 'copy', 'images', 'fonts');
+  gulp.start('html', 'copy', 'images', 'icons', 'fonts');
 });
