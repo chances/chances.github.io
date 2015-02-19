@@ -10,7 +10,7 @@ permalink: /about/
 
 Stay social and find me all over the internet:
 
-<div id="social">
+<div class="social">
   <div class="social-row">
     <a href="mailto:hello@chancesnow.me" title="Email"><img src="/assets/icons/email.png" alt="Email"></a>
     <a href="http://www.linkedin.com/in/{{ site.author.linked_in }}" title="LinkedIn"><img src="/assets/icons/linked-in.png" alt="LinkedIn"></a>

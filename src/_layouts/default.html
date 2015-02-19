@@ -24,7 +24,15 @@
       </main>
 
       <footer class="container">
-        <a href="/atom.xml" class="atom-feed" title="Subscribe to my RSS feed"><img src="/assets/icons/rss.png" alt="RSS Feed" /></a>
+        <div class="social footer">
+          <div class="social-row">
+            <a href="mailto:hello@chancesnow.me" title="Email"><img src="/assets/icons/email.png" alt="Email"></a>
+            <a href="https://www.github.com/{{ site.author.github }}" title="GitHub"><img src="/assets/icons/github.png" alt="GitHub"></a>
+            <a href="http://www.linkedin.com/in/{{ site.author.linked_in }}" title="LinkedIn"><img src="/assets/icons/linked-in.png" alt="LinkedIn"></a>
+            <a href="https://www.twitter.com/{{ site.author.twitter }}" title="Twitter"><img src="/assets/icons/twitter.png" alt="Twitter"></a>
+            <a href="/atom.xml" class="atom-feed" title="Subscribe to my RSS feed"><img src="/assets/icons/rss.png" alt="RSS Feed" /></a>
+          </div>
+        </div>
         <small>Copyright &copy; {{ site.time | date: '%Y' }} {{ site.author.name }}. All rights reserved.</small>
       </footer>
     </div>
