@@ -5,7 +5,7 @@
 .*/
 
 # Ignore drafts
-src/_drafts
+_drafts
 
 # OSX
 ._*
@@ -51,15 +51,3 @@ tags
 *.rar
 *.tar
 *.zip
-
-# Packages
-node_modules/
-.tmp
-test/
-
-app/_bower_components
-
-# Output files and folders
-src/assets/stylesheets/style.css
-serve
-site

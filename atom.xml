@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+ <title>Chance Snow</title>
+ <link href="chancesnow.me/atom.xml" rel="self"/>
+ <link href="chancesnow.me/"/>
+ <updated>2015-02-20T04:41:10-08:00</updated>
+ <id>chancesnow.me</id>
+ <author>
+   <name>Chance Snow</name>
+   <email>chances@cat.pdx.edu</email>
+ </author>
+
+
+ <entry>
+   <title>My New Blog</title>
+   <link href="chancesnow.me/blog/my-new-blog"/>
+   <updated>2015-02-20T00:00:00-08:00</updated>
+   <id>chancesnow.me/blog/my-new-blog</id>
+   <content type="html">&lt;p&gt;Check it out, this is my brand new personal website! It’s been over a year since I’ve spent some time to really sit down and work on my website, and even that was only a little podunk, university hosted, placeholder with my face stickered on. For a while now, it’s been time I finally buckled down and created a presence for myself that I could genuinely be proud of, but there’s a problem.&lt;/p&gt;
+
+&lt;p&gt;I’ve grown increasingly tired, as have many others, of writing web pages from scratch. And yet I am still neglecting to make use of the many tools and utilities available for today’s web developer. Fortunately, my negelct is quickly fading. Things like &lt;a href=&quot;http://npmjs.org&quot;&gt;npm&lt;/a&gt;, &lt;a href=&quot;http://bower.io&quot;&gt;Bower&lt;/a&gt;, &lt;a href=&quot;http://yeoman.io&quot;&gt;Yeoman&lt;/a&gt;, and &lt;a href=&quot;http://gulpjs.org&quot;&gt;Gulp&lt;/a&gt; have been increasing productivity for literally hundreds of thousands of developers.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Node.js programs are developed using JavaScript, this means … it’s possible to merge web and backend teams into one unit which makes things much more efficient.
+&lt;span class=&quot;citation&quot;&gt;&lt;cite&gt;Cian O’Maidin&lt;/cite&gt;, author at &lt;a href=&quot;http://www.nearform.com/nodecrunch/author/cian/&quot;&gt;nearForm&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;It’s quite surprising how much these tools are actually being used. Take &lt;a href=&quot;http://bower.io&quot;&gt;Bower&lt;/a&gt;, for example:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://nodei.co/npm/bower.png?downloads=true&quot; alt=&quot;bower download stats&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Anyway, what this boils down to is simple: I need to start religiously using these tools and others like them if I want to stay as productive as possible.&lt;/p&gt;
+
+&lt;h2 id=&quot;congratulations-its-a-blog-smalland-moresmall&quot;&gt;Congratulations, it’s a blog! &lt;small&gt;And more…&lt;/small&gt;&lt;/h2&gt;
+
+&lt;p&gt;I’ve never really thought I’d do any blogging, but the opportunity has presented itself, so I might as well take advantage of it. I can’t completely put my finger on what exactly I’ll be posting here, but I think it’s safe to say it’ll at least be some technical discussions, learning materials, insights, and perhaps even a few personal venting sessions while I pursue various projects.&lt;/p&gt;
+
+&lt;p&gt;Speaking of projects, check out the rest of the site.&lt;/p&gt;
+
+&lt;p&gt;I’ll be using this and other areas of the site as a portfolio of sorts; another place to show off, basically. There’s already a page listing &lt;a href=&quot;/projects&quot;&gt;a few notable projects&lt;/a&gt; I’ve worked on that definitely wouldn’t mind being seen by other pairs of eyes. I’ve also got a few other projects up my sleeves and look forward to releasing them out into the world. But until then, there’ll always be new ideas pushing their way out of my head, and this is the perfect place to house them.&lt;/p&gt;
+
+&lt;h2 id=&quot;lets-get-technical&quot;&gt;Let’s get technical&lt;/h2&gt;
+
+&lt;p&gt;This website is a &lt;abbr class=&quot;subtle&quot; title=&quot;I just made this up.&quot;&gt;pseudo-dynamic&lt;/abbr&gt; static site generated with &lt;a href=&quot;http://jekyllrb.org&quot;&gt;Jekyll&lt;/a&gt; and scaffolded with &lt;a href=&quot;https://github.com/sondr3/generator-jekyllized&quot;&gt;Jekyllized&lt;/a&gt;. It makes use of the &lt;a href=&quot;http://lanyon.getpoole.com&quot;&gt;Lanyon&lt;/a&gt; Jekyll theme with a few of my own &lt;abbr class=&quot;subtle&quot; title=&quot;Check out the social buttons in the sidebar and footer.&quot;&gt;customizations&lt;/abbr&gt; thrown in. The Jekyllized Yeoman generator provided a nice, albeit unfinished, gulpfile providing most of the tasks I needed to get the site up and running. It even includes &lt;a href=&quot;https://github.com/pages&quot;&gt;GitHub Pages&lt;/a&gt; integration, automating deployment by pushing a specific branch to GitHub.&lt;/p&gt;
+
+&lt;p&gt;With regard to the gulpfile, I’m modifying it for my needs, specifically by adding tasks to automatically create skeletons for new blog posts and pages. Eventually, I hope to be able to manage the bulk of my site with gulp and my text editor. For other facts about this website, see the &lt;a href=&quot;/about&quot;&gt;About&lt;/a&gt; page.&lt;/p&gt;
+
+&lt;p&gt;The source code for this site is available on &lt;a href=&quot;https://github.com/chances/chances.github.io&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;thanks-for-reading&quot;&gt;Thanks for reading!&lt;/h2&gt;
+
+</content>
+ </entry>
+
+
+</feed>
