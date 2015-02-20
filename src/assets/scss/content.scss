@@ -25,6 +25,12 @@ abbr.subtle {
   cursor: default;
 }
 
+.message,
+.highlight pre {
+  border-radius: 4px;
+  background-color: #f6f6f6;
+}
+
 .footnotes {
   font-size: 90%;
   margin: 2rem 0 -2rem;
