@@ -9,6 +9,10 @@ title: {{ title }}
   Howdy! This is an example blog post that shows several types of HTML content supported in this theme.
 </div>
 
+A happy little paragraph.
+
+<!--more-->
+
 Here's a quote:
 
 > Curabitur blandit tempus porttitor. Nullam quis risus eget urna mollis ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.
