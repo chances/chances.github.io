@@ -7,13 +7,37 @@ img {
   border-radius: 0;
 }
 
+@mixin message-color($hue) {
+  background-color: hsl($hue, 65%, 65%);
+}
+
+.message.success {
+  color: #ffffff;
+  @include message-color(115);
+}
+
+.message.info {
+  color: #ffffff;
+  background-color: hsl(200, 75%, 65%);
+}
+
+.message.warning {
+  color: #ffffff;
+  background-color: hsl(50, 75%, 65%);
+}
+
+.message.error {
+  color: #ffffff;
+  @include message-color(0);
+}
+
 .citation {
   text-align: right;
   display: block;
   margin-top: 0.5rem;
 
   cite::before {
-    content: '\2014 ';
+    content: '\2014\00a0';
   }
 }
 
