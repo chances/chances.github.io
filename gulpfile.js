@@ -202,11 +202,11 @@ gulp.task('fonts', function () {
     .pipe($.size({ title: 'fonts' }));
 });
 
-// Copy xml and txt files to the "site" directory
+// Copy special files to the "site" directory
 gulp.task('copy', function () {
-  return gulp.src(['serve/*.txt', 'serve/*.xml'])
+  return gulp.src(['serve/*.txt', 'serve/*.xml', 'README.md', 'CNAME'])
     .pipe(gulp.dest('site'))
-    .pipe($.size({ title: 'xml & txt' }));
+    .pipe($.size({ title: 'special files' }));
 });
 
 // Optimizes all the CSS, HTML and concats the JS etc
