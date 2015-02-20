@@ -38,6 +38,14 @@ abbr.subtle {
   border-top: 1px solid #eee;
 }
 
+.no-footnotes {
+
+  a.footnote,
+  .footnotes {
+    display: none;
+  }
+}
+
 #projects {
 
   & ul {
