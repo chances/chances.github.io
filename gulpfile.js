@@ -32,6 +32,68 @@ gulp.task('update:npm', $.shell.task('npm update'));
 gulp.task('update:bower', ['update:npm'], $.shell.task('bower update'));
 
 // TODO: Write some tasks to quickly create/undraft/publish/delete posts
+gulp.task('jekyll:post', function () {
+  var title = null,
+      titleSlug = null,
+      date = new Date(),
+      dateSlug = [
+        date.getUTCFullYear(),
+        (date.getUTCMonth() + 1) < 10 ? '0' + (date.getUTCMonth() + 1) : (date.getUTCMonth() + 1),
+        date.getDate() < 10 ? '0' + date.getDate() : date.getDate()],
+      categoriesType = 'category',
+      categories = '';
+
+  // Prompt for the new post's title and categories
+  return gulp.src('templates/post.md')
+    .pipe($.prompt.prompt({
+      type: 'input',
+      name: 'title',
+      message: 'Post title:'
+    }, function (response) {
+      // Sanitize title
+      title = response.title.trim();
+      titleSlug = title.toLowerCase()
+        //.replace(/[\.,\/#!$%\^&\*;:{}\[\]=_`~()]/g, '')
+        .replace(/\s+/g, '-').trim();
+    }))
+    // Prompt for the new post's category/categories
+    .pipe($.prompt.prompt({
+      type: 'input',
+      name: 'categories',
+      message: 'Post category or categories (space or comma separated):'
+    }, function (response) {
+      // Sanitize categories
+      categories = response.categories.trim();
+      if (categories.indexOf(',') !== -1) {
+        categoriesType = 'categories';
+        categories = categories.replace(/\s+,\s+/g, ' ');
+      }
+      if (categories.indexOf('[') !== -1 || categories.indexOf(']') !== -1) {
+        categoriesType = 'categories';
+        categories = categories.replace(/\s+[\[\]]\s+/g, '');
+      }
+      categories = categories.trim();
+
+      if (categories.length === 0) {
+        categories = null;
+      }
+
+      console.log(title + ' (' + titleSlug + ')');
+
+      // Render the new post template
+      gulp.src('templates/post.md')
+      .pipe($.mustache({
+        title: title,
+        date: dateSlug.join('-'),
+        //hasCategories: categories !== null,
+        hasCategories: true,
+        categoriesType: categoriesType,
+        categories: categories
+      }))
+      .pipe($.rename(dateSlug.join('-') + '-' + titleSlug + '.md'))
+      .pipe(gulp.dest('src/_drafts/'));
+    }));
+});
 
 // Runs the build command for Jekyll to compile the site locally
 // This will build the site with the production settings
