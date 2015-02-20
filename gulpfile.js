@@ -5,6 +5,10 @@ var gulp = require('gulp');
 // Loads the plugins without having to list all of them, but you need
 // to call them as $.pluginname
 var $ = require('gulp-load-plugins')();
+// 'fs' is used to work with files and such
+var fs = require('fs');
+// 'path' is used to work with filenames and such
+var path = require('path');
 // 'del' is used to clean out directories and such
 var del = require('del');
 // BrowserSync isn't a gulp package, and needs to be loaded manually
@@ -32,6 +36,7 @@ gulp.task('update:npm', $.shell.task('npm update'));
 gulp.task('update:bower', ['update:npm'], $.shell.task('bower update'));
 
 // TODO: Write some tasks to quickly create/undraft/publish/delete posts
+// Creates a new draft post and promts you for a title and optional cantegories
 gulp.task('jekyll:post', function () {
   var title = null,
       titleSlug = null,
@@ -92,6 +97,46 @@ gulp.task('jekyll:post', function () {
       }))
       .pipe($.rename(dateSlug.join('-') + '-' + titleSlug + '.md'))
       .pipe(gulp.dest('src/_drafts/'));
+    }));
+});
+
+// Moves a post chosen by you to _posts, thereby publishing it
+gulp.task('jekyll:publish', function () {
+  var posts = [],
+      draftsDir = 'src/_drafts/',
+      titleRegEx = /title:\s+(.*)\s+/;
+
+  // Get metadata for all draft posts
+  fs.readdirSync(draftsDir).forEach(function (post) {
+    var title = titleRegEx.exec(fs.readFileSync(path.join(draftsDir, post)))[1];
+    posts.push({
+      path: post,
+      title: (title === undefined) ? path.basename(post) : title
+    });
+  });
+  if (posts.length === 0) {
+    console.log('There are no drafted posts to publish.');
+    return;
+  }
+
+  return gulp.src(draftsDir + '*')
+    .pipe($.prompt.prompt({
+        type: 'list',
+        name: 'post',
+        message: 'Select a post to publish:',
+        choices: posts.map(function (post, index) { return {name: post.title, value: index}; })
+    }, function (response) {
+      var post = posts[response.post];
+
+      console.log('Publishing ' + post.title + ' (' + post.path + ')');
+
+      // Copy the post to _posts, publishing it
+      gulp.src(path.join(draftsDir, post.path))
+        .pipe(gulp.dest('src/_posts/'))
+        .on('end', function () {
+          // Delete draft post
+          del([path.join(draftsDir, post.path)]);
+        });
     }));
 });
 
