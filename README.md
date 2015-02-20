@@ -11,6 +11,8 @@ See the [development](https://github.com/chances/chances.github.io/tree/developm
 The following files, directories, and those directories' contents are Copyright Chance Snow. You may not reuse anything therein without my permission:
 
 * src/_posts/
+* src/about/
+* src/projects/
 * src/assets/favicon.ico
 * src/assets/images/
 
