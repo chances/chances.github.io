@@ -38,4 +38,4 @@ Some fun facts about this website include:
 
 Found a problem with the site? Feel free to [open an issue on GitHub](https://github.com/chances/chances.github.io/issues/new) or [ask me on Twitter](https://twitter.com/{{ site.author.twitter }}).
 
-Thanks for reading!
+## Thanks for reading!
