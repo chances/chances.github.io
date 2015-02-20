@@ -4,6 +4,8 @@ The personal website of Chance Snow, automatically transformed by [Jekyll](http:
 
 Doubles as a portfolio and a blog, all in one!
 
+See the [development](https://github.com/chances/chances.github.io/tree/development) branch for full source code.
+
 ## License
 
 The following files, directories, and those directories' contents are Copyright Chance Snow. You may not reuse anything therein without my permission:
