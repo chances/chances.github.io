@@ -80,7 +80,7 @@ gulp.task('jekyll:post', function () {
       categories = categories.trim();
 
       if (categories.length === 0) {
-        categories = null;
+        categories = 'uncategorized';
       }
 
       console.log(title + ' (' + titleSlug + ')');
@@ -89,9 +89,8 @@ gulp.task('jekyll:post', function () {
       gulp.src('templates/post.md')
       .pipe($.mustache({
         title: title,
+        titleSlug: titleSlug,
         date: dateSlug.join('-'),
-        //hasCategories: categories !== null,
-        hasCategories: true,
         categoriesType: categoriesType,
         categories: categories
       }))

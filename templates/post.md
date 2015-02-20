@@ -2,7 +2,8 @@
 layout: post
 date: {{ date }}
 title: {{ title }}
-{{ #hasCategories }}{{categoriesType}}: {{ categories }}{{ /hasCategories }}
+permalink: /blog/{{ titleSlug }}
+{{categoriesType}}: {{ categories }}
 ---
 
 <div class="message">
