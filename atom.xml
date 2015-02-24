@@ -4,14 +4,14 @@
  <title>Chance Snow</title>
  <link href="chancesnow.me/atom.xml" rel="self"/>
  <link href="chancesnow.me/"/>
- <updated>2015-02-20T04:41:10-08:00</updated>
+ <updated>2015-02-24T13:44:37-08:00</updated>
  <id>chancesnow.me</id>
  <author>
    <name>Chance Snow</name>
    <email>chances@cat.pdx.edu</email>
  </author>
 
-
+ 
  <entry>
    <title>My New Blog</title>
    <link href="chancesnow.me/blog/my-new-blog"/>
@@ -54,6 +54,6 @@
 
 </content>
  </entry>
-
+ 
 
 </feed>
