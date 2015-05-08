@@ -4,7 +4,7 @@
  <title>Chance Snow</title>
  <link href="chancesnow.me/atom.xml" rel="self"/>
  <link href="chancesnow.me/"/>
- <updated>2015-05-07T23:37:52-07:00</updated>
+ <updated>2015-05-08T00:06:22-07:00</updated>
  <id>chancesnow.me</id>
  <author>
    <name>Chance Snow</name>
@@ -23,10 +23,10 @@
 
 &lt;!--more--&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;Node.js programs are developed using JavaScript, this means … it’s possible to merge web and backend teams into one unit which makes things much more efficient.
-&lt;span class=&quot;citation&quot;&gt;&lt;cite&gt;Cian O’Maidin&lt;/cite&gt;, author at &lt;a href=&quot;http://www.nearform.com/nodecrunch/author/cian/&quot;&gt;nearForm&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;figure class=&quot;quote&quot;&gt;
+&lt;blockquote&gt;Node.js programs are developed using JavaScript, this means ... it’s possible to merge web and backend teams into one unit which makes things much more efficient.&lt;/blockquote&gt;
+&lt;figcaption class=&quot;citation&quot;&gt;&lt;span&gt;Cian O&#39;Maidin, &lt;cite&gt;&lt;a href=&quot;http://www.nearform.com/nodecrunch/node-js-becoming-go-technology-enterprise/&quot;&gt;Why Node is Becoming the Go-To Technology&lt;/a&gt;&lt;/cite&gt;&lt;/span&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
 
 &lt;p&gt;It’s quite surprising how much these tools are actually being used. Take &lt;a href=&quot;http://bower.io&quot;&gt;Bower&lt;/a&gt;, for example:&lt;/p&gt;
 
