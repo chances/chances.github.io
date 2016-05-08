@@ -2,13 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>chancesnow.me/</loc>
-    <lastmod>2016-02-12T17:44:47-08:00</lastmod>
+    <lastmod>2016-05-08T02:38:15-07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
     <url>
-      <loc>chancesnow.me/blog/my-new-blog</loc>
+      <loc>chancesnow.me/blog/my-new-blog/</loc>
       
         <lastmod>2015-02-20T00:00:00-08:00</lastmod>
       
@@ -24,7 +24,7 @@
   <url>
     <loc>chancesnow.me/404</loc>
     
-      <lastmod>2016-02-12T17:44:47-08:00</lastmod>
+      <lastmod>2016-05-08T02:38:15-07:00</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -37,33 +37,7 @@
   <url>
     <loc>chancesnow.me/atom.xml</loc>
     
-      <lastmod>2016-02-12T17:44:47-08:00</lastmod>
-    
-    
-      <changefreq>monthly</changefreq>
-    
-    
-      <priority>0.3</priority>
-    
-  </url>
-  
-  <url>
-    <loc>chancesnow.me/party/</loc>
-    
-      <lastmod>2016-02-12T17:44:47-08:00</lastmod>
-    
-    
-      <changefreq>monthly</changefreq>
-    
-    
-      <priority>0.3</priority>
-    
-  </url>
-  
-  <url>
-    <loc>chancesnow.me/birthday/</loc>
-    
-      <lastmod>2016-02-12T17:44:47-08:00</lastmod>
+      <lastmod>2016-05-08T02:38:15-07:00</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -76,7 +50,20 @@
   <url>
     <loc>chancesnow.me/</loc>
     
-      <lastmod>2016-02-12T17:44:47-08:00</lastmod>
+      <lastmod>2016-05-08T02:38:15-07:00</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>chancesnow.me/party/</loc>
+    
+      <lastmod>2016-05-08T02:38:15-07:00</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -89,7 +76,20 @@
   <url>
     <loc>chancesnow.me/projects/animatum/</loc>
     
-      <lastmod>2016-02-12T17:44:47-08:00</lastmod>
+      <lastmod>2016-05-08T02:38:15-07:00</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>chancesnow.me/birthday/</loc>
+    
+      <lastmod>2016-05-08T02:38:15-07:00</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -102,7 +102,7 @@
   <url>
     <loc>chancesnow.me/about/</loc>
     
-      <lastmod>2016-02-12T17:44:47-08:00</lastmod>
+      <lastmod>2016-05-08T02:38:15-07:00</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -115,7 +115,7 @@
   <url>
     <loc>chancesnow.me/projects/</loc>
     
-      <lastmod>2016-02-12T17:44:47-08:00</lastmod>
+      <lastmod>2016-05-08T02:38:15-07:00</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -128,7 +128,7 @@
   <url>
     <loc>chancesnow.me/sitemap.xml</loc>
     
-      <lastmod>2016-02-12T17:44:47-08:00</lastmod>
+      <lastmod>2016-05-08T02:38:15-07:00</lastmod>
     
     
       <changefreq>monthly</changefreq>

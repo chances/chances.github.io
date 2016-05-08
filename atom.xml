@@ -4,7 +4,7 @@
  <title>Chance Snow</title>
  <link href="chancesnow.me/atom.xml" rel="self"/>
  <link href="chancesnow.me/"/>
- <updated>2016-02-12T17:44:47-08:00</updated>
+ <updated>2016-05-08T02:38:15-07:00</updated>
  <id>chancesnow.me</id>
  <author>
    <name>Chance Snow</name>
@@ -14,7 +14,7 @@
  
  <entry>
    <title>My New Blog</title>
-   <link href="chancesnow.me/blog/my-new-blog"/>
+   <link href="chancesnow.me/blog/my-new-blog/"/>
    <updated>2015-02-20T00:00:00-08:00</updated>
    <id>chancesnow.me/blog/my-new-blog</id>
    <content type="html">&lt;p&gt;Check it out, this is my brand new personal website! It’s been over a year since I’ve spent some time to really sit down and work on my website, and even that was only a little podunk, university hosted, placeholder with my face stickered on. For a while now, it’s been time I finally buckled down and created a presence for myself that I could genuinely be proud of, but there’s a problem.&lt;/p&gt;
