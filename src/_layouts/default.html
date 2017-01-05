@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  {% include head.html %}
+
+  <body>
+
+    {% if page.plain != true %}
+      <header class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">
+              <img src="/assets/images/avatar.png" />
+              {{ site.title }}
+            </a>
+            <small>{{ site.tagline }}</small>
+          </h3>
+          <nav class="masthead-nav">
+            {% if page.title != "Projects" %}<a class="masthead-nav-item" href="/projects">Projects</a>{% endif %}
+            {% if page.title != "About" %}<a class="masthead-nav-item" href="/about">About</a>{% endif %}
+            <!-- <span class="masthead-nav-separator"></span> -->
+            <a class="masthead-nav-item github" href="https://github.com/chances">
+              <span class="devicons devicons-github_badge" title="Find me on GitHub"></span>
+            </a>
+          </nav>
+        </div>
+      </header>
+
+      <main class="container content">
+        {{ content }}
+      </main>
+
+      <footer class="container">
+        <div class="social footer">
+          <div class="social-row">
+            <a href="mailto:{{ site.author.email }}" title="Email"><img src="/assets/icons/email.png" alt="Email"></a>
+            <a href="https://www.github.com/{{ site.author.github }}" title="GitHub"><img src="/assets/icons/github.png" alt="GitHub"></a>
+            <a href="http://www.linkedin.com/in/{{ site.author.linked_in }}" title="LinkedIn"><img src="/assets/icons/linked-in.png" alt="LinkedIn"></a>
+            <a href="https://www.twitter.com/{{ site.author.twitter }}" title="Twitter"><img src="/assets/icons/twitter.png" alt="Twitter"></a>
+            <a href="/atom.xml" title="Subscribe to my RSS feed"><img src="/assets/icons/rss.png" alt="RSS Feed" /></a>
+          </div>
+        </div>
+        <small>Copyright &copy; {{ site.time | date: '%Y' }} {{ site.author.name }}. All rights reserved.</small>
+      </footer>
+    {% else %}
+      {{ content }}
+    {% endif %}
+
+  </body>
+</html>

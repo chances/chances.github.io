@@ -1,0 +1,14 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Chance Snow -- Creator/Developer/Author
+    * @github.com/chances
+    * @twitter.com/ChancesOfSnow
+
+# TECHNOLOGY COLOPHON
+
+    HTML5, CSS3, JavaScript
+    Jekyll, Lanyon/Poole, HTML5 Boilerplate
+    Node, Yeoman, Jekyllized
