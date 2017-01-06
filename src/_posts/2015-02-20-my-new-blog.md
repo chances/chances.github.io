@@ -1,8 +1,7 @@
 ---
-layout: post
 date: 2015-02-20
 title: My New Blog
-permalink: /blog/my-new-blog/
+permalink: blog/my-new-blog
 category: uncategorized
 ---
 
