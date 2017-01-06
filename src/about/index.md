@@ -29,10 +29,10 @@ Stay social and find me all over the internet:
 
 Some fun facts about this website include:
 
-* Built for [Jekyll](http://jekyllrb.com) with [Gulp](http://gulpjs.com)
+* Built with [Hakyll](https://jaspervdj.be/hakyll/)
 * Developed on GitHub and hosted for free on [GitHub Pages](https://pages.github.com)
-* Scaffolded with [Yeoman](http://yeoman.io) and [Jekyllized](https://github.com/sondr3/generator-jekyllized)
-* Coded with [WebStorm](https://www.jetbrains.com/webstorm/), an amazing web development IDE from [JetBrains](https://jetbrains.com)
+* Scaffolded with [The Haskell Tool Stack](https://haskellstack.org/)
+* Coded with [Atom](https://atom.io/), a hackable editor for the 21st century from [GitHub](https://github.com/github/atom)
 
 Found a problem with the site? Feel free to [open an issue on GitHub](https://github.com/chances/chances.github.io/issues/new) or [ask me on Twitter](https://twitter.com/$twitter$).
 
