@@ -104,7 +104,11 @@ main = hakyllWith conf $ do
                 >>= relativizeUrls
 
     -- Compile HTML pages
-    match (fromRegex "^(404|([a-z]*/?)+/(.*)).html$") $ do
+    let htmlPages = (.&&.)
+            (fromRegex "^(404|([a-z]*/?)+/(.*)).html$")
+            (complement "party/elm/**/*.html")
+
+    match htmlPages $ do
         route   idRoute
         compile $ do
             getResourceBody
