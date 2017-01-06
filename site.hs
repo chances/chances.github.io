@@ -129,7 +129,7 @@ main = hakyllWith conf $ do
     ------------------
 
     -- Post archive
-    create ["archive/index.html"] $ do
+    create ["blog/archive/index.html"] $ do
         route   idRoute
         compile $ do
             posts <- recentFirst =<< loadAll "_posts/*"
