@@ -66,7 +66,7 @@ main = hakyllWith conf $ do
 
     -- Minify JavaScript
     match "assets/javascript/*.js" $ do
-        -- route   jsMinIdRoute -- TODO: Parse build rules in html
+        -- route   jsMinIdRoute -- TODO: Parse build rules in html?
         route   idRoute
         compile compressJsCompiler
 
@@ -157,15 +157,6 @@ main = hakyllWith conf $ do
                 >>= loadAndApplyTemplate "_layouts/default.html" indexCtx
                 >>= relativizeUrls
                 >>= cleanIndexUrls
-
-    -------------------------
-    -- Post-compilation steps
-    -------------------------
-
-    -- TODO: Minify HTML
-    -- match "*.html" $ do
-    --     route   idRoute
-    --     compile HTML.minify
 
     match "_layouts/*" $ compile templateCompiler
     match "_includes/*" $ compile templateCompiler
