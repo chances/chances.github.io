@@ -1,0 +1,39 @@
+---
+title: Projects
+data: projects
+---
+
+<h1>Projects</h1>
+
+<div id="projects">
+  $if(projects)$
+  <ul>
+    $for(projects)$
+    <li>
+      <h3>
+        $if(github)$
+          <a href="https://github.com/chances/$github$" class="project-link github">
+            $if(short_name)$
+              <span class="devicons devicons-github_badge" title="View $short_name$ on GitHub"></span>
+            $else$
+              <span class="devicons devicons-github_badge" title="View $name$ on GitHub"></span>
+            $endif$
+          </a>
+        $endif$
+        $if(link)$
+          <a href="$link$">$name$</a>
+        $else$
+          $name$
+        $endif$
+        <small>$description$</small>
+      </h3>
+    </li>
+    $endfor$
+  </ul>
+  $else$
+  <p>No projects at the moment. Check back soon!</p>
+  <p>
+    In the meantime, take a look at my <a href="https://github.com/$github$">GitHub profile</a>.
+  </p>
+  $endif$
+</div>
