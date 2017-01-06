@@ -166,19 +166,19 @@ main = hakyllWith conf $ do
 
 siteCtx :: Context String
 siteCtx =
-    constField "site_title"   "Chance Snow"                     `mappend`
-    constField "site_tagline" "Student, redhead, web developer" `mappend`
-    constField "email"        "hello@chancesnow.me"             `mappend`
-    constField "facebook"     "chancexsnow"                     `mappend`
-    constField "twitter"      "ChancesOfSnow"                   `mappend`
-    constField "google_plus"  "113414184061295490862"           `mappend`
-    constField "lastfm"       "EnigmaticEffigy"                 `mappend`
-    constField "linked_in"    "chancesnow"                      `mappend`
-    constField "tumblr"       "chancesnow"                      `mappend`
-    constField "github"       "chances"                         `mappend`
-    constField "npm"          "chancesnow"                      `mappend`
-    constField "dribbble"     "chance"                          `mappend`
-    constField "year"         currentYear                       `mappend`
+    constField "site_title"   "Chance Snow"                         `mappend`
+    constField "site_tagline" "Redhead, web developer, philosopher" `mappend`
+    constField "email"        "hello@chancesnow.me"                 `mappend`
+    constField "facebook"     "chancexsnow"                         `mappend`
+    constField "twitter"      "ChancesOfSnow"                       `mappend`
+    constField "google_plus"  "113414184061295490862"               `mappend`
+    constField "lastfm"       "EnigmaticEffigy"                     `mappend`
+    constField "linked_in"    "chancesnow"                          `mappend`
+    constField "tumblr"       "chancesnow"                          `mappend`
+    constField "github"       "chances"                             `mappend`
+    constField "npm"          "chancesnow"                          `mappend`
+    constField "dribbble"     "chance"                              `mappend`
+    constField "year"         currentYear                           `mappend`
     defaultContext
 
 currentYear :: String
