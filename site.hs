@@ -1,10 +1,13 @@
 {-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 import           Data.Aeson                 (FromJSON)
 import qualified Data.ByteString.Char8      as BS
 import qualified Data.ByteString.Lazy.Char8 as C
-import           Data.List                  (isPrefixOf, isSuffixOf, sortBy)
+import           Data.List                  (intercalate, isPrefixOf,
+                                             isSuffixOf, sortBy)
+import           Data.List.Split            (splitOn)
 import qualified Data.Map                   as M
 import           Data.Maybe                 (fromJust)
 import           Data.Monoid                (mappend)
@@ -27,7 +30,8 @@ conf = defaultConfiguration
     { destinationDirectory = "../site"
     , tmpDirectory         = "_cache/tmp"
     -- , providerDirectory = "src"
-    , deployCommand        = "echo 'No deploy command specified' && exit 1"
+    , deployCommand        = "echo 'No deploy command specified.' && " ++
+                             "echo '' && echo 'Use `make deploy`.' && "
     , deploySite           = system . deployCommand
     , ignoreFile           = filesToIgnore
     , previewHost          = "localhost"
@@ -50,6 +54,7 @@ main = hakyllWith conf $ do
             [ "assets/fonts/*"
             , "assets/icons/*"
             , "assets/images/*"
+            , "assets/images/**/*"
             , "assets/stylesheets/*.css"
             , "assets/*.*"
             , "humans.txt"
@@ -64,9 +69,11 @@ main = hakyllWith conf $ do
     -- Compile JS and CSS
     ---------------------
 
+    -- TODO: Parse build rules in html?
+
     -- Minify JavaScript
     match "assets/javascript/*.js" $ do
-        -- route   jsMinIdRoute -- TODO: Parse build rules in html?
+        -- route   jsMinIdRoute
         route   idRoute
         compile compressJsCompiler
 
@@ -92,7 +99,7 @@ main = hakyllWith conf $ do
                 >>= saveSnapshot "content"
                 >>= loadAndApplyTemplate "_layouts/post.html"    withRelatedPostsCtx
                 >>= loadAndApplyTemplate "_layouts/default.html" withRelatedPostsCtx
-                >>= relativizeUrls
+                >>= rewriteUrls
 
     -- Compile markdown pages
     match (fromRegex "([a-z]*/)*index.md$") $ do
@@ -101,7 +108,7 @@ main = hakyllWith conf $ do
             pandocCompiler
                 >>= loadAndApplyTemplate "_layouts/page.html"    pageCtx
                 >>= loadAndApplyTemplate "_layouts/default.html" pageCtx
-                >>= relativizeUrls
+                >>= rewriteUrls
 
     -- Compile HTML pages
     let htmlPages = (.&&.)
@@ -114,7 +121,7 @@ main = hakyllWith conf $ do
             getResourceBody
                 >>= applyAsTemplate siteCtx
                 >>= loadAndApplyTemplate "_layouts/default.html" siteCtx
-                >>= relativizeUrls
+                >>= rewriteUrls
 
     -- TODO: Implement loading from projects.yml data file
     -- match "projects/index.html" $ do
@@ -145,7 +152,7 @@ main = hakyllWith conf $ do
             makeItem ""
                 >>= loadAndApplyTemplate "_layouts/archive.html" archiveCtx
                 >>= loadAndApplyTemplate "_layouts/default.html" archiveCtx
-                >>= relativizeUrls
+                >>= rewriteUrls
 
     -- Root index
     match "index.html" $ do
@@ -159,7 +166,7 @@ main = hakyllWith conf $ do
             getResourceBody
                 >>= applyAsTemplate indexCtx
                 >>= loadAndApplyTemplate "_layouts/default.html" indexCtx
-                >>= relativizeUrls
+                >>= rewriteUrls
                 >>= cleanIndexUrls
 
     match "_layouts/*" $ compile templateCompiler
@@ -243,7 +250,7 @@ htmlIdRoute = customRoute createIndexRoute where
 sassToCssRoute :: Routes
 sassToCssRoute = composeRoutes
     (gsubRoute "scss/" $ const "stylesheets/")
-    (setExtension "css")
+    (setExtension "min.css")
 
 jsMinIdRoute :: Routes
 jsMinIdRoute = setExtension "min.js"
@@ -268,18 +275,32 @@ cleanPageRoute :: Routes
 cleanPageRoute = cleanRoute $ \p ->
     takeDirectory p </> takeBaseName p </> "index.html"
 
-cleanIndexUrls :: Item String -> Compiler (Item String)
-cleanIndexUrls = return . fmap (withUrls clean) where
-    idx = "index.html"
-    clean url
-        | idx `isSuffixOf` url = take (length url - length idx) url
-        | otherwise            = url
-
 --------------------------------------------------------------------------------
 -- Compilers
+
+rewriteUrls :: Item String -> Compiler (Item String)
+rewriteUrls item = relativizeUrls item >>= rewriteCssUrls
+
+-- | Rewire local, relative CSS URLs in compiles sources to point to their
+--   minified counterparts
+rewriteCssUrls :: Item String -> Compiler (Item String)
+rewriteCssUrls = return . fmap (withUrls rewrite) where
+  rewrite url
+      | ".css" `isSuffixOf` url &&
+        ("./"   `isPrefixOf` url || "../"   `isPrefixOf` url) &&
+        (not $ ".min.css" `isSuffixOf` url) =
+            intercalate ".min.css" . splitOn ".css" $ url
+      | otherwise = url
 
 compressJsCompiler :: Compiler (Item String)
 compressJsCompiler = do
   let minifyJS = C.unpack . JS.minify . C.pack . itemBody
   s <- getResourceString
   return $ itemSetBody (minifyJS s) s
+
+cleanIndexUrls :: Item String -> Compiler (Item String)
+cleanIndexUrls = return . fmap (withUrls clean) where
+  idx = "index.html"
+  clean url
+      | idx `isSuffixOf` url = take (length url - length idx) url
+      | otherwise            = url
