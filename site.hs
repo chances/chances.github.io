@@ -23,6 +23,8 @@ import           System.FilePath            (takeFileName)
 import           System.FilePath.Posix      (takeBaseName, takeDirectory, (</>))
 import           System.IO.Unsafe           (unsafePerformIO)
 import           System.Process             (system)
+import           Test.RandomStrings         (onlyAlphaNum, randomASCII,
+                                             randomString)
 import           Text.Jasmine               as JS
 
 conf :: Configuration
@@ -277,6 +279,12 @@ cleanPageRoute = cleanRoute $ \p ->
 
 --------------------------------------------------------------------------------
 -- Compilers
+
+cacheBuster :: String
+cacheBuster = unsafePerformIO $ do
+    randomHash <- randomString (onlyAlphaNum randomASCII) 8
+    putStrLn ("Generated cache buster: " ++ randomHash)
+    return randomHash
 
 rewriteUrls :: Item String -> Compiler (Item String)
 rewriteUrls item = relativizeUrls item >>= rewriteCssUrls
