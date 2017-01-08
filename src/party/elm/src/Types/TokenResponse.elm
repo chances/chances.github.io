@@ -1,4 +1,4 @@
-module TokenResponse exposing (TokenResponse, tokenResponseDecoder)
+module Types.TokenResponse exposing (TokenResponse, tokenResponseDecoder)
 
 import Json.Decode exposing (Decoder, string, succeed, fail)
 import Json.Decode.Pipeline exposing (decode, required, resolve)
@@ -6,8 +6,8 @@ import Time.DateTime exposing (DateTime, fromISO8601)
 
 
 type alias TokenResponse =
-    { access_token : String
-    , expiry_date : DateTime
+    { accessToken : String
+    , expiryDate : DateTime
     , scope : String
     }
 
