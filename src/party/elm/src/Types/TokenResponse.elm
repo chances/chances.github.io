@@ -1,8 +1,9 @@
-import Json.Decode exposing (int, string, float, customDecoder, Decoder)
-import Json.Decode.Pipeline exposing (decode, required, hardcoded)
+module TokenResponse exposing (TokenResponse, tokenResponseDecoder)
+
+import Json.Decode exposing (Decoder, string, succeed, fail)
+import Json.Decode.Pipeline exposing (decode, required, resolve)
 import Time.DateTime exposing (DateTime, fromISO8601)
 
--- import Types.Time exposing (Time)
 
 type alias TokenResponse =
     { access_token : String
@@ -10,14 +11,21 @@ type alias TokenResponse =
     , scope : String
     }
 
-decodeTokenResponse : Decoder TokenResponse
-decodeTokenResponse =
-    decode TokenResponse
-        |> required "access_token" string
-        |> required "expiry_date" decodeDateTime
-        |> required "scope" string
 
--- string : Decoder a -> Decoder (a -> b) -> Decoder b
+tokenResponseDecoder : Decoder TokenResponse
+tokenResponseDecoder =
+    let
+        toDecoder : String -> String -> String -> Decoder TokenResponse
+        toDecoder token expiryDateString scope =
+            case fromISO8601 expiryDateString of
+                Ok expiryDate ->
+                    succeed (TokenResponse token expiryDate scope)
 
-decodeDateTime : Decoder a -> Decoder (a -> b) -> Decoder DateTime
-decodeDateTime valDecoder _ = customDecoder valDecoder fromISO8601
+                Err err ->
+                    fail err
+    in
+        decode toDecoder
+            |> required "access_token" string
+            |> required "expiry_date" string
+            |> required "scope" string
+            |> resolve
