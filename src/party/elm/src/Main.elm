@@ -42,8 +42,14 @@ getToken =
 
                 Err _ ->
                     UpdateToken Nothing
+
+        url =
+            "http://localhost:3000/auth/token"
+
+        hostedUrl =
+            "https://party.chancesnow.me/auth/token"
     in
-        HttpBuilder.get "https://party.chancesnow.me/auth/token"
+        HttpBuilder.get url
             |> withExpect (Http.expectJson tokenResponseDecoder)
             |> withTimeout (10 * Time.second)
             |> send complete
