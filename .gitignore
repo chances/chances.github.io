@@ -19,3 +19,5 @@ cabal.sandbox.config
 site/
 _cache/
 _site/
+
+src/assets/javascript/party.elm.js
