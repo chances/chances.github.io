@@ -7,7 +7,7 @@ license:             BSD3
 license-file:        LICENSE
 author:              Chance Snow
 maintainer:          git@chancesnow.me
-copyright:           Copyright 2016 Chance Snow
+copyright:           Copyright 2017 Chance Snow
 category:            App
 build-type:          Simple
 extra-source-files:  README.md
