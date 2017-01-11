@@ -3,6 +3,10 @@
   description: 'A web-based runaway script. Bringing the sexy back to runaway scripts.'
   github: runaway
 
+- name: duk-vis
+  description: 'A JavaScript driven music visualizer'
+  github: duk-vis
+
 - name: YouTunes
   description: 'Turn YouTube into your own personal music player.'
   github: YouTunes
