@@ -1,0 +1,17 @@
+{
+  "short_name": "Party",
+  "name": "Party",
+  "description": "Facilitate guest interaction at your parties.",
+  "start_url": "./?utm_source=web_app_manifest",
+  "icons": [
+    {
+      "src": "/assets/images/Party-logo-noWordmark.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "background_color": "#242424",
+  "theme_color": "#FCFCFC",
+  "display": "standalone",
+  "orientation": "portrait"
+}
