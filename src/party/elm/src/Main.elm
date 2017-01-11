@@ -1,6 +1,7 @@
 module Main exposing (..)
 
 import Html exposing (Html, body, button, div, p, span, hr, h2, text)
+import Html.Attributes exposing (href)
 import Html.Events exposing (onClick)
 import Http
 import Time
@@ -99,6 +100,18 @@ view model =
             , button [ onClick GetToken ] [ text "Get Token" ]
             , hr [] []
             , p [] [ text (toString model.maybeToken) ]
+            ]
+        , div []
+            [ hr [] []
+            , Html.a
+                [ href "/party/old.html"
+                , Html.Attributes.style
+                    [ ( "cursor", "pointer" )
+                    , ( "font-size", "14pt" )
+                    , ( "color", "white" )
+                    ]
+                ]
+                [ text "Prettier Mockup" ]
             ]
         ]
 
