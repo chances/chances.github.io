@@ -162,6 +162,7 @@ main = hakyllWith conf $ do
         compile $ do
             posts <- recentFirst =<< loadAll "_posts/*"
             let indexCtx =
+                    constField "is_index" "True" `mappend`
                     listField "posts" postCtx (return posts) `mappend`
                     siteCtx
 

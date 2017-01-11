@@ -11,10 +11,10 @@
     $if(plain)$
       $title$
     $else$
-      $if(title)$
-        $title$ &middot; $site_title$
-      $else$
+      $if(is_index)$
         $site_title$
+      $else$
+        $title$ &middot; $site_title$
       $endif$
     $endif$
   </title>
