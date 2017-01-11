@@ -2,7 +2,7 @@
   "short_name": "Party",
   "name": "Party",
   "description": "Facilitate guest interaction at your parties.",
-  "start_url": "./?utm_source=web_app_manifest",
+  "start_url": "/party?utm_source=web_app_manifest",
   "icons": [
     {
       "src": "/assets/images/Party-logo-noWordmark-256.png",
