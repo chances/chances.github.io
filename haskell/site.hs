@@ -3,19 +3,17 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 import           Data.Aeson                 (FromJSON)
-import qualified Data.ByteString.Char8      as BS
 import qualified Data.ByteString.Lazy.Char8 as C
 import           Data.List                  (intercalate, isPrefixOf,
                                              isSuffixOf, sortBy)
 import           Data.List.Split            (splitOn)
 import qualified Data.Map                   as M
-import           Data.Maybe                 (fromJust)
+import           Data.Maybe                 (fromMaybe)
 import           Data.Monoid                (mappend)
 import           Data.Time.Calendar         (toGregorian)
 import           Data.Time.Clock            (getCurrentTime)
 import           Data.Time.LocalTime        (getCurrentTimeZone, localDay,
                                              utcToLocalTime)
-import           Data.Yaml                  (decode)
 import           GHC.Generics               (Generic)
 import           Hakyll
 import           Hakyll.Web.Sass            (sassCompiler)
@@ -26,6 +24,8 @@ import           System.Process             (system)
 import           Test.RandomStrings         (onlyAlphaNum, randomASCII,
                                              randomString)
 import           Text.Jasmine               as JS
+
+import qualified Projects
 
 conf :: Configuration
 conf = defaultConfiguration
@@ -113,9 +113,11 @@ main = hakyllWith conf $ do
                 >>= rewriteUrls
 
     -- Compile HTML pages
-    let htmlPages = (.&&.)
+    let notElmPages = complement "party/elm/**/*.html"
+        notProjectsIndex = complement "projects/index.html"
+        htmlPages = (.&&.)
             (fromRegex "^(404|([a-z]*/?)+/(.*)).html$")
-            (complement "party/elm/**/*.html")
+            ((.&&.) notElmPages notProjectsIndex)
 
     match htmlPages $ do
         route   idRoute
@@ -126,16 +128,19 @@ main = hakyllWith conf $ do
                 >>= rewriteUrls
 
     -- TODO: Implement loading from projects.yml data file
-    -- match "projects/index.html" $ do
-    --     route   idRoute
-    --     compile $ do
-    --         let projects = loadData
-    --             indexCtx =
-    --                 listField "posts" postCtx (return posts) `mappend`
-    --                 siteCtx
-    --
-    --         getResourceBody
-    --             >>= applyAsTemplate
+    match "projects/index.html" $ do
+        route   idRoute
+        compile $ do
+            let projectsData = Projects.loadProjectsData "_data/projects.yml"
+                projectItems = Projects.projectsToItems projectsData
+                projectsCtx =
+                    listField "projects" Projects.projectCtx (return projectItems) `mappend`
+                    siteCtx
+
+            getResourceBody
+                >>= applyAsTemplate projectsCtx
+                >>= loadAndApplyTemplate "_layouts/default.html" projectsCtx
+                >>= rewriteUrls
 
     ------------------
     -- Generated files
@@ -211,35 +216,7 @@ postCtx =
     siteCtx
 
 pageCtx :: Context String
-pageCtx = postCtx
-
-data Project = Project
-    { name        :: String
-    , short_name  :: Maybe String
-    , description :: String
-    , github      :: String
-    } deriving (Generic)
-
-instance FromJSON Project
-
-getProjectsData :: FilePath -> Maybe [Project] -> [Project]
-getProjectsData dataFilePath maybeProjects = unsafePerformIO $ do
-    ymlData <- BS.readFile dataFilePath
-    return $ case (Data.Yaml.decode ymlData) of
-        Just projects -> projects
-        Nothing       -> []
-
-projectToContext :: Project -> Context String
-projectToContext project =
-    constField "name" (name project) `mappend`
-    case short_name project of
-        Just shortName ->
-            constField "short_name"  (fromJust $ short_name project)  `mappend`
-            constField "description" (description project) `mappend`
-            constField "github"      (github project)
-        Nothing        ->
-            constField "description" (description project) `mappend`
-            constField "github"      (github project)
+pageCtx = siteCtx
 
 --------------------------------------------------------------------------------
 -- Routing
@@ -297,7 +274,7 @@ rewriteCssUrls = return . fmap (withUrls rewrite) where
   rewrite url
       | ".css" `isSuffixOf` url &&
         ("/"   `isPrefixOf` url || "./"   `isPrefixOf` url || "../"   `isPrefixOf` url) &&
-        (not $ ".min.css" `isSuffixOf` url) =
+        not (".min.css" `isSuffixOf` url) =
             intercalate ".min.css" . splitOn ".css" $ url
       | otherwise = url
 

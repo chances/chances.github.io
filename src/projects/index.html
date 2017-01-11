@@ -1,6 +1,5 @@
 ---
 title: Projects
-data: projects
 ---
 
 <h1>Projects</h1>
@@ -13,14 +12,14 @@ data: projects
       <h3>
         $if(github)$
           <a href="https://github.com/chances/$github$" class="project-link github">
-            $if(short_name)$
+            $if(has_short_name)$
               <span class="devicons devicons-github_badge" title="View $short_name$ on GitHub"></span>
             $else$
               <span class="devicons devicons-github_badge" title="View $name$ on GitHub"></span>
             $endif$
           </a>
         $endif$
-        $if(link)$
+        $if(has_link)$
           <a href="$link$">$name$</a>
         $else$
           $name$
