@@ -287,7 +287,7 @@ cacheBuster = unsafePerformIO $ do
     return randomHash
 
 rewriteUrls :: Item String -> Compiler (Item String)
-rewriteUrls item = relativizeUrls item >>= rewriteCssUrls
+rewriteUrls item = rewriteCssUrls item
 
 -- | Rewire local, relative CSS URLs in compiles sources to point to their
 --   minified counterparts
@@ -295,7 +295,7 @@ rewriteCssUrls :: Item String -> Compiler (Item String)
 rewriteCssUrls = return . fmap (withUrls rewrite) where
   rewrite url
       | ".css" `isSuffixOf` url &&
-        ("./"   `isPrefixOf` url || "../"   `isPrefixOf` url) &&
+        ("/"   `isPrefixOf` url || "./"   `isPrefixOf` url || "../"   `isPrefixOf` url) &&
         (not $ ".min.css" `isSuffixOf` url) =
             intercalate ".min.css" . splitOn ".css" $ url
       | otherwise = url
