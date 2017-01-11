@@ -23,7 +23,7 @@ h1, h2 {
   margin-bottom: 3.5rem;
   flex: 1;
   overflow: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
 #content[data-show="contribute"] {
