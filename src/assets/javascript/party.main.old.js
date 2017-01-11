@@ -46,6 +46,7 @@ $(function () {
     }
   });
 
+  // Only do this when @media (display-mode: standalone) ?
   $('#query').focus(function () {
     $musicMenu.hide();
     $mainMenu.hide();
