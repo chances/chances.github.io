@@ -1,6 +1,6 @@
 module Main exposing (..)
 
-import Html exposing (Html, body, button, div, p, span, hr, h2, text)
+import Html exposing (Html, body, button, img, div, p, span, hr, h2, text)
 import Html.Attributes exposing (href)
 import Html.Events exposing (onClick)
 import Http
@@ -95,6 +95,25 @@ view : Model -> Html Msg
 view model =
     body []
         [ h2 [] [ text "chancesnow.me/party" ]
+        , div
+            [ Html.Attributes.style
+                [ ( "display", "flex" )
+                , ( "flex-direction", "column" )
+                , ( "align-items", "center" )
+                , ( "justify-content", "center" )
+                ]
+            ]
+            [ img
+                [ Html.Attributes.src "/assets/images/Party-logo-invert.png"
+                , Html.Attributes.alt "Party"
+                , Html.Attributes.style
+                    [ ( "max-width", "454px" )
+                    , ( "margin", "0" )
+                    ]
+                ]
+                []
+            , p [ Html.Attributes.style [ ( "margin-top", "0" ) ] ] [ text "Prototype" ]
+            ]
         , div []
             [ p [] (renderToken model.maybeToken)
             , button [ onClick GetToken ] [ text "Get Token" ]
