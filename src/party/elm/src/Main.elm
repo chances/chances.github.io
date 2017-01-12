@@ -1,12 +1,15 @@
 module Main exposing (..)
 
+import Debug
 import Html exposing (Html, main_, button, img, div, p, span, hr, h2, text)
 import Html.Attributes exposing (href)
 import Html.Events exposing (onClick)
 import Http
 import Time
-import HttpBuilder exposing (withExpect, withTimeout, send)
+import HttpBuilder exposing (withCredentials, withExpect, withTimeout, send)
+import Types.Envelope exposing (Envelope, isErrorEnvelope)
 import Types.TokenResponse exposing (TokenResponse, tokenResponseDecoder)
+import Types.PingResponse exposing (PingResponse, pingResponseDecoder)
 
 
 -- "circuithub/elm-list-extra": "3.0.0 <= v < 4.0.0",
@@ -14,6 +17,7 @@ import Types.TokenResponse exposing (TokenResponse, tokenResponseDecoder)
 
 type alias Model =
     { tvMode : Bool
+    , maybePingResponse : Maybe PingResponse
     , maybeToken : Maybe TokenResponse
     , searchQuery : String
     }
@@ -21,40 +25,42 @@ type alias Model =
 
 initialState : Model
 initialState =
-    Model False Nothing ""
+    Model False Nothing Nothing ""
 
 
 type Msg
-    = Reset
-    | GetToken
+    = Pong (Maybe PingResponse)
     | UpdateToken (Maybe TokenResponse)
 
 
 init : ( Model, Cmd Msg )
 init =
-    ( initialState, Cmd.none )
+    ( initialState, pingApi )
 
 
-getToken : Cmd Msg
-getToken =
+pingApi : Cmd Msg
+pingApi =
     let
-        complete : Result Http.Error TokenResponse -> Msg
+        complete : Result Http.Error (Envelope PingResponse) -> Msg
         complete result =
             case result of
-                Ok tokenResponse ->
-                    UpdateToken (Just tokenResponse)
+                Ok pingResponseEnvelope ->
+                    case isErrorEnvelope pingResponseEnvelope of
+                        True ->
+                            Pong Nothing
+
+                        -- TODO: Handle error envelope
+                        False ->
+                            Pong pingResponseEnvelope.data
 
                 Err _ ->
-                    UpdateToken Nothing
+                    Pong Nothing
 
-        url =
-            "http://localhost:3000/auth/token"
-
-        hostedUrl =
-            "https://party.chancesnow.me/auth/token"
+        -- TODO: Handle Http error
     in
-        HttpBuilder.get url
-            |> withExpect (Http.expectJson tokenResponseDecoder)
+        HttpBuilder.get "http://app.local:3000/auth/ping"
+            |> withCredentials
+            |> withExpect (Http.expectJson pingResponseDecoder)
             |> withTimeout (10 * Time.second)
             |> send complete
 
@@ -62,14 +68,21 @@ getToken =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        Reset ->
-            init
-
-        GetToken ->
-            ( model, getToken )
+        Pong maybePingResponse ->
+            ( Model
+                model.tvMode
+                (Debug.log "pong: " maybePingResponse)
+                model.maybeToken
+                model.searchQuery
+            , Cmd.none
+            )
 
         UpdateToken maybeToken ->
-            ( Model model.tvMode maybeToken ""
+            ( Model
+                model.tvMode
+                model.maybePingResponse
+                (Debug.log "token" maybeToken)
+                model.searchQuery
             , Cmd.none
             )
 
@@ -113,12 +126,6 @@ view model =
                 ]
                 []
             , p [ Html.Attributes.style [ ( "margin-top", "0" ) ] ] [ text "Prototype" ]
-            ]
-        , div []
-            [ p [] (renderToken model.maybeToken)
-            , button [ onClick GetToken ] [ text "Get Token" ]
-            , hr [] []
-            , p [] [ text (toString model.maybeToken) ]
             ]
         , div []
             [ hr [] []
