@@ -21,3 +21,4 @@ _cache/
 _site/
 
 src/assets/javascript/party.elm.js
+src/assets/javascript/party.js
