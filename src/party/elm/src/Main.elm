@@ -104,7 +104,7 @@ view model =
                 ]
             ]
             [ img
-                [ Html.Attributes.src "/assets/images/Party-logo-invert.png"
+                [ Html.Attributes.src "/assets/images/party/Party-logo-invert.png"
                 , Html.Attributes.alt "Party"
                 , Html.Attributes.style
                     [ ( "max-width", "454px" )
