@@ -1,4 +1,4 @@
-module Types.TokenResponse exposing (TokenResponse, tokenResponseDecoder)
+module Types.TokenResponse exposing (..)
 
 import Json.Decode exposing (Decoder, string, succeed, fail)
 import Json.Decode.Pipeline exposing (decode, required, resolve)
@@ -10,6 +10,16 @@ type alias TokenResponse =
     , expiryDate : DateTime
     , scope : String
     }
+
+
+tokenExpired : TokenResponse -> DateTime -> Bool
+tokenExpired tokenResponse currentTime =
+    case Time.DateTime.compare tokenResponse.expiryDate currentTime of
+        GT ->
+            False
+
+        _ ->
+            True
 
 
 tokenResponseDecoder : Decoder TokenResponse
