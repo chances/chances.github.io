@@ -1,1 +1,2 @@
-var app = Elm.Main.fullscreen();
+
+var app = Elm.Main.embed(document.body);

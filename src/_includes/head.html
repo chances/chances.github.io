@@ -29,8 +29,10 @@
   $endif$
   $if(stylesheet)$<link rel="stylesheet" href="$stylesheet$">$endif$
 
-  $if(plain)$$else$
   <!-- JS -->
+  $if(plain)$
+    $if(javascript)$<script type="text/javascript" src="$javascript$"></script>$endif$
+  $else$
   <!-- build:js /assets/javascript/all.min.js -->
   <!-- script src="/assets/javascript/javascript.js"></script>
   <script src="/assets/javascript/somejavascript.js"></script -->
