@@ -5,8 +5,10 @@ import Html exposing (Html, main_, button, img, div, p, span, hr, h2, text)
 import Html.Attributes exposing (href)
 import Html.Events exposing (onClick)
 import Http
+import Task
 import Time
 import HttpBuilder exposing (withCredentials, withExpect, withTimeout, send)
+import Time.DateTime exposing (DateTime, fromTimestamp)
 import Types.Envelope exposing (Envelope, isErrorEnvelope)
 import Types.TokenResponse exposing (TokenResponse, tokenResponseDecoder)
 import Types.PingResponse exposing (PingResponse, pingResponseDecoder)
@@ -29,7 +31,8 @@ initialState =
 
 
 type Msg
-    = Pong (Maybe PingResponse)
+    = GetTimeAndThen (DateTime -> Msg)
+    | Pong (Maybe PingResponse)
     | UpdateToken (Maybe TokenResponse)
 
 
@@ -98,6 +101,9 @@ getToken maybePingResponse =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        GetTimeAndThen successHandler ->
+            ( model, (Task.perform (\time -> successHandler (fromTimestamp time)) Time.now) )
+
         Pong maybePingResponse ->
             ( Model
                 model.tvMode
