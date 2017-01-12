@@ -1,6 +1,6 @@
 module Main exposing (..)
 
-import Html exposing (Html, body, button, img, div, p, span, hr, h2, text)
+import Html exposing (Html, main_, button, img, div, p, span, hr, h2, text)
 import Html.Attributes exposing (href)
 import Html.Events exposing (onClick)
 import Http
@@ -93,7 +93,7 @@ renderToken maybeToken =
 
 view : Model -> Html Msg
 view model =
-    body []
+    main_ []
         [ h2 [] [ text "chancesnow.me/party" ]
         , div
             [ Html.Attributes.style

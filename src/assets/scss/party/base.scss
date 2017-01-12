@@ -7,7 +7,7 @@
   cursor: default;
 }
 
-html, body {
+html, body, main {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -15,7 +15,7 @@ html, body {
   overflow: hidden;
 }
 
-body {
+main {
   font-family: proxima_nova, "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 10pt;
   color: #fcfcfc;
@@ -25,13 +25,13 @@ body {
 }
 
 @media (min-width: 30rem) {
-  body {
+  main {
     letter-spacing: 0.025rem;
   }
 }
 
 @media (min-width: 56rem) {
-  body {
+  main {
     letter-spacing: 0.05rem;
   }
 }
