@@ -13,7 +13,7 @@
   <title>
     
       
-        Chance Snow
+        My New(er) Blog &middot; Chance Snow
       
     
   </title>
@@ -86,57 +86,57 @@
       </header>
 
       <main class="container content">
-        <div class="posts no-footnotes">
-  <div>
-    <h1 class="post-title">
-        Coming Soon: <small>More Blog Posts</small>
-    </h1>
-    <p>I <a href="https://github.com/chances/chances.github.io/issues/10">promise</a>!</p>
-  </div>
-  <hr />
+        <article class="post">
+  <h1 class="post-title">My New(er) Blog</h1>
   
-    <article class="post">
-      <h1 class="post-title">
-        <a href="/./blog/my-newer-blog/">
-          My New(er) Blog
-        </a>
-      </h1>
-      <span class="post-date">January  5, 2017</span>
-
-      
-          <p>Out with the old, in with the new(er)!</p>
+  <span class="post-date">Thursday, January 5, 2017</span>
+  <p>Out with the old, in with the new(er)!</p>
 <p>Although I enjoyed <a href="/blog/my-new-blog">revamping</a> my website back in 2015, I failed to foresee how much the tools I put in place would get in my way. And, damn, did they get in the way! Making <em>minor</em> changes was hard enough, let alone trying to write a blog post. I was even managing <strong>two</strong> <em>different</em> Git repositories for <strong>one</strong> static website. All these pain points capitalized on each other creating a tooling nightmare.</p>
 <p>Today, I’ve decided to switch out the toolbox and use something better.</p>
+<!--more-->
+<figure class="quote">
+<blockquote>
+I need to start religiously using these tools and others like them if I want to stay as productive as possible.
+</blockquote>
+<figcaption class="citation">
+<span>Chance Snow, <cite><a href="/blog/my-new-blog">My New Blog</a></cite></span>
+</figcaption>
+</figure>
+<h2 id="religiosity-is-not-the-answer">Religiosity is not the answer…</h2>
+<p>Religiously using a bunch of tools to stay productive is just asking for trouble. I shouldn’t torture myself and spend an hour tooling around before I even get to work. I’m better off watching a monkey try to use a hammer.</p>
+<p>They say you learn the most when you fail. My failure is evident judging by the <abbr class="subtle" title="I backdated all the posts shown through the last two years...">absence of posts</abbr> on this blog. I realize I can’t keep my tools out of the way entirely, but I can <em>simplify</em> the process of using them. I can fix this nightmare with a different tool, a <em>better</em> tool.</p>
+<h2 id="fostering-productivity-with-flexibility">Fostering productivity with flexibility</h2>
+<p>Doing more with <abbr class="subtle" title="In my end-user interface, at least. There's still a fair amount of dependencies attached to the site, but nearly as many direct dependents.">less</abbr> using <a href="https://en.wikipedia.org/wiki/Haskell_(programming_language)">Haskell</a>.</p>
+<p>Haskell’s generality affords its users the opportunity to make virtually anything they please and it’s <a href="https://hackage.haskell.org/package/base">standard library</a> is very robust. <a href="https://haskellstack.org">The Haskell Tool Stack</a> makes project setup a breeze and is tightly integrated with the Haskell ecosystem as a whole.</p>
+<h3 id="how-haskell-and-stack-help-me">How Haskell and Stack help me</h3>
+<p>My workflow is greatly simplified:</p>
+<ul>
+<li>No longer am I bogged down with <a href="http://gulpjs.com/">gulp</a>, <a href="https://jekyllrb.com/">ruby</a>, or <a href="https://bower.io/">bower</a> and my train wreck of an imperatively defined build tool-chain.</li>
+<li>I can now deploy any change in <strong>minutes</strong> not hours.</li>
+<li><a href="https://github.com/chances/chances.github.io/tree/hakyll">Uncompiled source code</a> is in the <em>same</em> Git repository as the <a href="https://github.com/chances/chances.github.io/tree/master">built site</a>.</li>
+<li>Simply running <code>make watch</code> builds the entire site and watches for changes as they happen</li>
+<li>Did I mention speed? (Native performance, FTW!)</li>
+</ul>
+<p>This means I can (<em>finally</em>) write blog posts <em>when the mood strikes</em> and not feel disheartened at the hand of a cumbersome workflow.</p>
+<h3 id="downsides">Downsides</h3>
+<p>Learning curve of Haskell is <abbr class="subtle" title="But that's normal when learning a new language...">steep</abbr>:</p>
+<ul>
+<li>Monads</li>
+<li>Functors</li>
+<li>Type mismatches</li>
+<li>Other headaches</li>
+</ul>
+<p>Rarely, dependency hell sneaks up on me, but it’s curtailed by Stack rather well.</p>
+<h2 id="technical-details">Technical details</h2>
+<p>This is a static site generated with <a href="https://jaspervdj.be/hakyll">Hakyll</a> and scaffolded with <a href="https://haskellstack.org">The Haskell Tool Stack</a>. Source code is available in full on <a href="https://github.com/chances/chances.github.io">GitHub</a>.</p>
+<h2 id="thanks-for-reading">Thanks for reading!</h2>
+</article>
 
-      
-
-      <a href="/./blog/my-newer-blog/">Read more &raquo;</a>
-    </article>
-  
-    <article class="post">
-      <h1 class="post-title">
-        <a href="/./blog/my-new-blog/">
-          My New Blog
-        </a>
-      </h1>
-      <span class="post-date">February 20, 2015</span>
-
-      
-          <p>Check it out, this is my brand new personal website! It’s been over a year since I’ve spent some time to really sit down and work on my website, and even that was only a little podunk, university hosted, placeholder with my face stickered on. For a while now, it’s been time I finally buckled down and created a presence for myself that I could genuinely be proud of, but there’s a problem.</p>
-<p>I’ve grown increasingly tired, as have many others, of writing web pages from scratch. And yet I am still neglecting to make use of the many tools and utilities available for today’s web developer. Fortunately, my negelct is quickly fading. Things like <a href="http://npmjs.org">npm</a>, <a href="http://bower.io">Bower</a>, <a href="http://yeoman.io">Yeoman</a>, and <a href="http://gulpjs.org">Gulp</a> have been increasing productivity for literally hundreds of thousands of developers.</p>
-
-      
-
-      <a href="/./blog/my-new-blog/">Read more &raquo;</a>
-    </article>
-  
-</div>
-
-<!-- TODO: Add pagination (10 posts per page) -->
-<!-- https://dannysu.com/2015/10/29/hakyll-pagination/ -->
-<div class="pagination">
-  <span class="pagination-item older">Older</span>
-  <span class="pagination-item newer">Newer</span>
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+  </ul>
 </div>
 
       </main>
