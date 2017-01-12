@@ -65,6 +65,36 @@ pingApi =
             |> send complete
 
 
+getToken : Maybe PingResponse -> Cmd Msg
+getToken maybePingResponse =
+    case maybePingResponse of
+        Just pingResponse ->
+            let
+                complete : Result Http.Error TokenResponse -> Msg
+                complete result =
+                    case result of
+                        Ok tokenResponse ->
+                            UpdateToken (Just tokenResponse)
+
+                        Err _ ->
+                            UpdateToken Nothing
+
+                url =
+                    "http://app.local:3000/auth/token"
+
+                hostedUrl =
+                    "https://party.chancesnow.me/auth/token"
+            in
+                HttpBuilder.get url
+                    |> withCredentials
+                    |> withExpect (Http.expectJson tokenResponseDecoder)
+                    |> withTimeout (10 * Time.second)
+                    |> send complete
+
+        Nothing ->
+            Cmd.none
+
+
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
@@ -74,7 +104,7 @@ update msg model =
                 (Debug.log "pong: " maybePingResponse)
                 model.maybeToken
                 model.searchQuery
-            , Cmd.none
+            , getToken maybePingResponse
             )
 
         UpdateToken maybeToken ->
