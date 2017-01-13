@@ -1,4 +1,4 @@
-module Types.PingResponse exposing (PingResponse, ApiStatus, pingResponseDecoder)
+module Ping.Types exposing (..)
 
 import Json.Decode exposing (Decoder, field, string, bool)
 import Json.Decode.Pipeline exposing (decode, required)
@@ -31,3 +31,17 @@ apiStatusDecoder : Decoder ApiStatus
 apiStatusDecoder =
     decode ApiStatus
         |> required "available" bool
+
+
+type alias Model =
+    { maybePingResponse : Maybe PingResponse
+    }
+
+
+initialState : Model
+initialState =
+    Model Nothing
+
+
+type Msg
+    = Pong (Maybe PingResponse)
