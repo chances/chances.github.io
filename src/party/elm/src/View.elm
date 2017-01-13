@@ -52,5 +52,12 @@ prototypeHeader =
                 ]
             ]
             []
-        , p [ style [ ( "margin-top", "0" ) ] ] [ text "Prototype" ]
+        , p
+            [ style
+                [ ( "margin-top", "0" )
+                , ( "position", "relative" )
+                , ( "top", "-15px" )
+                ]
+            ]
+            [ text "Prototype" ]
         ]
