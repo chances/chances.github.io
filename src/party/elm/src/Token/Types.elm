@@ -49,7 +49,9 @@ type alias Model =
 
 initialState : Model
 initialState =
-    Model Nothing False
+    { maybeToken = Nothing
+    , expired = False
+    }
 
 
 type Msg

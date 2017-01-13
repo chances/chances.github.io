@@ -4,6 +4,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 import Model exposing (Model, Msg(..))
+import Search.View as Search
 
 
 root : Model -> Html Msg
@@ -13,6 +14,7 @@ root model =
         , prototypeHeader
         , div []
             [ text ("Token expired: " ++ toString model.token.expired) ]
+        , Search.root model.search
         , div []
             [ hr [] []
             , a

@@ -4,11 +4,13 @@ import Debug
 import Task
 import Time
 import Time.DateTime exposing (fromTimestamp)
+import Ping.Rest as Ping
+import Ping.Types as Ping
 import Token.Rest as Token
 import Token.State as Token
 import Token.Types as Token
-import Ping.Rest as Ping
-import Ping.Types as Ping
+import Search.State as Search
+import Search.Types as Search
 import Model exposing (..)
 
 
@@ -17,6 +19,10 @@ init =
     ( initialState
     , Cmd.batch [ Token.init ]
     )
+
+
+
+-- Look into http://package.elm-lang.org/packages/Fresheyeball/elm-return
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -46,6 +52,15 @@ update msg model =
                 , Cmd.map Token command
                 )
 
+        Search searchMsg ->
+            let
+                ( searchModel, command ) =
+                    Search.update searchMsg model.search
+            in
+                ( { model | search = searchModel }
+                , Cmd.map Search command
+                )
+
 
 getToken : Maybe Ping.PingResponse -> Cmd Msg
 getToken maybePingResponse =
@@ -56,4 +71,5 @@ subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.batch
         [ Sub.map Token (Token.subscriptions model.token)
+        , Sub.map Search (Search.subscriptions model.search)
         ]
