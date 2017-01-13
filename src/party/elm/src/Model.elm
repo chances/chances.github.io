@@ -15,7 +15,11 @@ type alias Model =
 
 initialState : Model
 initialState =
-    Model False Ping.initialState Token.initialState ""
+    Model
+        False
+        Ping.initialState
+        Token.initialState
+        ""
 
 
 type Msg

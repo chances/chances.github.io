@@ -12,6 +12,8 @@ root model =
         [ h2 [ tvMode ] [ text "chancesnow.me/party" ]
         , prototypeHeader
         , div []
+            [ text ("Token expired: " ++ toString model.token.expired) ]
+        , div []
             [ hr [] []
             , a
                 [ href "/party/old.html"

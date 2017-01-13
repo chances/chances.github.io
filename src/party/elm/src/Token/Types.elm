@@ -43,13 +43,15 @@ tokenDecoder =
 
 type alias Model =
     { maybeToken : Maybe Token
+    , expired : Bool
     }
 
 
 initialState : Model
 initialState =
-    Model Nothing
+    Model Nothing False
 
 
 type Msg
     = UpdateToken (Maybe Token)
+    | CheckToken DateTime

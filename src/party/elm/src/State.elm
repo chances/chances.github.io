@@ -5,6 +5,7 @@ import Task
 import Time
 import Time.DateTime exposing (fromTimestamp)
 import Token.Rest as Token
+import Token.State as Token
 import Token.Types as Token
 import Ping.Rest as Ping
 import Ping.Types as Ping
@@ -13,14 +14,21 @@ import Model exposing (..)
 
 init : ( Model, Cmd Msg )
 init =
-    ( initialState, ping )
+    ( initialState
+    , Cmd.batch [ Token.init ]
+    )
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         GetTimeAndThen successHandler ->
-            ( model, (Task.perform (\time -> successHandler (fromTimestamp time)) Time.now) )
+            ( model
+            , (Task.perform
+                (\time -> successHandler (fromTimestamp time))
+                Time.now
+              )
+            )
 
         Ping pingMsg ->
             case pingMsg of
@@ -30,16 +38,13 @@ update msg model =
                     )
 
         Token tokenMsg ->
-            case tokenMsg of
-                Token.UpdateToken maybeToken ->
-                    ( { model | token = Token.Model (Debug.log "token" maybeToken) }
-                    , Cmd.none
-                    )
-
-
-ping : Cmd Msg
-ping =
-    Cmd.map Ping Ping.ping
+            let
+                ( tokenModel, command ) =
+                    Token.update tokenMsg model.token
+            in
+                ( { model | token = tokenModel }
+                , Cmd.map Token command
+                )
 
 
 getToken : Maybe Ping.PingResponse -> Cmd Msg
@@ -49,4 +54,6 @@ getToken maybePingResponse =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Sub.none
+    Sub.batch
+        [ Sub.map Token (Token.subscriptions model.token)
+        ]
