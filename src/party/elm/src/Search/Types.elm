@@ -2,14 +2,15 @@ module Search.Types exposing (..)
 
 
 type alias Model =
-    { query : Maybe String
+    { query : String
     }
 
 
 initialState : Model
 initialState =
-    { query = Nothing }
+    { query = "" }
 
 
 type Msg
-    = Search (Maybe String)
+    = ChangeQuery String
+    | Search

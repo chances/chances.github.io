@@ -34,6 +34,8 @@
     "semistandard": "^9.2.1"
   },
   "dependencies": {
-    "haskind": "^0.6.2"
+    "bluebird": "^3.4.7",
+    "haskind": "^0.6.2",
+    "spotify-web-api-js": "^0.21.2"
   }
 }

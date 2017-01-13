@@ -2,7 +2,7 @@ module Search.State exposing (init, update, subscriptions)
 
 import Debug
 import Search.Types exposing (..)
-import Spotify exposing (searchTracks)
+import Spotify
 import Model as Model
 
 
@@ -14,9 +14,14 @@ init =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        Search maybeQuery ->
+        Search ->
             ( model
-            , searchTracks maybeQuery
+            , Spotify.searchTracks model.query
+            )
+
+        ChangeQuery newQuery ->
+            ( { model | query = newQuery }
+            , Cmd.none
             )
 
 

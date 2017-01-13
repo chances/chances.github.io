@@ -7,6 +7,7 @@ import Time.DateTime exposing (fromTimestamp)
 import Ping.Rest as Ping
 import Token.Rest exposing (..)
 import Token.Types exposing (..)
+import Spotify
 import Model as Model
 
 
@@ -28,17 +29,17 @@ update msg model =
                 Just token ->
                     if tokenExpired token currentTime then
                         ( { model | maybeToken = Nothing, expired = True }
-                        , Cmd.none
+                        , Spotify.updateToken Nothing
                           -- TODO: Refresh the token somehow
                         )
                     else
                         ( { model | expired = False }
-                        , Cmd.none
+                        , Spotify.updateToken (Just token.accessToken)
                         )
 
                 Nothing ->
                     ( { model | expired = True }
-                    , Cmd.none
+                    , Spotify.updateToken Nothing
                     )
 
 
