@@ -1,0 +1,39 @@
+{
+  "name": "chances-github-io",
+  "version": "1.0.0",
+  "description": "JavaScript assets for https://chancesnow.me",
+  "scripts": {
+    "build": "npm run build:party",
+    "build:party": "browserify $ENTRY_POINT -o $TARGET",
+    "lint": "npm run lint:party",
+    "lint:party": "semistandard ./src/party/js/{./party,spotify/**/*}.js --fix",
+    "test": "npm run test:party",
+    "test:party": "npm run test:party:js && npm run test:party:elm-install && npm run test:party:elm-test",
+    "test:party:js": "echo 'No tests yet.'",
+    "test:party:elm-install": "cd ./src/party/elm/tests; elm package install --yes",
+    "test:party:elm-test": "cd ./src/party/elm; elm-test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chances/chances.github.io.git"
+  },
+  "author": "Chance Snow <git@chancesnow.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chances/chances.github.io/issues"
+  },
+  "homepage": "https://github.com/chances/chances.github.io#readme",
+  "devDependencies": {
+    "browserify": "^13.3.0",
+    "elm-test": "^0.18.2",
+    "eslint": "^3.13.1",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-flowtype": "^2.29.2",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-standard": "^2.0.1",
+    "semistandard": "^9.2.1"
+  },
+  "dependencies": {
+    "haskind": "^0.6.2"
+  }
+}
