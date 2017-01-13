@@ -1,6 +1,5 @@
 module State exposing (init, update, subscriptions)
 
-import Debug
 import Task
 import Time
 import Time.DateTime exposing (fromTimestamp)
@@ -39,7 +38,7 @@ update msg model =
         Ping pingMsg ->
             case pingMsg of
                 Ping.Pong maybePingResponse ->
-                    ( { model | ping = Ping.Model (Debug.log "pong" maybePingResponse) }
+                    ( { model | ping = Ping.Model maybePingResponse }
                     , getToken maybePingResponse
                     )
 

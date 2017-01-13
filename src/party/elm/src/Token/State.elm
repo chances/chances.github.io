@@ -1,6 +1,5 @@
 module Token.State exposing (init, update, subscriptions)
 
-import Debug
 import Task
 import Time
 import Time.DateTime exposing (fromTimestamp)

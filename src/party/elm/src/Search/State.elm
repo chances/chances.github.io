@@ -1,6 +1,5 @@
 module Search.State exposing (init, update, subscriptions)
 
-import Debug
 import Search.Types exposing (..)
 import Spotify
 import Model as Model
