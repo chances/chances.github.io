@@ -20,7 +20,7 @@ browserify:
 	@ENTRY_POINT=${JS_ENTRY_POINT} TARGET=${BROWSERIFY_TARGET} npm run build:party
 
 lint:
-	@npm run lint:party
+	@npm run lint:party -s
 
 test:
 	@npm run test:party
