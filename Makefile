@@ -8,11 +8,11 @@ build-hakyll:
 	@echo "Building Hakyll site builder ..."
 	@stack build
 
-build-elm:
+build-party:
 	@cd src/party/elm && \
 	make --quiet build
 
-build: build-hakyll build-elm
+build: build-hakyll build-party
 	@echo "Building chances.github.io to ./site ..."
 	@cd src && \
 	stack exec site rebuild
