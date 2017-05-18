@@ -77,7 +77,8 @@ main = hakyllWith conf $ do
     match "assets/javascript/*.js" $ do
         -- route   jsMinIdRoute
         route   idRoute
-        compile compressJsCompiler
+        -- compile compressJsCompiler
+        compile copyFileCompiler
 
     -- Compile Sass stylesheets
     match "assets/scss/*.scss" $ do
