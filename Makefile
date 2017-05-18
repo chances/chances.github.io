@@ -9,13 +9,17 @@ build-hakyll:
 	@stack build
 
 build-party:
-	@cd src/party/elm && \
+	@cd src/party && \
 	make --quiet build
 
 build: build-hakyll build-party
 	@echo "Building chances.github.io to ./site ..."
 	@cd src && \
 	stack exec site rebuild
+
+serve: build
+	@cd src && \
+	stack exec site serve
 
 watch: build
 	@cd src && \

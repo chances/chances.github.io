@@ -23,8 +23,3 @@ _site/
 # Node
 node_modules/
 npm-debug.log
-
-# Local intermediate build files
-src/assets/javascript/party.elm.js
-src/assets/javascript/party.js
-src/party/js/party.elm.js

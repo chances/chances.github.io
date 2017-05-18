@@ -1,0 +1,22 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+      "target": "ES5",
+      "module": "commonjs",
+      "strict": true,
+      "removeComments": false,
+      "preserveConstEnums": true,
+      "noEmitOnError": true,
+      "outDir": "js/",
+      "inlineSourceMap": true,
+
+      "jsx": "React"
+  },
+  "include": [
+      "ts/**/*"
+  ],
+  "exclude": [
+      "node_modules",
+      "**/*.spec.ts"
+  ]
+}

@@ -1,18 +1,15 @@
 ENTRY_POINT := src/Main.elm
 OUT_DIR := ./dist
-TARGET := ../js/party.elm.js
-JS_ENTRY_POINT := src/party/js/party.js
+TARGET := ./js/party.elm.js
+JS_ENTRY_POINT := src/party/js/main.js
 BROWSERIFY_TARGET := src/assets/javascript/party.js
-REL_BROWSERIFY_TARGET := ../../assets/javascript/party.js
+REL_BROWSERIFY_TARGET := ../assets/javascript/party.js
 
-build: packages app browserify
-
-packages: elm-package.json
-	@elm package install --yes
+build: app browserify
 
 app:
 	@echo "Building chances-party browser client..."
-	elm make ${ENTRY_POINT} --output ${TARGET}
+	@npm run tsc
 
 browserify:
 	@echo "Entry point: ${JS_ENTRY_POINT}"
@@ -29,7 +26,7 @@ watch:
 	# Watch target adapted from http://stackoverflow.com/a/23734495/1363247
 	@while true; do \
         make --quiet app browserify; \
-        inotifywait -qre close_write ./src ../js; \
+        inotifywait -qre close_write ./ts ./js; \
     done
 
 clean:

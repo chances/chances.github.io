@@ -8,15 +8,12 @@
     "lint": "npm run lint:party",
     "lint:party": "semistandard ./src/party/js/{./party,spotify/**/*}.js --fix",
     "test": "npm run test:party",
-    "test:party": "npm run test:party:js && npm run test:party:elm-install && npm run test:party:elm-test",
+    "test:party": "npm run test:party:js",
     "test:party:js": "echo 'No tests yet.'",
-    "test:party:elm-install": "cd ./src/party/elm/tests; elm package install --yes",
-    "test:party:elm-test": "cd ./src/party/elm; elm-test"
+    "tsc": "npm run tsc:party",
+    "tsc:party": "cd ./src/party; tsc"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/chances/chances.github.io.git"
-  },
+  "repository": "git+https://github.com/chances/chances.github.io.git",
   "author": "Chance Snow <git@chancesnow.me>",
   "license": "MIT",
   "bugs": {
@@ -25,15 +22,16 @@
   "homepage": "https://github.com/chances/chances.github.io#readme",
   "devDependencies": {
     "browserify": "^13.3.0",
-    "elm-test": "^0.18.2",
     "eslint": "^3.13.1",
     "eslint-config-standard": "^6.2.1",
     "eslint-plugin-flowtype": "^2.29.2",
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-standard": "^2.0.1",
-    "semistandard": "^9.2.1"
+    "semistandard": "^9.2.1",
+    "typescript": "^2.3.2"
   },
   "dependencies": {
+    "@types/bluebird": "^3.5.4",
     "bluebird": "^3.4.7",
     "haskind": "^0.6.2",
     "spotify-web-api-js": "^0.21.2"

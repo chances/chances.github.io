@@ -114,11 +114,10 @@ main = hakyllWith conf $ do
                 >>= rewriteUrls
 
     -- Compile HTML pages
-    let notElmPages = complement "party/elm/**/*.html"
-        notProjectsIndex = complement "projects/index.html"
+    let notProjectsIndex = complement "projects/index.html"
         htmlPages = (.&&.)
             (fromRegex "^(404|([a-z]*/?)+/(.*)).html$")
-            ((.&&.) notElmPages notProjectsIndex)
+            notProjectsIndex
 
     match htmlPages $ do
         route   idRoute
