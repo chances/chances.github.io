@@ -26,7 +26,7 @@ watch:
 	# Watch target adapted from http://stackoverflow.com/a/23734495/1363247
 	@while true; do \
         make --quiet app browserify; \
-        inotifywait -qre close_write ./ts ./js; \
+        inotifywait -qre close_write ./ts; \
     done
 
 clean:

@@ -8,9 +8,9 @@
       "preserveConstEnums": true,
       "noEmitOnError": true,
       "outDir": "js/",
-      "inlineSourceMap": true,
 
-      "jsx": "React"
+      "jsx": "React",
+      "jsxFactory": "h"
   },
   "include": [
       "ts/**/*"
