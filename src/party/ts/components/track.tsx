@@ -23,13 +23,16 @@ export function block(id: string, name: string, track: api.Track) {
 
 export default class Track extends Component<Props, void> {
   render({id, heading}: Props) {
-    let {images, name, artists} = this.props.value;
+    let {images, name, artists, contributor} = this.props.value;
     let image = api.largestImage(images)
 
     let content = [
       <div class="song-info">
         <span class="title">{name}</span>
         <span class="artist">{api.firstArtistName(artists)}</span>
+        {
+          contributor ? <span class="requested-by">Added by {contributor}</span> : null
+        }
       </div>
     ];
 
