@@ -1,8 +1,7 @@
-clean:
-	@rm -rf dist
+build: build-hakyll build-party
+	@echo "Building chances.github.io to ./site ..."
 	@cd src && \
-	stack exec site clean
-	@stack clean
+	stack exec site rebuild
 
 build-hakyll:
 	@echo "Building Hakyll site builder ..."
@@ -12,10 +11,11 @@ build-party:
 	@cd src/party && \
 	make --quiet build
 
-build: build-hakyll build-party
-	@echo "Building chances.github.io to ./site ..."
+clean:
+	@rm -rf dist
 	@cd src && \
-	stack exec site rebuild
+	stack exec site clean
+	@stack clean
 
 serve: build
 	@cd src && \
