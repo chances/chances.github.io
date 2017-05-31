@@ -280,8 +280,18 @@ $query-height: 2rem;
 
     & > li {
       flex: 1;
-      margin: 0 0 $track-margin;
-      //overflow: hidden;
+      // margin: 0 0 $track-margin;
+      // overflow: hidden;
+    }
+  }
+
+  #upNext, #history, #results {
+    & > ul > li {
+      margin: 1rem 0;
+    }
+
+    & img {
+      max-width: 6rem;
     }
   }
 }
