@@ -1,7 +1,6 @@
 import { Component, h } from 'preact'
 import { } from 'immutable'
-import { Data } from 'haskind';
-const { Maybe } = Data;
+import { Maybe } from 'monet'
 
 import * as api from '../api/track'
 import { TabProps } from './tab'
@@ -34,9 +33,9 @@ export default class Track extends Component<Props, void> {
       </div>
     ];
 
-    if (Maybe.isJust(image)) {
+    if (image.isJust()) {
       content.unshift(
-        <img src={Maybe.fromJust<api.Image>(image).url} />
+        <img src={image.just().url} />
       )
     }
 

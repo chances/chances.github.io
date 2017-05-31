@@ -1,6 +1,4 @@
-import { Data } from 'haskind';
-const { Maybe } = Data;
-const { Just, Nothing } = Data.Maybe;
+import { Maybe } from 'monet'
 
 export interface Track {
   id: string,
@@ -31,8 +29,8 @@ export function firstArtistName(artists: TrackArtist[]) {
     : "";
 }
 
-export function largestImage(images: Image[]): Haskind.Maybe<Image> {
-  if (images.length === 0) return Nothing();
+export function largestImage(images: Image[]): Maybe<Image> {
+  if (images.length === 0) return Maybe.Nothing<Image>();
 
   let largestImage = images[0];
   for (var imageIndex = 1; imageIndex < images.length; imageIndex++) {
@@ -41,5 +39,5 @@ export function largestImage(images: Image[]): Haskind.Maybe<Image> {
       largestImage = image;
     }
   }
-  return Just(largestImage);
+  return Maybe.Just(largestImage);
 }
