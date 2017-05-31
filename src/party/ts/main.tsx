@@ -2,6 +2,7 @@ import { render, h } from 'preact'
 import * as util from './util'
 
 import NowPlaying from './music/now-playing'
+import TrackList from './components/track-list'
 
 let foo = util.log('Foo:', { jank: 'free' })
 
@@ -17,6 +18,7 @@ if (main !== null) {
       </div>
       <div id="content">
         <NowPlaying />
+        <TrackList id="upNext" name="Up Next" />
       </div>
       <div>
         <a href="/party/old.html" style="cursor: pointer; font-size: 14pt; color: white;">Prettier Mockup</a>
