@@ -13,11 +13,11 @@ spotify.setPromiseImplementation(Promise);
 let accessToken = Nothing();
 
 // Maybe TokenString -> Void
-export function updateAccessToken(maybeToken: Haskind.Maybe) {
+export function updateAccessToken(maybeToken: Haskind.Maybe<string>) {
   accessToken = Maybe.fromMaybe(Nothing(), maybeToken);
 
   if (Maybe.isJust(maybeToken)) {
-    spotify.setAccessToken(Maybe.fromJust<string>(maybeToken));
+    spotify.setAccessToken(Maybe.fromJust(maybeToken));
   }
 }
 

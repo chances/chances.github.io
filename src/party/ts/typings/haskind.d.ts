@@ -1,6 +1,6 @@
 declare module 'haskind' {
   export const Data: {
-    Maybe: Haskind.Maybe
+    Maybe: Haskind.Maybe<any>
     Either: Haskind.Either
   }
 }
@@ -9,23 +9,25 @@ declare namespace Haskind {
   namespace Data {
     type Maybe = _Just<any> | _Nothing;
     type _Just<T> = {
-      (val: T): Haskind.Maybe
+      (val: T): Haskind.Maybe<T>
       just: T
     }
     type _Nothing = {
-      (): Haskind.Maybe
+      (): Haskind.Maybe<any>
       nothing: void
     }
   }
 
-  interface Maybe {
+  interface Maybe<T> {
     Just: Data._Just<any>
     Nothing: Data._Nothing
 
-    isJust(m: Maybe): boolean
-    isNothing(m: Maybe): boolean
-    fromJust<T>(m: Maybe): T
-    fromMaybe<T>(def: T, m: Maybe): T
+    isJust(m: Maybe<T>): boolean
+    isNothing(m: Maybe<T>): boolean
+    fromJust(m: Maybe<T>): T
+    fromJust<V>(m: Maybe<V>): V
+    fromMaybe(def: T, m: Maybe<T>): T
+    fromMaybe<V>(def: V, m: Maybe<V>): V
   }
 
   interface Either {
