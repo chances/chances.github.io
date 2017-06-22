@@ -10,6 +10,7 @@
     "test": "npm run test:party",
     "test:party": "npm run test:party:js",
     "test:party:js": "echo 'No tests yet.'",
+    "browser-sync": "browser-sync start --proxy \"localhost:8000\" --open \"ui\" --startPath \"/party\" --files \"./site/assets/**/*\"",
     "tsc": "npm run tsc:party",
     "tsc:party": "cd ./src/party; tsc"
   },
@@ -33,6 +34,7 @@
   "dependencies": {
     "@types/bluebird": "^3.5.4",
     "bluebird": "^3.4.7",
+    "browser-sync": "^2.18.12",
     "monet": "^0.8.10",
     "preact": "^8.1.0",
     "redux": "^3.6.0",
