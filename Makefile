@@ -28,8 +28,6 @@ watch: build
 watch-party:
 	@cd src && \
 	stack exec site watch &
-	@cd src && \
-	stack exec site serve &
 	cd src/party && \
 	make watch
 
