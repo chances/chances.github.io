@@ -10,7 +10,7 @@
     "test": "npm run test:party",
     "test:party": "npm run test:party:js",
     "test:party:js": "echo 'No tests yet.'",
-    "browser-sync": "browser-sync start --proxy \"localhost:8000\" --open \"ui\" --startPath \"/party\" --files \"./site/assets/**/*\"",
+    "browser-sync": "browser-sync start --proxy \"localhost:8000\" --open \"ui\" --startPath \"/party\" --files \"./src/assets/**/*\"",
     "tsc": "npm run tsc:party",
     "tsc:party": "cd ./src/party; tsc"
   },
