@@ -25,6 +25,14 @@ watch: build
 	@cd src && \
 	stack exec site watch
 
+watch-party:
+	@cd src && \
+	stack exec site watch &
+	@cd src && \
+	stack exec site serve &
+	cd src/party && \
+	make watch
+
 deploy: build
 	@echo "Deploying chances.github.io via master branch"
 	@echo "  At commit" `git rev-parse --verify HEAD`
@@ -44,4 +52,4 @@ deploy: build
 	git commit -m "$$(printf "$$MESSAGE")" && \
 	git push origin master
 
-.PHONY: clean build build-hakyll deploy
+.PHONY: clean build build-hakyll build-party serve watch watch-party deploy
