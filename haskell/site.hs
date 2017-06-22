@@ -230,7 +230,7 @@ htmlIdRoute = customRoute createIndexRoute where
 sassToCssRoute :: Routes
 sassToCssRoute = composeRoutes
     (gsubRoute "scss/" $ const "stylesheets/")
-    (setExtension "min.css")
+    (setExtension (cacheBuster ++ ".min.css"))
 
 jsMinIdRoute :: Routes
 jsMinIdRoute = setExtension "min.js"
@@ -268,14 +268,14 @@ rewriteUrls :: Item String -> Compiler (Item String)
 rewriteUrls item = rewriteCssUrls item
 
 -- | Rewire local, relative CSS URLs in compiles sources to point to their
---   minified counterparts
+--   minified and cache busted counterparts
 rewriteCssUrls :: Item String -> Compiler (Item String)
 rewriteCssUrls = return . fmap (withUrls rewrite) where
   rewrite url
       | ".css" `isSuffixOf` url &&
         ("/"   `isPrefixOf` url || "./"   `isPrefixOf` url || "../"   `isPrefixOf` url) &&
         not (".min.css" `isSuffixOf` url) =
-            intercalate ".min.css" . splitOn ".css" $ url
+            intercalate ("." ++ cacheBuster ++ ".min.css") . splitOn ".css" $ url
       | otherwise = url
 
 compressJsCompiler :: Compiler (Item String)
