@@ -24,9 +24,9 @@ test:
 
 watch:
 	# Watch target adapted from http://stackoverflow.com/a/23734495/1363247
-	@while true; do \
+	@npm run browser-sync & \
+	while true; do \
         make --quiet app browserify; \
-		npm run browser-sync; \
         inotifywait -qre close_write ./ts; \
     done
 

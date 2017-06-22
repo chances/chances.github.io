@@ -28,7 +28,7 @@ watch: build
 watch-party:
 	@cd src && \
 	stack exec site watch &
-	cd src/party && \
+	@cd src/party && \
 	make watch
 
 deploy: build
