@@ -50,3 +50,7 @@ img {
   margin: 0 0 1rem;
   border-radius: 5px;
 }
+
+input[type=text]:not(:disabled) {
+  cursor: text;
+}

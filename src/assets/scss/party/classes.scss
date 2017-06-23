@@ -102,3 +102,51 @@
     cursor: default;
   }
 }
+
+$query-height: 2rem;
+
+.pill-form-group {
+
+  & > input[type=text] {
+    color: #0a0a0a;
+    margin: 0 0 0 $query-height / 4;
+    padding: 0 $query-height 0 $query-height / 4;
+    height: $query-height;
+    // border: 1px solid #0a0a0a;
+    // border-right: none;
+    border: none;
+    border-radius: $query-height;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    outline: none;
+    background: #fcfcfc;
+    box-shadow: 0 0 0.25rem #0a0a0a;
+    z-index: 1;
+
+    &:focus {
+      box-shadow: 0 0 0.25rem #0a0a0a, 0 0 0.5rem #acacac;
+    }
+  }
+
+  & > input[type=submit] {
+    color: #fcfcfc;
+    font-weight: bold;
+    margin: 0 $query-height / 4 0 0;
+    padding: 0 $query-height / 3 0 $query-height / 4;
+    height: $query-height;
+    // border: 1px solid #0a0a0a;
+    // border-left: none;
+    border: none;
+    border-radius: $query-height;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    outline: none;
+    background: #353535;
+    box-shadow: 0 0 0.125rem #0a0a0a;
+    z-index: 0;
+
+    &:focus {
+      box-shadow: 0 0 0.125rem #0a0a0a, 0 0 0.5rem #acacac;
+    }
+  }
+}
