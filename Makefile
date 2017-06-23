@@ -2,7 +2,6 @@ build: build-hakyll build-party
 	@echo "Building chances.github.io to ./site ..."
 	@cd src && \
 	stack exec site rebuild
-	@rm -r ./site/assets/stylesheets/*/
 
 build-hakyll:
 	@echo "Building Hakyll site builder ..."
@@ -23,22 +22,14 @@ serve: build
 	stack exec site serve
 
 watch: build
-	@make --quiet watch-delete-css-libs &
 	@cd src && \
 	stack exec site watch
 
 watch-party:
-	@make --quiet watch-delete-css-libs &
 	@cd src && \
 	stack exec site watch &
 	@cd src/party && \
 	make watch
-
-watch-delete-css-libs:
-	@while true; do \
-		rm -r ./site/assets/stylesheets/*/; \
-        inotifywait -qre close_write ./site/assets/stylesheets; \
-    done
 
 deploy: build
 	@echo "Deploying chances.github.io via master branch"
@@ -59,4 +50,4 @@ deploy: build
 	git commit -m "$$(printf "$$MESSAGE")" && \
 	git push origin master
 
-.PHONY: clean build build-hakyll build-party serve watch watch-party watch-delete-css-libs deploy
+.PHONY: clean build build-hakyll build-party serve watch watch-party deploy

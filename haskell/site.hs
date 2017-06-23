@@ -82,7 +82,16 @@ main = hakyllWith conf $ do
         compile copyFileCompiler
 
     -- Compile Sass stylesheets
-    match "assets/scss/**.scss" $ do
+    match "assets/scss/*.scss" $ do
+        route   sassToCssRoute
+        let compressCssItem = fmap compressCss
+        compile (compressCssItem <$> sassCompiler)
+
+    match "assets/scss/**/*.scss" $
+        compile getResourceBody
+
+    sassDependencies <- makePatternDependency "assets/scss/**/*.scss"
+    rulesExtraDependencies [sassDependencies] $ match "assets/scss/*.scss" $ do
         route   sassToCssRoute
         let compressCssItem = fmap compressCss
         compile (compressCssItem <$> sassCompiler)
