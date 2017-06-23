@@ -43,7 +43,8 @@ filesToIgnore path
     | "." `isPrefixOf` fileName = True
     | otherwise                 = False
     where
-        fileName = takeFileName path
+        fileName  = takeFileName path
+        directory = takeDirectory path
 
 -- TODO: Modularize this main stuff?
 main :: IO ()
@@ -81,7 +82,7 @@ main = hakyllWith conf $ do
         compile copyFileCompiler
 
     -- Compile Sass stylesheets
-    match "assets/scss/*.scss" $ do
+    match "assets/scss/**.scss" $ do
         route   sassToCssRoute
         let compressCssItem = fmap compressCss
         compile (compressCssItem <$> sassCompiler)
