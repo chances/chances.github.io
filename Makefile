@@ -2,34 +2,41 @@ build: build-hakyll build-party
 	@echo "Building chances.github.io to ./site ..."
 	@cd src && \
 	stack exec site rebuild
+.PHONY: build
 
 build-hakyll:
 	@echo "Building Hakyll site builder ..."
 	@stack build
+.PHONY: build-hakyll
 
 build-party:
 	@cd src/party && \
 	make --quiet build
+.PHONY: build-party
 
 clean:
 	@rm -rf dist
 	@cd src && \
 	stack exec site clean
 	@stack clean
+.PHONY: clean
 
 serve: build
 	@cd src && \
 	stack exec site serve
+.PHONY: serve
 
 watch: build
 	@cd src && \
 	stack exec site watch
+.PHONY: watch
 
 watch-party:
 	@cd src && \
 	stack exec site watch &
 	@cd src/party && \
 	make watch
+.PHONY: watch-party
 
 deploy: build
 	@echo "Deploying chances.github.io via master branch"
@@ -49,5 +56,5 @@ deploy: build
 	git add . && \
 	git commit -m "$$(printf "$$MESSAGE")" && \
 	git push origin master
+.PHONY: deploy
 
-.PHONY: clean build build-hakyll build-party serve watch watch-party deploy

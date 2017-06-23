@@ -34,4 +34,4 @@ clean:
 	rm -f ${TARGET}
 	rm -f ${REL_BROWSERIFY_TARGET}
 
-.PHONY: build app packages lint test watch clean
+.PHONY: build app browserify lint test watch clean
