@@ -24,7 +24,5 @@ _site/
 node_modules/
 npm-debug.log
 
-.vscode/
-
 # Intermediate build files
 src/assets/javascript/party.js
