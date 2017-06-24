@@ -22,10 +22,9 @@ browserify:
 	@${BROWSERIFY} ${JS_ENTRY_POINT} -o ${BROWSERIFY_TARGET}
 
 lint:
-	@npm run lint:party -s
 	@${SEMISTANDARD} ./js/{./party,spotify/**/*}.js --fix
 
-test:
+test: lint
 	@echo "No tests yet."
 
 watch:
