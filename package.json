@@ -39,6 +39,7 @@
     "concurrently": "^3.5.0",
     "immutable": "^3.8.1",
     "monet": "^0.8.10",
+    "most": "^1.4.1",
     "preact": "^8.1.0",
     "redux": "^3.6.0",
     "spotify-web-api-js": "^0.21.2"
