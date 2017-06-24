@@ -4,9 +4,6 @@ BROWSER_SYNC = ../../node_modules/.bin/browser-sync
 SEMISTANDARD = ../../node_modules/.bin/semistandard
 CONCURRENTLY = ../../node_modules/.bin/concurrently
 
-ENTRY_POINT := src/Main.elm
-OUT_DIR := ./dist
-TARGET := ./js/party.elm.js
 JS_ENTRY_POINT := ./js/main.js
 BROWSERIFY_TARGET := ../assets/javascript/party.js
 REL_BROWSERIFY_TARGET := ../assets/javascript/party.js
@@ -51,7 +48,7 @@ watch-ts:
 	done
 
 clean:
-	rm -f ${TARGET}
+	rm -rf ./js
 	rm -f ${REL_BROWSERIFY_TARGET}
 
 .PHONY: build app browserify lint test watch browser-sync watch-ts clean
