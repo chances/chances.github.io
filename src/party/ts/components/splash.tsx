@@ -12,6 +12,17 @@ export default class Splash extends Component<{}, State> {
     firstLaunch: false
   }
 
+  private focusBlurJoinForm(e: Event) {
+    let input = e.currentTarget as HTMLInputElement;
+    let pillGroup = input.parentElement as HTMLElement;
+
+    if (e.type === 'focus') {
+      pillGroup.classList.add('focus');
+    } else {
+      pillGroup.classList.remove('focus');
+    }
+  }
+
   private joinSubmitted(e: Event) {
 
   }
@@ -21,12 +32,15 @@ export default class Splash extends Component<{}, State> {
       <div id="content">
         <form id="join" onSubmit={this.joinSubmitted}>
           <h1>Join a Party</h1>
-          <p>Enter the four character party code to help mix things up.</p>
+          <p>Help mix things up and join the fun!</p>
           <div class="form-group">
             <label for="partyCode">Party code:</label>
             <div class="pill-group">
-              <input id="partyCode" name="room_code" type="text" placeholder="Ab7j" maxLength={4} autofocus autocomplete="off" />
-              <input type="submit" value="Join" />
+              <input id="partyCode" name="room_code" type="text"
+                placeholder="Ab7j" autofocus autocomplete="off" maxLength={4}
+                onFocus={this.focusBlurJoinForm} onBlur={this.focusBlurJoinForm} />
+              <input type="submit" value="Join"
+                onFocus={this.focusBlurJoinForm} onBlur={this.focusBlurJoinForm} />
             </div>
           </div>
         </form>
