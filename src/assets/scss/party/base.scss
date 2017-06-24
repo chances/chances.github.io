@@ -17,7 +17,7 @@ html, body, main {
 
 main {
   font-family: proxima_nova, "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 10pt;
+  font-size: 12pt;
   color: #fcfcfc;
   text-align: center;
   letter-spacing: 0;
@@ -26,12 +26,14 @@ main {
 
 @media (min-width: 30rem) {
   main {
+    font-size: 10pt;
     letter-spacing: 0.025rem;
   }
 }
 
 @media (min-width: 56rem) {
   main {
+    font-size: 10pt;
     letter-spacing: 0.05rem;
   }
 }

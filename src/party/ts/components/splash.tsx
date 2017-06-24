@@ -22,10 +22,12 @@ export default class Splash extends Component<{}, State> {
         <form id="join" onSubmit={this.joinSubmitted}>
           <h1>Join a Party</h1>
           <p>Enter the four character party code to help mix things up.</p>
-          <div class="pill-form-group">
+          <div class="form-group">
             <label for="partyCode">Party code:</label>
-            <input id="partyCode" name="room_code" type="text" placeholder="Ab7j" maxLength={4} autofocus />
-            <input type="submit" value="Join" />
+            <div class="pill-group">
+              <input id="partyCode" name="room_code" type="text" placeholder="Ab7j" maxLength={4} autofocus autocomplete="off" />
+              <input type="submit" value="Join" />
+            </div>
           </div>
         </form>
       </div>,

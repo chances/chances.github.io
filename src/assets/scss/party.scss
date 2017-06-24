@@ -19,8 +19,7 @@ h1, h2 {
 #content {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  margin-bottom: 3.5rem;
+  justify-content: space-around;
   flex: 1;
   overflow: hidden;
   overflow-y: auto;

@@ -103,50 +103,98 @@
   }
 }
 
-$query-height: 2rem;
+.form-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 
-.pill-form-group {
+$query-height: 2.5rem;
+$query-height-mouse: 2rem;
+$border-width: 0.125rem;
+
+.pill-group {
+  display: flex;
+  flex-direction: row;
+  margin: 0 $query-height / 4;
+  height: $query-height;
+  border: 1px solid #222;
+  border-right: none;
+  border-radius: $query-height;
+  outline: none;
+  background: #2C2C2C;
+  box-shadow: 0 0.1rem 0.25rem #0A0A0A, inset 0 0.125rem 0.125rem #2A2A2A;
+  box-shadow: 0 0.1rem 0.25rem #0A0A0A, 0 0.1rem 0.25rem transparent, inset 0 0.125rem 0.125rem #2A2A2A;
+  transition: 100ms background-color, 150ms box-shadow;
+
+  &.focus {
+    box-shadow: 0 0 0.25rem #FAFAFA, 0 0.1rem 0.25rem #0A0A0A, inset 0 0.125rem 0.125rem #2A2A2A;
+  }
 
   & > input[type=text] {
-    color: #0a0a0a;
-    margin: 0 0 0 $query-height / 4;
-    padding: 0 $query-height 0 $query-height / 4;
-    height: $query-height;
-    // border: 1px solid #0a0a0a;
-    // border-right: none;
+    flex: 1;
+    color: #fcfcfc;
+    text-shadow: 0 0.1rem #1A1A1A;
+    padding: 0 $query-height / 4 0 $query-height / 3.5;
+    height: 100%;
     border: none;
     border-radius: $query-height;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     outline: none;
-    background: #fcfcfc;
-    box-shadow: 0 0 0.25rem #0a0a0a;
-    z-index: 1;
-
-    &:focus {
-      box-shadow: 0 0 0.25rem #0a0a0a, 0 0 0.5rem #acacac;
-    }
+    background: transparent;
+    z-index: 5;
   }
 
   & > input[type=submit] {
     color: #fcfcfc;
+    font-size: 0.95rem;
     font-weight: bold;
-    margin: 0 $query-height / 4 0 0;
-    padding: 0 $query-height / 3 0 $query-height / 4;
-    height: $query-height;
-    // border: 1px solid #0a0a0a;
-    // border-left: none;
+    margin-left: 0.25rem;
+    padding-left: $query-height / 4;
+    padding-right: $query-height / 3;
+    height: 100%;
     border: none;
+    border: $border-width solid transparent;
     border-radius: $query-height;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     outline: none;
-    background: #353535;
-    box-shadow: 0 0 0.125rem #0a0a0a;
-    z-index: 0;
+    background: transparent;
+    transition: 100ms background-color, 100ms box-shadow;
+    cursor: pointer;
+    z-index: 1;
+
+    &:hover, &:focus {
+      border-color: #3A3A3A;
+      background-color: #3A3A3A;
+    }
+    &:focus:active {
+      background-color: transparent;
+      transition-duration: 50ms, 50ms;
+    }
 
     &:focus {
-      box-shadow: 0 0 0.125rem #0a0a0a, 0 0 0.5rem #acacac;
+      box-shadow: 0 0 0.125rem #0A0A0A, 0 0 0.25rem #ACACAC;
+    }
+  }
+}
+
+@media (min-width: 30rem) {
+  .pill-group {
+    margin: 0 $query-height-mouse / 4;
+    border-radius: $query-height-mouse;
+
+    & > input[type=text] {
+      padding-left: $query-height-mouse / 3;
+      padding: 0 $query-height / 4 0 $query-height / 3.5;
+      // height: $query-height-mouse;
+      border-radius: $query-height-mouse;
+    }
+
+    & > input[type=submit] {
+      border-top-right-radius: $query-height-mouse;
+      border-bottom-right-radius: $query-height-mouse;
     }
   }
 }

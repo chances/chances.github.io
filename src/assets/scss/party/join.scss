@@ -1,14 +1,28 @@
 
 #join {
-  flex: 1;
-  margin-top: 3.5rem;
+  position: relative;
+  top: -1rem;
 }
 
-#join > div >  {
-  color: black;
+@media (min-height: 40rem) {
+  #join {
+    top: -2rem;
+  }
+}
+@media (min-width: 56rem) and (orientation: landscape), (min-width: 56rem) {
+  #join {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    top: -2rem;
+  }
+}
+
+#join > .form-group {
+  justify-content: center;
 }
 
 #partyCode {
-  width: 4.5rem;
+  width: 5rem;
   font-family: monospace;
 }
