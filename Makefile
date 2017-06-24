@@ -1,3 +1,12 @@
+CSS_C=sassc
+CSS_FLAGS=-t compressed
+CSS_SRC=src/assets/scss
+CSS_OUT=site/assets/stylesheets
+CSS_SOURCES=$(shell find $(CSS_SRC) -type f -name "*.scss")
+CSS_TARGETS=$(patsubst $(CSS_SRC)/%.scss,$(CSS_OUT)/%.min.css,$(wildcard $(CSS_SRC)/*.scss))
+
+all: build css
+
 build: build-hakyll build-party
 	@echo "Building chances.github.io to ./site ..."
 	@cd src && \
@@ -31,9 +40,14 @@ watch: build
 	stack exec site watch
 .PHONY: watch
 
+watch-css:
+	@while true; do \
+		make --quiet css; \
+        inotifywait -qre close_write ./src/assets/scss; \
+    done
+.PHONY: watch-css
+
 watch-party:
-	@cd src && \
-	stack exec site watch &
 	@cd src/party && \
 	make watch
 .PHONY: watch-party
@@ -58,3 +72,12 @@ deploy: build
 	git push origin master
 .PHONY: deploy
 
+css: $(CSS_TARGETS)
+.PHONY: css
+
+$(CSS_OUT):
+	mkdir -p $(CSS_OUT)
+
+$(CSS_TARGETS): $(CSS_OUT)/%.min.css : $(CSS_SOURCES) | $(CSS_OUT)
+	@echo "Compiling assets/stylesheets/$(notdir $(basename $(basename $@))).css"
+	@$(CSS_C) $(CSS_FLAGS) $< $@
