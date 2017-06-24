@@ -27,6 +27,7 @@ watch:
 	@npm run browser-sync & \
 	while true; do \
         make --quiet app browserify; \
+		cd ..; stack exec site build; cd party; \
         inotifywait -qre close_write ./ts; \
     done
 

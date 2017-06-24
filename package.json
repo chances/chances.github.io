@@ -5,12 +5,13 @@
   "scripts": {
     "build": "npm run build:party",
     "build:party": "browserify $ENTRY_POINT -o $TARGET",
+    "watch:party": "concurrently --kill-others \"cd ./src/party; make --quiet watch\" \"make --quiet watch-css\"",
     "lint": "npm run lint:party",
     "lint:party": "semistandard ./src/party/js/{./party,spotify/**/*}.js --fix",
     "test": "npm run test:party",
     "test:party": "npm run test:party:js",
     "test:party:js": "echo 'No tests yet.'",
-    "browser-sync": "browser-sync start --proxy \"localhost:8000\" --open \"ui\" --startPath \"/party\" --files \"./site/**/*.js\"",
+    "browser-sync": "browser-sync start -s \"site\" -f \"site\" --open \"ui\" --startPath \"/party\"",
     "tsc": "npm run tsc:party",
     "tsc:party": "cd ./src/party; tsc"
   },
@@ -35,6 +36,7 @@
     "@types/bluebird": "^3.5.4",
     "bluebird": "^3.4.7",
     "browser-sync": "^2.18.12",
+    "concurrently": "^3.5.0",
     "immutable": "^3.8.1",
     "monet": "^0.8.10",
     "preact": "^8.1.0",

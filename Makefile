@@ -48,8 +48,7 @@ watch-css:
 .PHONY: watch-css
 
 watch-party:
-	@cd src/party && \
-	make watch
+	@npm run watch:party
 .PHONY: watch-party
 
 deploy: build
@@ -78,6 +77,6 @@ css: $(CSS_TARGETS)
 $(CSS_OUT):
 	mkdir -p $(CSS_OUT)
 
-$(CSS_TARGETS): $(CSS_OUT)/%.min.css : $(CSS_SOURCES) | $(CSS_OUT)
-	@echo "Compiling assets/stylesheets/$(notdir $(basename $(basename $@))).css"
-	@$(CSS_C) $(CSS_FLAGS) $< $@
+$(CSS_TARGETS): $(CSS_SOURCES)
+	@echo "Compiling src/assets/stylesheets/$(notdir $(basename $(basename $@))).css"
+	@$(CSS_C) $(CSS_FLAGS) src/assets/scss/$(notdir $(basename $(basename $@))).scss $@
