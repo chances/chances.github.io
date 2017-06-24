@@ -3,17 +3,8 @@
   "version": "1.0.0",
   "description": "JavaScript assets for https://chancesnow.me",
   "scripts": {
-    "build": "npm run build:party",
-    "build:party": "browserify $ENTRY_POINT -o $TARGET",
-    "watch:party": "concurrently --kill-others \"cd ./src/party; make --quiet watch\" \"make --quiet watch-css\"",
-    "lint": "npm run lint:party",
-    "lint:party": "semistandard ./src/party/js/{./party,spotify/**/*}.js --fix",
     "test": "npm run test:party",
-    "test:party": "npm run test:party:js",
-    "test:party:js": "echo 'No tests yet.'",
-    "browser-sync": "browser-sync start -s \"site\" -f \"site\" --open \"ui\" --startPath \"/party\"",
-    "tsc": "npm run tsc:party",
-    "tsc:party": "cd ./src/party; tsc"
+    "test:party": "cd ./src/party && make test"
   },
   "repository": "git+https://github.com/chances/chances.github.io.git",
   "author": "Chance Snow <git@chancesnow.me>",

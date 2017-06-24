@@ -35,7 +35,7 @@ serve: build
 	stack exec site serve
 .PHONY: serve
 
-watch: build
+watch: build-hakyll
 	@cd src && \
 	stack exec site watch
 .PHONY: watch
@@ -48,7 +48,8 @@ watch-css:
 .PHONY: watch-css
 
 watch-party:
-	@npm run watch:party
+	@cd src/party && \
+	make --quiet watch
 .PHONY: watch-party
 
 deploy: build
