@@ -2,8 +2,8 @@ import { Component, h } from 'preact'
 
 import header from './logo'
 
-import TrackList from './track-list'
-import NowPlaying from '../music/now-playing'
+import TrackList from './music/track-list'
+import NowPlaying from './music/now-playing'
 
 interface State {
   tvMode: boolean

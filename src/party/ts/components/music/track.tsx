@@ -2,8 +2,8 @@ import { Component, h } from 'preact'
 import { } from 'immutable'
 import { Maybe } from 'monet'
 
-import * as api from '../api/track'
-import { TabProps } from './tab'
+import * as api from '../../api/track'
+import { TabProps } from '../tab'
 
 interface TrackProps {
   value: api.Track

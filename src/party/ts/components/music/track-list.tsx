@@ -1,7 +1,7 @@
 import { Component, h } from 'preact'
 
-import * as api from '../api/track'
-import * as track from '../components/track'
+import * as api from '../../api/track'
+import * as track from './track'
 
 interface TrackListParams {
   id: string
