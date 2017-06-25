@@ -17,13 +17,17 @@ JS_TEST_SOURCES := ./js/test/*.js
 
 all: build
 
-build: app browserify
+build: css app browserify
 .PHONY: build
 
 app:
 	@echo "Building chances-party browser client..."
 	@${TSC}
 .PHONY: app
+
+css:
+	@cp -r scss/* ../assets/scss/.
+.PHONY: css
 
 browserify:
 	@echo "Entry point: ${JS_ENTRY_POINT}"
@@ -49,24 +53,33 @@ watch:
 	@echo "Entry point: ${JS_ENTRY_POINT}"
 	@echo "Browserify target: ${BROWSERIFY_TARGET}"
 	@${CONCURRENTLY} --kill-others \
-		"cd ../..; make --quiet watch" \
+		"cd ../..; make --quiet watch &> /dev/null" \
 		"cd ../..; make --quiet watch-css" \
 		"make --quiet browser-sync" \
 		"${TSC} -w 1> /dev/null" \
-		"make --quiet watch-ts"
+		"make --quiet watch-scss" \
+		"make --quiet watch-js"
 .PHONY: watch
 
 browser-sync:
 	@${BROWSER_SYNC} start -s "../../site" -f "../../site" --open "ui" --startPath "/party"
 .PHONY: browser-sync
 
-watch-ts:
+watch-scss:
 	# Watch target adapted from http://stackoverflow.com/a/23734495/1363247
 	@while true; do \
-		make --quiet; \
-		inotifywait -qre close_write ./ts; \
+		cp -r scss/* ../assets/scss/.; \
+		inotifywait -qre close_write ./scss; \
 	done
-.PHONY: watch-ts
+.PHONY: watch-scss
+
+watch-js:
+	# Watch target adapted from http://stackoverflow.com/a/23734495/1363247
+	@while true; do \
+		make --quiet browserify; \
+		inotifywait -qre close_write ./js; \
+	done
+.PHONY: watch-js
 
 watch-tests:
 	@while true; do \
