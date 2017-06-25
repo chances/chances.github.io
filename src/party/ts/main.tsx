@@ -1,4 +1,5 @@
 import { h, render } from 'preact'
+import { Provider } from 'preact-redux'
 import { applyMiddleware, createStore } from 'redux'
 
 import { setPartyApiHost } from './api/request'
@@ -7,7 +8,7 @@ import partyApp from './reducers'
 import * as util from './util'
 
 import Party from './components/party'
-import Splash from './components/splash'
+import Splash from './containers/splash'
 
 const store = createStore(
   partyApp,
@@ -20,5 +21,10 @@ const main = document.querySelector('main')
 if (main !== null) {
   main.remove()
 
-  render(<Splash />, document.body)
+  render(
+    <Provider store={store}>
+      <Splash />
+    </Provider>,
+    document.body,
+  )
 }
