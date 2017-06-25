@@ -19,13 +19,15 @@ export function updateAccessToken(maybeToken: Maybe<string>) {
   }
 }
 
-type EitherTrackResults = Either<any, SpotifyApi.TrackSearchResponse>
+export type EitherTrackResults = Either<any, SpotifyApi.TrackSearchResponse>
+export interface Options {limit: Maybe<number>, offset: Maybe<number>}
+export type MaybeOptions = Maybe<Options>
 
 // String -> Maybe { limit: Maybe Number, offset: Maybe Number } ->
 //    Promise (Either SpotifyError (Paging Track))
 export function searchTracks(
   query: string,
-  maybeOptions: Maybe<{limit: Maybe<number>, offset: Maybe<number>}>,
+  maybeOptions: MaybeOptions,
 ) {
   // TODO: Handle maybeOptions
   query = query.split(' ').join('%20')

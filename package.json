@@ -15,10 +15,17 @@
   "homepage": "https://github.com/chances/chances.github.io#readme",
   "devDependencies": {
     "@types/bluebird": "^3.5.4",
+    "@types/chai": "^4.0.1",
+    "@types/tape": "^4.2.30",
     "bluebird": "^3.4.7",
     "browser-sync": "^2.18.12",
     "browserify": "^13.3.0",
+    "chai": "^4.0.2",
     "concurrently": "^3.5.0",
+    "faucet": "^0.0.1",
+    "nyc": "^11.0.2",
+    "tape": "^4.6.3",
+    "ts-node": "^3.1.0",
     "tslint": "^5.4.3",
     "tslint-react": "^3.0.0",
     "typescript": "^2.3.4"
@@ -35,5 +42,28 @@
     "preact": "^8.1.0",
     "redux": "^3.6.0",
     "spotify-web-api-js": "^0.21.2"
+  },
+  "nyc": {
+    "include": [
+      "src/party/ts/*.ts",
+      "src/party/ts/**/*.ts",
+      "src/party/ts/*.tsx",
+      "src/party/ts/**/*.tsx"
+    ],
+    "exclude": [
+      "src/party/ts/typings"
+    ],
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "json",
+      "html"
+    ],
+    "all": true
   }
 }
