@@ -5,8 +5,12 @@ let topic: tape.Test
 
 export function test(name: string, cb: tape.TestCase) {
   tape(name, t => {
-    topic = t
-    cb(t)
+    try {
+      topic = t
+      cb(t)
+    } catch (e) {
+      topic.fail(e.message)
+    }
   })
 }
 
@@ -15,11 +19,7 @@ export function expect(assertion: Chai.Assertion) {
     throw new Error('Test has no topic subject')
   }
 
-  try {
-    topic.ok(assertion)
-  } catch (e) {
-    topic.fail(e.message)
-  }
+  topic.ok(assertion)
 }
 
 export const that = chai.expect
