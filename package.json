@@ -16,8 +16,7 @@
   "devDependencies": {
     "@types/bluebird": "^3.5.4",
     "@types/chai": "^4.0.1",
-    "@types/request": "^0.0.44",
-    "@types/request-promise": "^4.1.35",
+    "@types/isomorphic-fetch": "^0.0.34",
     "@types/tape": "^4.2.30",
     "bluebird": "^3.4.7",
     "browser-sync": "^2.18.12",
@@ -40,14 +39,13 @@
     "browser-sync": "^2.18.12",
     "concurrently": "^3.5.0",
     "immutable": "^3.8.1",
+    "isomorphic-fetch": "^2.2.1",
     "monet": "^0.8.10",
     "most": "^1.4.1",
     "most-subject": "^5.3.0",
     "preact": "^8.1.0",
     "preact-redux": "^2.0.1",
     "redux": "^3.6.0",
-    "request": "^2.81.0",
-    "request-promise": "^4.2.1",
     "spotify-web-api-js": "^0.21.2"
   },
   "nyc": {

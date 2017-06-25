@@ -8,6 +8,11 @@
       "preserveConstEnums": true,
       "noEmitOnError": true,
       "outDir": "js/",
+      "lib": [
+        "es6",
+        "es2015.symbol",
+        "dom"
+      ],
 
       "jsx": "React",
       "jsxFactory": "h"
