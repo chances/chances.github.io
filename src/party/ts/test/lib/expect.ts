@@ -14,6 +14,8 @@ export function test(name: string, cb: tape.TestCase) {
   })
 }
 
+export const skip = tape.skip
+
 export function expect(assertion: Chai.Assertion) {
   if (topic == null) {
     throw new Error('Test has no topic subject')
