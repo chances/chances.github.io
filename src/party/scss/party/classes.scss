@@ -126,6 +126,7 @@ $border-width: 0.125rem;
   box-shadow: 0 0.1rem 0.25rem #0A0A0A, inset 0 0.125rem 0.125rem #2A2A2A;
   box-shadow: 0 0.1rem 0.25rem #0A0A0A, 0 0.1rem 0.25rem transparent, inset 0 0.125rem 0.125rem #2A2A2A;
   transition: 100ms background-color, 150ms box-shadow;
+  z-index: 4;
 
   &.focus {
     box-shadow: 0 0 0.25rem #FAFAFA, 0 0.1rem 0.25rem #0A0A0A, inset 0 0.125rem 0.125rem #2A2A2A;
@@ -143,7 +144,7 @@ $border-width: 0.125rem;
     border-bottom-right-radius: 0;
     outline: none;
     background: transparent;
-    z-index: 5;
+    z-index: 6;
   }
 
   & > input[type=submit] {
@@ -163,7 +164,7 @@ $border-width: 0.125rem;
     background: transparent;
     transition: 100ms background-color, 100ms box-shadow;
     cursor: pointer;
-    z-index: 1;
+    z-index: 5;
 
     &:hover, &:focus {
       border-color: #3A3A3A;
@@ -195,5 +196,20 @@ $border-width: 0.125rem;
       border-top-right-radius: $query-height-mouse / 6;
       border-bottom-right-radius: $query-height-mouse / 6;
     }
+  }
+}
+
+span.spinner {
+  transition: 300ms opacity ease-out, 0.5s margin-left;
+  transition-delay: 200ms, 0s;
+  opacity: 1;
+  margin-left: 0;
+  z-index: 1;
+
+  &.hiding {
+    opacity: 0;
+    margin-left: -40px;
+    transition: 100ms opacity ease-in, 0.4s margin-left;
+    transition-delay: 0s, 100ms;
   }
 }

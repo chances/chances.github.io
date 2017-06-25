@@ -1,8 +1,10 @@
 import { Component, h } from 'preact'
 
 import header from './logo'
+import Spinner from './spinner'
 
 interface Props {
+  joining?: boolean
   onJoinSubmitted(partyCode: string): void
 }
 
@@ -16,6 +18,7 @@ export default class JoinForm extends Component<Props, State> {
   }
 
   render({onJoinSubmitted}: Props, {partyCode}: State) {
+    const spinnerHidden = !(joining != null && joining)
     return (
       <form id="join" onSubmit={this.onJoinSubmitted}>
         <h1>Join a Party</h1>
@@ -42,6 +45,7 @@ export default class JoinForm extends Component<Props, State> {
               onBlur={this.focusBlurJoinForm}
             />
           </div>
+          <Spinner hidden={spinnerHidden} />
         </div>
       </form>
     )
