@@ -70,9 +70,9 @@ watch-ts:
 
 watch-tests:
 	@while true; do \
-		${TAPE} ${JS_TEST_SOURCES} | ${FAUCET}; \
+		${TS_NODE} --fast ${TAPE} ${TS_TEST_SOURCES} | ${FAUCET} \
 		echo ""; \
-		inotifywait -qre close_write ./js/test; \
+		inotifywait -qre close_write ./ts/test; \
 	done
 .PHONY: watch-tests
 
