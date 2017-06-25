@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "JavaScript assets for https://chancesnow.me",
   "scripts": {
-    "test": "npm run test:party",
+    "test": "npm run test:party -s",
     "test:party": "cd ./src/party && make test"
   },
   "repository": "git+https://github.com/chances/chances.github.io.git",
@@ -14,15 +14,13 @@
   },
   "homepage": "https://github.com/chances/chances.github.io#readme",
   "devDependencies": {
-    "browserify": "^13.3.0",
+    "@types/bluebird": "^3.5.4",
+    "bluebird": "^3.4.7",
     "browser-sync": "^2.18.12",
+    "browserify": "^13.3.0",
     "concurrently": "^3.5.0",
-    "eslint": "^3.13.1",
-    "eslint-config-standard": "^6.2.1",
-    "eslint-plugin-flowtype": "^2.29.2",
-    "eslint-plugin-promise": "^3.4.0",
-    "eslint-plugin-standard": "^2.0.1",
-    "semistandard": "^9.2.1",
+    "tslint": "^5.4.3",
+    "tslint-react": "^3.0.0",
     "typescript": "^2.3.4"
   },
   "dependencies": {

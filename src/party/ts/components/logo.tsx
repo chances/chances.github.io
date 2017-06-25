@@ -1,12 +1,15 @@
 import { Component, h } from 'preact'
 
 export default function header(isSplash: boolean, tvMode: boolean = false) {
-  let header = [];
+  const header = []
 
   if (isSplash) {
     header.push(
-      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-        <img src="/assets/images/party/Party-logo-invert.png" alt="Party" style="max-width: 300px; margin: 0 0 -1.5rem 0;" />
+      <div id="logo">
+        <img
+          src="/assets/images/party/Party-logo-invert.png"
+          alt="Party"
+        />
         <p style="margin-top: 0;">Prototype</p>
       </div>,
     )
@@ -14,9 +17,9 @@ export default function header(isSplash: boolean, tvMode: boolean = false) {
 
   if (tvMode) {
     header.push(
-      <h2>chancesnow.me/party</h2>
+      <h2>chancesnow.me/party</h2>,
     )
   }
 
-  return header;
+  return header
 }

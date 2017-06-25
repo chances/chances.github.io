@@ -1,12 +1,12 @@
-import { render, h } from 'preact'
+import { h, render } from 'preact'
 import * as util from './util'
 
-import Splash from './components/splash'
 import Party from './components/party'
+import Splash from './components/splash'
 
 // let foo = util.log('Foo:', { jank: 'free' })
 
-let main = document.querySelector('main')
+const main = document.querySelector('main')
 if (main !== null) {
   main.remove()
 

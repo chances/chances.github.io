@@ -1,7 +1,7 @@
 TSC = ../../node_modules/.bin/tsc
 BROWSERIFY = ../../node_modules/.bin/browserify
 BROWSER_SYNC = ../../node_modules/.bin/browser-sync
-SEMISTANDARD = ../../node_modules/.bin/semistandard
+TS_LINT = ../../node_modules/.bin/tslint
 CONCURRENTLY = ../../node_modules/.bin/concurrently
 
 JS_ENTRY_POINT := ./js/main.js
@@ -22,7 +22,7 @@ browserify:
 	@${BROWSERIFY} ${JS_ENTRY_POINT} -o ${BROWSERIFY_TARGET}
 
 lint:
-	@${SEMISTANDARD} ./js/{./party,spotify/**/*}.js --fix
+	@${TS_LINT} -c ./tslint.json ./ts/**.ts ./ts/**.tsx
 
 test: lint
 	@echo "No tests yet."

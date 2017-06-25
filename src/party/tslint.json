@@ -1,0 +1,29 @@
+{
+  "extends": ["tslint:latest", "tslint-react"],
+  "rules": {
+    "max-line-length": [true, 100],
+    "quotemark": [
+      true, "single", "jsx-double", "avoid-escape"
+    ],
+    "semicolon": [true, "never"],
+    "arrow-parens": [true, "ban-single-arg-parens"],
+    "interface-name": [true, "never-prefix"],
+    "member-ordering": [
+      true,
+      {
+        "order": [
+          "static-field",
+          "instance-field",
+          "constructor",
+          "public-instance-method",
+          "protected-instance-method",
+          "private-instance-method"
+        ]
+      }
+    ],
+    "member-access": [true, "no-public"],
+    "ban-types": [false],
+
+    "jsx-wrap-multiline": false
+  }
+}

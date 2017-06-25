@@ -1,18 +1,19 @@
 
 export default function _curry(f: (...args: any[]) => any) {
-  return function (...args: any[]) {
-    // var args = Array.prototype.slice.call(arguments, 0);
+  return (...args: any[]) => {
     return args.length < f.length
-      ? _curry(args.reduce(
-        function (g: () => any, arg: any) {
+      ? _curry(
+        args.reduce(
+        (g: () => any, arg: any) => {
           return g.bind(null, arg)
-        }, f)
+        }, f),
       )
-      : f.apply(null, args);
+      : f.apply(null, args)
   }
 }
 
 export const log = _curry((message: string, value: any) => {
-  console.log(message, value);
-  return value;
+  // tslint:disable-next-line:no-console
+  console.log(message, value)
+  return value
 })
