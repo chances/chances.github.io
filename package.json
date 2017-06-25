@@ -4,7 +4,7 @@
   "description": "JavaScript assets for https://chancesnow.me",
   "scripts": {
     "test": "npm run test:party -s",
-    "test:party": "cd ./src/party && make test"
+    "test:party": "cd ./src/party && make test-plainly"
   },
   "repository": "git+https://github.com/chances/chances.github.io.git",
   "author": "Chance Snow <git@chancesnow.me>",
@@ -24,6 +24,7 @@
     "concurrently": "^3.5.0",
     "faucet": "^0.0.1",
     "nyc": "^11.0.2",
+    "tap-dot": "^1.0.5",
     "tape": "^4.6.3",
     "ts-node": "^3.1.0",
     "tslint": "^5.4.3",

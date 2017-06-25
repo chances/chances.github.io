@@ -5,6 +5,7 @@ TS_LINT = ../../node_modules/.bin/tslint
 TS_NODE = ../../node_modules/.bin/ts-node
 TAPE = ../../node_modules/.bin/tape
 FAUCET = ../../node_modules/.bin/faucet
+TAP_DOT = ../../node_modules/.bin/tap-dot
 NYC = ../../node_modules/.bin/nyc
 CONCURRENTLY = ../../node_modules/.bin/concurrently
 
@@ -43,6 +44,10 @@ lint:
 test: lint
 	@${TS_NODE} --fast ${TAPE} ${TS_TEST_SOURCES} | ${FAUCET}
 .PHONY: test
+
+test-plainly: lint
+	@${TS_NODE} --fast ${TAPE} ${TS_TEST_SOURCES} | ${TAP_DOT}
+.PHONY: test-plainly
 
 cover: app
 	@rm -rf coverage
