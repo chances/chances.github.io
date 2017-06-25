@@ -1,5 +1,6 @@
 TSC = ../../node_modules/.bin/tsc
 BROWSERIFY = ../../node_modules/.bin/browserify
+UGLIFY = ../../node_modules/.bin/uglifyjs
 BROWSER_SYNC = ../../node_modules/.bin/browser-sync
 TS_LINT = ../../node_modules/.bin/tslint
 TS_NODE = ../../node_modules/.bin/ts-node
@@ -34,7 +35,11 @@ css:
 browserify:
 	@echo "Entry point: ${JS_ENTRY_POINT}"
 	@echo "Browserify target: ${BROWSERIFY_TARGET}"
-	@${BROWSERIFY} ${JS_ENTRY_POINT} -o ${BROWSERIFY_TARGET}
+	@${BROWSERIFY} -t uglifyify ${JS_ENTRY_POINT} | ${UGLIFY} -c > ${BROWSERIFY_TARGET}
+.PHONY: browserify
+
+browserify-dev:
+	@${BROWSERIFY} -t uglifyify ${JS_ENTRY_POINT} -o ${BROWSERIFY_TARGET}
 .PHONY: browserify
 
 lint:
@@ -81,7 +86,7 @@ watch-scss:
 watch-js:
 	# Watch target adapted from http://stackoverflow.com/a/23734495/1363247
 	@while true; do \
-		make --quiet browserify; \
+		make --quiet browserify-dev; \
 		inotifywait -qre close_write ./js; \
 	done
 .PHONY: watch-js
