@@ -46,20 +46,14 @@
   },
   "nyc": {
     "include": [
-      "src/party/ts/*.ts",
-      "src/party/ts/**/*.ts",
-      "src/party/ts/*.tsx",
-      "src/party/ts/**/*.tsx"
+      "src/party/js/*.js",
+      "src/party/js/**/*.js"
     ],
     "exclude": [
-      "src/party/ts/typings"
+      "src/party/js/test"
     ],
     "extension": [
-      ".ts",
-      ".tsx"
-    ],
-    "require": [
-      "ts-node/register"
+      ".js"
     ],
     "reporter": [
       "json",

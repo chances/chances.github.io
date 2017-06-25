@@ -12,6 +12,7 @@ JS_ENTRY_POINT := ./js/main.js
 BROWSERIFY_TARGET := ../assets/javascript/party.js
 REL_BROWSERIFY_TARGET := ../assets/javascript/party.js
 
+TS_SOURCES := ./ts/**.ts ./ts/**.tsx
 TS_TEST_SOURCES := ./ts/test/*.ts
 JS_TEST_SOURCES := ./js/test/*.js
 
@@ -36,17 +37,16 @@ browserify:
 .PHONY: browserify
 
 lint:
-	@${TS_LINT} -c ./tslint.json ./ts/**.ts ./ts/**.tsx
+	@${TS_LINT} -c ./tslint.json ${TS_SOURCES}
 .PHONY: lint
 
 test: lint
 	@${TS_NODE} --fast ${TAPE} ${TS_TEST_SOURCES} | ${FAUCET}
 .PHONY: test
 
-cover:
+cover: app
 	@rm -rf coverage
-	# @${ISTANBUL} cover ${TAPE} ${JS_TEST_SOURCES}
-	@${NYC} make test
+	@${NYC} ${TAPE} ${JS_TEST_SOURCES} | ${FAUCET}
 .PHONY: cover
 
 watch:

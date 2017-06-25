@@ -1,6 +1,6 @@
-import { Maybe } from 'monet'
 import { expect, test, that } from './lib/expect'
 
+import { Maybe } from 'monet'
 import { EitherTrackResults, Options, searchTracks } from '../spotify'
 
 test('searchTracks fails when access token is nothing', t => {
