@@ -1,15 +1,25 @@
-import test = require('tape')
-import { expect } from 'chai'
+import tape = require('tape')
+import * as chai from 'chai'
 
-export const where = expect
+let topic: tape.Test
 
-export function expectation(
-  t: test.Test,
-  expectation: () => Chai.Assertion,
-) {
+export function test(name: string, cb: tape.TestCase) {
+  tape(name, t => {
+    topic = t
+    cb(t)
+  })
+}
+
+export function expect(assertion: Chai.Assertion) {
+  if (topic == null) {
+    throw new Error('Test has no topic subject')
+  }
+
   try {
-    t.ok(expectation())
+    topic.ok(assertion)
   } catch (e) {
-    t.fail(e.message)
+    topic.fail(e.message)
   }
 }
+
+export const that = chai.expect
