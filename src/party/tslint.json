@@ -21,6 +21,7 @@
         ]
       }
     ],
+    "object-literal-sort-keys": false,
     "member-access": [true, "no-public"],
     "ban-types": [false],
 
