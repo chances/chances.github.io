@@ -37,10 +37,17 @@ class Splash extends Component<SplashProps, {}> {
 
 const SplashContainer = connect<{}, SplashProps, {}>(
   (state: State) => {
+    const hasJoinRequest = state.joining.isJust()
+    const isJoining = hasJoinRequest &&
+      state.joining.just().status === RequestStatus.LOADING
+    const partyCode = hasJoinRequest
+      ? state.joining.just().partyCode
+      : ''
+
     return {
-      firstLaunch: state.firstLaunch,
-      isJoining: state.joining.isJust(),
-      partyCode: state.joining.isJust() ? state.joining.just().partyCode : '',
+      ...state,
+      isJoining,
+      partyCode,
     }
   },
   dispatch => {
