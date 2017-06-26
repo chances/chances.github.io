@@ -2,6 +2,10 @@ import { Either } from 'monet'
 import Promise = require('bluebird')
 import fetch = require('isomorphic-fetch')
 
+Promise.config({
+  cancellation: true,
+})
+
 let partyApiHost = 'https://party.chancesnow.me/'
 
 const defaultOptions: RequestInit = {
