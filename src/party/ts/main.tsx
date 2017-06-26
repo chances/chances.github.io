@@ -1,6 +1,8 @@
+import localForage = require('localforage')
 import { h, render } from 'preact'
 import { Provider } from 'preact-redux'
 import { applyMiddleware, compose, createStore } from 'redux'
+import { persistStore } from 'redux-persist'
 
 import { setPartyApiHost } from './api'
 import { Middleware, partyApp } from './redux'
@@ -22,6 +24,8 @@ const store = createStore(
     applyMiddleware(Middleware.logger),
   ),
 )
+
+persistStore(store, {storage: localForage})
 
 setPartyApiHost(util.log('Party API Host:', 'http://app.local:3005'))
 
