@@ -23,6 +23,20 @@
 }
 
 #partyCode {
-  width: 5rem;
+  width: 4.5rem;
   font-family: monospace;
+}
+
+#join input[type=submit] {
+  transition: 300ms opacity ease-out, 0.5s margin-left;
+  transition-delay: 200ms, 0s, 0s;
+  opacity: 1;
+  margin-left: 0;
+
+  &.hiding {
+    opacity: 0;
+    margin-left: -4rem;
+    transition: 100ms opacity ease-in, 0.4s margin-left;
+    transition-delay: 0s, 100ms, 100ms;
+  }
 }
