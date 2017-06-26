@@ -1,3 +1,4 @@
+import { createTransform } from 'redux-persist'
 import Immutable = require('immutable')
 import { Maybe } from 'monet'
 
@@ -10,7 +11,8 @@ const initial = {
   party: Maybe.Nothing<Party>(),
 }
 
-export type IState = typeof initial
+type IState = typeof initial
+export default IState
 
 type StateKeys = keyof IState
 type StateValues = typeof initial[keyof typeof initial]
@@ -68,3 +70,11 @@ function mutate(state: State, key: StateKeys, value: StateValues): IState {
 }
 
 export const initialState = new State()
+
+export const persistTransform = createTransform<State, IState>(
+  (stateToSerialize, key) => stateToSerialize,
+  (serializedState: IState, key) => new State(serializedState),
+  {
+    blacklist: ['joining'],
+  },
+)

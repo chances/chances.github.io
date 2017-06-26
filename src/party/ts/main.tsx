@@ -5,7 +5,7 @@ import { applyMiddleware, compose, createStore } from 'redux'
 import { persistStore } from 'redux-persist'
 
 import { setPartyApiHost } from './api'
-import { Middleware, partyApp } from './redux'
+import { Middleware, partyApp, persistTransform } from './redux'
 import * as util from './util'
 
 import Party from './components/party'
@@ -25,7 +25,10 @@ const store = createStore(
   ),
 )
 
-persistStore(store, {storage: localForage})
+persistStore(store, {
+  storage: localForage,
+  transforms: [persistTransform],
+})
 
 setPartyApiHost(util.log('Party API Host:', 'http://app.local:3005'))
 
