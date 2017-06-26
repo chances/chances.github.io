@@ -9,7 +9,12 @@ const defaultOptions: RequestInit = {
 }
 
 export interface RequestParam {name: string, value: string}
-export type ResponsePromise<T> = Promise<Either<any, T>>
+export type Response<T> = Either<any, T>
+export type ResponsePromise<T> = Promise<Response<T>>
+export enum RequestStatus {
+  LOADING,
+  COMPLETED,
+}
 
 export function get<T>(path: string, params?: RequestParam[]): ResponsePromise<T> {
   const url = partyApiHost + path +

@@ -3,3 +3,5 @@ js/
 
 # Code coverage
 coverage/
+
+graph.svg

@@ -1,18 +1,26 @@
 import { h, render } from 'preact'
 import { Provider } from 'preact-redux'
-import { applyMiddleware, createStore } from 'redux'
+import { applyMiddleware, compose, createStore } from 'redux'
 
-import { setPartyApiHost } from './api/request'
-import { logger } from './middleware'
-import partyApp from './reducers'
+import { setPartyApiHost } from './api'
+import { Middleware, partyApp } from './redux'
 import * as util from './util'
 
 import Party from './components/party'
 import Splash from './containers/splash'
 
+declare var window: {
+  __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose,
+}
+
+import 'preact/devtools'
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
 const store = createStore(
   partyApp,
-  applyMiddleware(logger),
+  composeEnhancers(
+    applyMiddleware(Middleware.logger),
+  ),
 )
 
 setPartyApiHost(util.log('Party API Host:', 'http://app.local:3005'))

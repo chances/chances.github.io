@@ -35,7 +35,7 @@ css:
 browserify:
 	@echo "Entry point: ${JS_ENTRY_POINT}"
 	@echo "Browserify target: ${BROWSERIFY_TARGET}"
-	@${BROWSERIFY} -t uglifyify ${JS_ENTRY_POINT} | ${UGLIFY} -c > ${BROWSERIFY_TARGET}
+	@${BROWSERIFY} -t uglifyify ${JS_ENTRY_POINT} -o ${BROWSERIFY_TARGET}
 .PHONY: browserify
 
 browserify-dev:

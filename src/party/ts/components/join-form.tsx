@@ -4,20 +4,15 @@ import header from './logo'
 import Spinner from './spinner'
 
 interface Props {
+  partyCode?: string
   joining?: boolean
   onJoinSubmitted(partyCode: string): void
 }
 
-interface State {
-  partyCode: string
-}
+export default class JoinForm extends Component<Props, {}> {
+  private partyCode: HTMLInputElement
 
-export default class JoinForm extends Component<Props, State> {
-  state = {
-    partyCode: '',
-  }
-
-  render({onJoinSubmitted}: Props, {partyCode}: State) {
+  render({partyCode, joining}: Props, {}) {
     const spinnerHidden = !(joining != null && joining)
     return (
       <form id="join" onSubmit={this.onJoinSubmitted}>
@@ -27,8 +22,8 @@ export default class JoinForm extends Component<Props, State> {
           <label for="partyCode">Party code:</label>
           <div class="pill-group">
             <input
+              ref={this.refPartyCode}
               id="partyCode"
-              name="room_code"
               type="text"
               value={partyCode}
               placeholder="Ab7j"
@@ -51,6 +46,10 @@ export default class JoinForm extends Component<Props, State> {
     )
   }
 
+  private refPartyCode = (node: HTMLInputElement) => {
+    this.partyCode = node
+  }
+
   private focusBlurJoinForm(e: Event) {
     const input = e.currentTarget as HTMLInputElement
     const pillGroup = input.parentElement as HTMLElement
@@ -64,11 +63,9 @@ export default class JoinForm extends Component<Props, State> {
 
   private onJoinSubmitted = (e: Event) => {
     e.preventDefault()
-    const form = e.currentTarget as HTMLFormElement
-    const partyCode = form.elements.namedItem('partyCode') as HTMLInputElement | null
 
-    if (partyCode && partyCode.value) {
-      this.props.onJoinSubmitted(partyCode.value)
+    if (this.partyCode && this.partyCode.value) {
+      this.props.onJoinSubmitted(this.partyCode.value)
     }
   }
 }

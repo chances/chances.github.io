@@ -1,6 +1,6 @@
 import { Maybe } from 'monet'
 
-import { get, ResponsePromise } from './request'
+import { get, RequestStatus, Response, ResponsePromise } from './request'
 import { Track } from './track'
 
 export type PartyCode = string
@@ -12,8 +12,14 @@ export interface Party {
   current_track?: Track,
 }
 
-export interface PartyLocation {
+interface PartyLocation {
   host_name: string
+}
+
+export interface JoinParty {
+  partyCode: PartyCode,
+  status: RequestStatus,
+  response?: Response<Party>,
 }
 
 export function getParty(): ResponsePromise<Party> {
