@@ -7,11 +7,8 @@ export { persistTransform } from './redux/state'
 export { Action } from './redux/actions'
 export { Reducer } from './redux/reducers'
 
-export type State = IState
-
-const Actions = AllActions
-export default Actions
-
 export const Middleware = AllMiddleware
 
+export type State = IState
+export const Actions = AllActions
 export const partyApp = mainReducer

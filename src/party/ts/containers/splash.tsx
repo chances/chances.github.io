@@ -2,8 +2,7 @@ import { Component, h } from 'preact'
 import { connect } from 'preact-redux'
 
 import { JoinParty, RequestStatus } from '../api'
-import Actions from '../redux'
-import { State } from '../redux'
+import { Actions, State } from '../redux'
 
 import JoinForm from '../components/join-form'
 import header from '../components/logo'
