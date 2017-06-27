@@ -46,7 +46,7 @@ export default class JoinForm extends Component<Props, {}> {
               autocomplete="off"
               maxLength={4}
               disabled={!spinnerHidden}
-              onKeyUp={this.partyCodeKey}
+              onInput={this.partyCodeInputChange}
               onFocus={this.focusBlurJoinForm}
               onBlur={this.focusBlurJoinForm}
             />
@@ -74,7 +74,7 @@ export default class JoinForm extends Component<Props, {}> {
     this.submitButton = node
   }
 
-  private partyCodeKey = (e: Event) => {
+  private partyCodeInputChange = (e: Event) => {
     const input = e.currentTarget as HTMLInputElement
     const value = stripNonAlphaNumeric(
       input.value.trim().replace(whitespace, ''),
@@ -85,8 +85,10 @@ export default class JoinForm extends Component<Props, {}> {
       return
     }
 
-    const showSubmit = value.length > 0
+    this.submitVisible = value.length > 0
+  }
 
+  private set submitVisible(showSubmit: boolean) {
     if (showSubmit) {
       this.submitButton.classList.remove('hiding')
     } else if (!this.submitButton.classList.contains('hiding')) {
