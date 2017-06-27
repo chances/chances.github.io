@@ -9,7 +9,7 @@ interface Props {
   onJoinSubmitted(partyCode: string): void
 }
 
-const whitespace = /[\s\^]/g
+const whitespace = /[\s\\\^\[\]`]/g
 const alphaNum = /[a-zA-z0-9]/
 function stripNonAlphaNumeric(s: string) {
   let result = ''
