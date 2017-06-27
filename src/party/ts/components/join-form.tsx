@@ -55,6 +55,7 @@ export default class JoinForm extends Component<Props, {}> {
               class="hiding"
               type="submit"
               value="Join"
+              title="Join the party"
               onFocus={this.focusBlurJoinForm}
               onBlur={this.focusBlurJoinForm}
             />
