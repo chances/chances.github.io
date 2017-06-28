@@ -32,18 +32,28 @@ stylesheet: /assets/stylesheets/party.css
           class="spinner"
           fill="#FCFCFC"
           d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
-        >
-          <animateTransform
-            attributeType="xml"
-            attributeName="transform"
-            type="rotate"
-            from="0 25 25"
-            to="360 25 25"
-            dur="0.8s"
-            repeatCount="indefinite"
-          />
-        </path>
+        />
       </svg>
+      <style>
+span.spinner svg > path.spinner {
+    -webkit-animation:spin 800ms linear infinite;
+    -moz-animation:spin 800ms linear infinite;
+    animation:spin 800ms linear infinite;
+    -webkit-transform-origin: bottom right;
+    -moz-transform-origin: bottom right;
+    transform-origin: bottom right;
+}
+main.splash svg {
+  opacity: 1;
+  transition: 300ms opacity ease-out;
+}
+main.splash.hiding svg {
+  opacity: 0;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+      </style>
     </span>
   </div>
   <div>
@@ -52,6 +62,6 @@ stylesheet: /assets/stylesheets/party.css
 </main>
 <script src="/assets/javascript/party.js"></script>
 <!-- TODO: Remove this with a Hakyll rule, somehow... -->
-<script id="__bs_script__">//<![CDATA[
+<script defer id="__bs_script__">//<![CDATA[
     document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.js?v=2.18.12'><\/script>".replace("HOST", location.hostname));
 //]]></script>

@@ -37,12 +37,16 @@ api.setPartyApiHost(util.log('Party API Host:', partyApiHost))
 
 const main = document.querySelector('main')
 if (main !== null) {
-  main.remove()
+  main.classList.add('hiding')
 
-  render(
-    <Provider store={store}>
-      <Splash />
-    </Provider>,
-    document.body,
-  )
+  setTimeout(() => {
+    main.remove()
+
+    render(
+      <Provider store={store}>
+        <Splash />
+      </Provider>,
+      document.body,
+    )
+  }, 300)
 }
