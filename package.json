@@ -26,6 +26,7 @@
     "chai": "^4.0.2",
     "codecov": "^2.2.0",
     "concurrently": "^3.5.0",
+    "envify": "^4.0.0",
     "faucet": "^0.0.1",
     "nyc": "^11.0.2",
     "tap-dot": "^1.0.5",
