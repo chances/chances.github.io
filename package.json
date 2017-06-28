@@ -4,8 +4,7 @@
   "description": "JavaScript assets for https://chancesnow.me",
   "scripts": {
     "test": "npm run test:party -s",
-    "test:party": "cd ./src/party && make test-plainly",
-    "posttest": "codecov -f **/coverage/*.json -t df9fae3c-8520-4dca-b25c-7a886a646911"
+    "test:party": "cd ./src/party && make test-ci"
   },
   "repository": "git+https://github.com/chances/chances.github.io.git",
   "author": "Chance Snow <git@chancesnow.me>",
@@ -58,14 +57,19 @@
   },
   "nyc": {
     "include": [
-      "src/party/js/*.js",
-      "src/party/js/**/*.js"
+      "src/party/ts/**/*.ts",
+      "src/party/ts/**/*.tsx"
     ],
     "exclude": [
-      "src/party/js/test"
+      "src/party/ts/**/*.d.ts",
+      "src/party/ts/test"
     ],
     "extension": [
-      ".js"
+      ".ts",
+      ".tsx"
+    ],
+    "require": [
+      "ts-node/register"
     ],
     "reporter": [
       "json",

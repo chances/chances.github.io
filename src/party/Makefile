@@ -8,6 +8,7 @@ TAPE = ../../node_modules/.bin/tape
 FAUCET = ../../node_modules/.bin/faucet
 TAP_DOT = ../../node_modules/.bin/tap-dot
 NYC = ../../node_modules/.bin/nyc
+CODECOV = ../../node_modules/.bin/codecov
 CONCURRENTLY = ../../node_modules/.bin/concurrently
 
 TS_ENTRY_POINT := ./ts/main.tsx
@@ -42,15 +43,16 @@ test: lint
 	@${TS_NODE} --fast ${TAPE} ${TS_TEST_SOURCES} | ${FAUCET}
 .PHONY: test
 
-test-plainly: lint
-	@${TS_NODE} --fast ${TAPE} ${TS_TEST_SOURCES} | ${TAP_DOT}
-.PHONY: test-plainly
-
 cover:
 	@rm -rf coverage
-	@${TSC}
-	@${NYC} ${TAPE} ${JS_TEST_SOURCES} | ${FAUCET}
+	@${NYC} ${TAPE} ${TS_TEST_SOURCES} | ${FAUCET}
 .PHONY: cover
+
+test-ci: lint
+	@rm -rf coverage
+	@${NYC} ${TAPE} ${TS_TEST_SOURCES} | ${TAP_DOT}
+	@${CODECOV} -f ./coverage/*.json -t df9fae3c-8520-4dca-b25c-7a886a646911
+.PHONY: test-ci
 
 watch:
 	@echo "Entry point: ${JS_ENTRY_POINT}"
