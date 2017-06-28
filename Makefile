@@ -41,10 +41,8 @@ watch: build-hakyll
 .PHONY: watch
 
 watch-css:
-	@while true; do \
-		make --quiet css; \
-        inotifywait -qre close_write ./src/assets/scss; \
-    done
+	@fswatch -or ./ts/test | xargs \
+	make --quiet css
 .PHONY: watch-css
 
 watch-party:

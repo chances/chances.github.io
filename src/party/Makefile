@@ -69,27 +69,18 @@ browser-sync:
 .PHONY: browser-sync
 
 watch-scss:
-	# Watch target adapted from http://stackoverflow.com/a/23734495/1363247
-	@while true; do \
-		cp -r scss/* ../assets/scss/.; \
-		inotifywait -qre close_write ./scss; \
-	done
+	@fswatch -or ./ts/test | xargs \
+	cp -r scss/* ../assets/scss/.
 .PHONY: watch-scss
 
 watch-js:
-	# Watch target adapted from http://stackoverflow.com/a/23734495/1363247
-	@while true; do \
-		${BROWSERIFY} --debug ${JS_ENTRY_POINT} -o ${BROWSERIFY_TARGET}; \
-		inotifywait -qre close_write ./js; \
-	done
+	@fswatch -or ./ts/test | xargs \
+	${BROWSERIFY} --debug ${JS_ENTRY_POINT} -o ${BROWSERIFY_TARGET}
 .PHONY: watch-js
 
-watch-tests:
-	@while true; do \
-		${TS_NODE} --fast ${TAPE} ${TS_TEST_SOURCES} | ${FAUCET} \
-		echo ""; \
-		inotifywait -qre close_write ./ts/test; \
-	done
+watch-tests: test
+	@fswatch -or ./ts/test | xargs \
+	${TS_NODE} --fast ${TAPE} ${TS_TEST_SOURCES} | ${FAUCET}
 .PHONY: watch-tests
 
 clean:
