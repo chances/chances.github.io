@@ -32,7 +32,7 @@ browserify:
 	@echo "Building chances-party browser client..."
 	@echo "Entry point: ${JS_ENTRY_POINT}"
 	@echo "Browserify target: ${BROWSERIFY_TARGET}"
-	@${BROWSERIFY} --debug -t [ envify --NODE_ENV production ] -t uglifyify -p [tsify] ${TS_ENTRY_POINT} | ${UGLIFY} > ${BROWSERIFY_TARGET}
+	@${BROWSERIFY} --debug -t [ envify purge --NODE_ENV production ] -t uglifyify -p [tsify] ${TS_ENTRY_POINT} | ${UGLIFY} > ${BROWSERIFY_TARGET}
 .PHONY: browserify
 
 lint:
