@@ -10,9 +10,9 @@ TAP_DOT = ../../node_modules/.bin/tap-dot
 NYC = ../../node_modules/.bin/nyc
 CONCURRENTLY = ../../node_modules/.bin/concurrently
 
+TS_ENTRY_POINT := ./ts/main.tsx
 JS_ENTRY_POINT := ./js/main.js
 BROWSERIFY_TARGET := ../assets/javascript/party.js
-REL_BROWSERIFY_TARGET := ../assets/javascript/party.js
 
 TS_SOURCES := ./ts/**.ts ./ts/**.tsx
 TS_TEST_SOURCES := ./ts/test/*.ts
@@ -20,26 +20,18 @@ JS_TEST_SOURCES := ./js/test/*.js
 
 all: build
 
-build: css app browserify
+build: css browserify
 .PHONY: build
-
-app:
-	@echo "Building chances-party browser client..."
-	@${TSC}
-.PHONY: app
 
 css:
 	@cp -r scss/* ../assets/scss/.
 .PHONY: css
 
 browserify:
+	@echo "Building chances-party browser client..."
 	@echo "Entry point: ${JS_ENTRY_POINT}"
 	@echo "Browserify target: ${BROWSERIFY_TARGET}"
-	@${BROWSERIFY} -t uglifyify ${JS_ENTRY_POINT} -o ${BROWSERIFY_TARGET}
-.PHONY: browserify
-
-browserify-dev:
-	@${BROWSERIFY} -t uglifyify ${JS_ENTRY_POINT} -o ${BROWSERIFY_TARGET}
+	@${BROWSERIFY} --debug -p [tsify] ${TS_ENTRY_POINT} -o ${BROWSERIFY_TARGET}
 .PHONY: browserify
 
 lint:
@@ -54,8 +46,9 @@ test-plainly: lint
 	@${TS_NODE} --fast ${TAPE} ${TS_TEST_SOURCES} | ${TAP_DOT}
 .PHONY: test-plainly
 
-cover: app
+cover:
 	@rm -rf coverage
+	@${TSC}
 	@${NYC} ${TAPE} ${JS_TEST_SOURCES} | ${FAUCET}
 .PHONY: cover
 
@@ -86,7 +79,7 @@ watch-scss:
 watch-js:
 	# Watch target adapted from http://stackoverflow.com/a/23734495/1363247
 	@while true; do \
-		make --quiet browserify-dev; \
+		${BROWSERIFY} --debug ${JS_ENTRY_POINT} -o ${BROWSERIFY_TARGET}; \
 		inotifywait -qre close_write ./js; \
 	done
 .PHONY: watch-js
@@ -101,5 +94,5 @@ watch-tests:
 
 clean:
 	rm -rf ./js
-	rm -f ${REL_BROWSERIFY_TARGET}
+	rm -f ${BROWSERIFY_TARGET}
 .PHONY: clean

@@ -6,6 +6,8 @@
       "strict": true,
       "removeComments": false,
       "preserveConstEnums": true,
+      "inlineSourceMap": true,
+      "inlineSources": true,
       "noEmitOnError": true,
       "outDir": "js/",
       "lib": [
