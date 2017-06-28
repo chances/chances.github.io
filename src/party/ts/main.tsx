@@ -32,7 +32,8 @@ persistStore(store, {
   transforms: [persistTransform],
 })
 
-api.setPartyApiHost(util.log('Party API Host:', 'http://app.local:3005'))
+const partyApiHost = process.env.PARTY_API || 'https://party.chancesnow.me'
+api.setPartyApiHost(util.log('Party API Host:', partyApiHost))
 
 const main = document.querySelector('main')
 if (main !== null) {

@@ -71,12 +71,14 @@ browser-sync:
 .PHONY: browser-sync
 
 watch-scss:
-	@fswatch -or ./ts/test | xargs \
+	@fswatch -or ./scss | xargs \
 	cp -r scss/* ../assets/scss/.
 .PHONY: watch-scss
 
 watch-js:
-	@fswatch -or ./ts/test | xargs \
+	@export PARTY_API="http://app.local:3005"
+	${BROWSERIFY} --debug ${JS_ENTRY_POINT} -o ${BROWSERIFY_TARGET}
+	@fswatch -or ./ts | xargs \
 	${BROWSERIFY} --debug ${JS_ENTRY_POINT} -o ${BROWSERIFY_TARGET}
 .PHONY: watch-js
 
