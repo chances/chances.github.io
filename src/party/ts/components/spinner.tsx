@@ -16,7 +16,7 @@ export default class Spinner extends Component<Props, {}> {
   get color() {
     return this.props.color != null
       ? this.props.color
-      : '#fcfcfc'
+      : '#FCFCFC'
   }
 
   get size() {
@@ -26,7 +26,6 @@ export default class Spinner extends Component<Props, {}> {
   }
 
   render(props: Props, {}) {
-    const viewSize = this.size + 10
     const dur = '0.7s'
 
     return (
@@ -36,13 +35,12 @@ export default class Spinner extends Component<Props, {}> {
           y="0px"
           width={this.size + 'px'}
           height={this.size + 'px'}
-          viewBox={'0 0 ' + viewSize + ' ' + viewSize}
-          style={'enable-background:new 0 0 ' + viewSize + ' ' + viewSize + ';'}
+          viewBox="0 0 50 50"
+          style="enable-background: new 0 0 50 50"
         >
           <path
             class="spinner"
             fill={this.color}
-            strokeWidth={(this.size / 5).toFixed(1)}
             // tslint:disable-next-line:max-line-length
             d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
           >

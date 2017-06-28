@@ -25,6 +25,9 @@ h1, h2 {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
+main.splash > #content {
+  flex-direction: column;
+}
 #content[data-show="contribute"] {
   flex-direction: row;
   justify-content: center;
