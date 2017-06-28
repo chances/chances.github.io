@@ -4,7 +4,8 @@
   "description": "JavaScript assets for https://chancesnow.me",
   "scripts": {
     "test": "npm run test:party -s",
-    "test:party": "cd ./src/party && make test-plainly"
+    "test:party": "cd ./src/party && make test-plainly",
+    "posttest": "codecov -f **/coverage/*.json -t df9fae3c-8520-4dca-b25c-7a886a646911"
   },
   "repository": "git+https://github.com/chances/chances.github.io.git",
   "author": "Chance Snow <git@chancesnow.me>",
@@ -24,6 +25,7 @@
     "browser-sync": "^2.18.12",
     "browserify": "^13.3.0",
     "chai": "^4.0.2",
+    "codecov": "^2.2.0",
     "concurrently": "^3.5.0",
     "faucet": "^0.0.1",
     "nyc": "^11.0.2",
