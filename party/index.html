@@ -17,6 +17,9 @@
   
   <link rel="stylesheet" href="/assets/stylesheets/party.min.css">
 
+  <!-- JS -->
+  
+    
   
 
   <script>
@@ -56,10 +59,49 @@
   <body>
 
     
-      <!-- build:js /assets/javascript/party.min.js -->
-<script src="/assets/javascript/party.elm.js"></script>
-<script src="/assets/javascript/party.main.js"></script>
-<!-- endbuild -->
+      <!-- TODO: Add support for https://developers.google.com/web/updates/2015/10/display-mode -->
+
+<main class="splash">
+  <div id="logo">
+    <img src="/assets/images/party/Party-logo-invert.png" alt="Party" />
+    <p style="margin-top: 0;">Prototype</p>
+  </div>
+  <div id="content">
+    <span class="spinner">
+      <svg x="0px" y="0px" width="60px" height="60px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;">
+        <path class="spinner" fill="#FCFCFC" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"></path>
+      </svg>
+      <style>
+span.spinner svg > path.spinner {
+    -webkit-animation:spin 800ms linear infinite;
+    -moz-animation:spin 800ms linear infinite;
+    animation:spin 800ms linear infinite;
+    -webkit-transform-origin: bottom right;
+    -moz-transform-origin: bottom right;
+    transform-origin: bottom right;
+}
+main.splash svg {
+  opacity: 1;
+  transition: 300ms opacity ease-out;
+}
+main.splash.hiding svg {
+  opacity: 0;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+      </style>
+    </span>
+  </div>
+  <div>
+    <p>Made with love in PDX.</p>
+  </div>
+</main>
+<script src="/assets/javascript/party.js"></script>
+<!-- TODO: Remove this with a Hakyll rule, somehow... -->
+<script defer id="__bs_script__">//<![CDATA[
+    document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.js?v=2.18.12'><\/script>".replace("HOST", location.hostname));
+//]]></script>
 
     
 

@@ -1,4 +1,4 @@
-# [chancesnow.me](http://chancesnow.me)
+# [chancesnow.me](http://chancesnow.me) [![Build Status](https://travis-ci.org/chances/chances.github.io.svg?branch=master)](https://travis-ci.org/chances/chances.github.io)
 
 The personal website of Chance Snow, transformed by [Hakyll](https://jaspervdj.be/hakyll/).
 
