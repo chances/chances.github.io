@@ -9,6 +9,7 @@ FAUCET = ../../node_modules/.bin/faucet
 TAP_DOT = ../../node_modules/.bin/tap-dot
 NYC = ../../node_modules/.bin/nyc
 CODECOV = ../../node_modules/.bin/codecov
+SANE = ../../node_modules/.bin/sane
 CONCURRENTLY = ../../node_modules/.bin/concurrently
 
 TS_ENTRY_POINT := ./ts/main.tsx
@@ -57,12 +58,10 @@ test-ci: lint
 watch:
 	@echo "Entry point: ${JS_ENTRY_POINT}"
 	@echo "Browserify target: ${BROWSERIFY_TARGET}"
-	@${BROWSERIFY} --debug -p [tsify] ${TS_ENTRY_POINT} -o ${BROWSERIFY_TARGET}
 	@${CONCURRENTLY} --kill-others \
-		"cd ../..; make --quiet watch &> /dev/null" \
-		"cd ../..; make --quiet watch-css" \
-		"make --quiet browser-sync" \
 		"${TSC} -w 1> /dev/null" \
+		"cd ../..; make --quiet watch &> /dev/null" \
+		"make --quiet browser-sync" \
 		"make --quiet watch-scss" \
 		"make --quiet watch-js"
 .PHONY: watch
@@ -72,19 +71,20 @@ browser-sync:
 .PHONY: browser-sync
 
 watch-scss:
-	@fswatch -or ./scss | xargs -n1 -I {} \
-	cp -r scss/* ../assets/scss/.
+	@${SANE} "cp -r scss/* ../assets/scss/. && cd ../..; make --quiet css" ./scss --wait=2
 .PHONY: watch-scss
 
 watch-js:
 	@export PARTY_API="http://app.local:3005"
-	@fswatch -or ./js | xargs -n1 -I {} \
-	${BROWSERIFY} --debug ${JS_ENTRY_POINT} -o ${BROWSERIFY_TARGET}
+	@${SANE} \
+		"${BROWSERIFY} --debug -t \
+			[ envify --NODE_ENV development --PARTY_API http://app.local:3005 ] \
+			${JS_ENTRY_POINT} -o ${BROWSERIFY_TARGET}" \
+		./js --wait=2
 .PHONY: watch-js
 
 watch-tests: test
-	@fswatch -or ./ts/test | xargs -n1 -I {} \
-	${TS_NODE} --fast ${TAPE} ${TS_TEST_SOURCES} | ${FAUCET}
+	@${SANE} "${TS_NODE} --fast ${TAPE} ${TS_TEST_SOURCES} | ${FAUCET}" ./ts/test --wait=2
 .PHONY: watch-tests
 
 clean:
