@@ -41,7 +41,7 @@ watch: build-hakyll
 .PHONY: watch
 
 watch-css:
-	@fswatch -or ./ts/test | xargs \
+	@fswatch -or ./src/assets/scss | xargs -n1 -I {} \
 	make --quiet css
 .PHONY: watch-css
 

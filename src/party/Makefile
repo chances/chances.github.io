@@ -57,6 +57,7 @@ test-ci: lint
 watch:
 	@echo "Entry point: ${JS_ENTRY_POINT}"
 	@echo "Browserify target: ${BROWSERIFY_TARGET}"
+	@${BROWSERIFY} --debug -p [tsify] ${TS_ENTRY_POINT} -o ${BROWSERIFY_TARGET}
 	@${CONCURRENTLY} --kill-others \
 		"cd ../..; make --quiet watch &> /dev/null" \
 		"cd ../..; make --quiet watch-css" \
@@ -71,19 +72,18 @@ browser-sync:
 .PHONY: browser-sync
 
 watch-scss:
-	@fswatch -or ./scss | xargs \
+	@fswatch -or ./scss | xargs -n1 -I {} \
 	cp -r scss/* ../assets/scss/.
 .PHONY: watch-scss
 
 watch-js:
 	@export PARTY_API="http://app.local:3005"
-	${BROWSERIFY} --debug ${JS_ENTRY_POINT} -o ${BROWSERIFY_TARGET}
-	@fswatch -or ./ts | xargs \
+	@fswatch -or ./js | xargs -n1 -I {} \
 	${BROWSERIFY} --debug ${JS_ENTRY_POINT} -o ${BROWSERIFY_TARGET}
 .PHONY: watch-js
 
 watch-tests: test
-	@fswatch -or ./ts/test | xargs \
+	@fswatch -or ./ts/test | xargs -n1 -I {} \
 	${TS_NODE} --fast ${TAPE} ${TS_TEST_SOURCES} | ${FAUCET}
 .PHONY: watch-tests
 
