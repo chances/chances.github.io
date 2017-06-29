@@ -5,12 +5,13 @@ CSS_OUT=site/assets/stylesheets
 CSS_SOURCES=$(shell find $(CSS_SRC) -type f -name "*.scss")
 CSS_TARGETS=$(patsubst $(CSS_SRC)/%.scss,$(CSS_OUT)/%.min.css,$(wildcard $(CSS_SRC)/*.scss))
 
-all: build css
+all: build
 
 build: build-hakyll build-party
 	@echo "Building chances.github.io to ./site ..."
 	@cd src && \
 	stack exec site rebuild
+	@make --quiet css
 .PHONY: build
 
 build-hakyll:
