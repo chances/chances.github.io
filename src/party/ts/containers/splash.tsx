@@ -1,32 +1,36 @@
+import { Maybe } from 'monet'
 import { Component, h } from 'preact'
 import { connect } from 'preact-redux'
+import { Dispatch } from 'redux'
 
-import { JoinParty, RequestStatus } from '../api'
+import { JoinParty, Request } from '../api'
 import { Actions, State } from '../redux'
 
 import JoinForm from '../components/join-form'
 import header from '../components/logo'
 
-interface SplashProps {
+type SplashProps = SplashStateProps & SplashDispatchProps
+interface SplashStateProps {
   firstLaunch: boolean
+  partyCode: Maybe<string>
   isJoining: boolean
-  partyCode: string
-  joinParty(partyCode: string): void
+  error: Maybe<string>
 }
-
-function joinParty(partyCode: string): JoinParty {
-  return {
-    partyCode,
-    status: RequestStatus.LOADING,
-  }
+interface SplashDispatchProps {
+  joinParty(partyCode: string): void
 }
 
 class Splash extends Component<SplashProps, {}> {
 
-  render({joinParty, isJoining, partyCode}: SplashProps, {}) {
+  render({joinParty, isJoining, partyCode, error}: SplashProps, {}) {
     return h('main', {}, header(true).concat([
       <div id="content">
-        <JoinForm onJoinSubmitted={joinParty} joining={isJoining} partyCode={partyCode} />
+        <JoinForm
+          onJoinSubmitted={joinParty}
+          isJoining={isJoining}
+          partyCode={partyCode}
+          error={error}
+        />
       </div>,
       <div>
         <p>Made with love in PDX.</p>
@@ -35,30 +39,32 @@ class Splash extends Component<SplashProps, {}> {
   }
 }
 
-const SplashContainer = connect<{}, SplashProps, {}>(
-  (state: State) => {
-    const hasJoinRequest = state.joining.isJust()
-    const isJoining = hasJoinRequest &&
-      state.joining.just().status === RequestStatus.LOADING
-    const partyCode = hasJoinRequest
-      ? state.joining.just().partyCode
-      : ''
+function stateProps(state: State): SplashStateProps {
+  const isJoining = state.joining.cata(() => false, request => request.isLoading)
+  const maybeError = state.joining
+    .flatMap(request => request.error)
+    .map(err => err.detail)
 
-    return {
-      ...state,
-      isJoining,
-      partyCode,
-    }
-  },
-  dispatch => {
-    return {
-      joinParty: partyCode => {
-        dispatch(Actions.JoinParty.create(joinParty(partyCode)))
-      },
-    }
-  },
-)(
-  Splash,
-)
+  return {
+    ...state,
+    partyCode: state.joining.map(joinRequest => joinRequest.partyCode),
+    isJoining,
+    error: maybeError,
+  }
+}
+
+function dispatchProps(dispatch: Dispatch<any>): SplashDispatchProps {
+  return {
+    joinParty: partyCode => {
+      const joinRequest = new Request() as JoinParty
+      joinRequest.partyCode = partyCode
+
+      dispatch(Actions.JoinParty.create(joinRequest))
+    },
+  }
+}
+
+const SplashContainer =
+  connect<SplashStateProps, SplashDispatchProps, {}>(stateProps, dispatchProps)(Splash)
 
 export default SplashContainer

@@ -1,11 +1,13 @@
+import { Maybe } from 'monet'
 import { Component, h } from 'preact'
 
 import header from './logo'
 import Spinner from './spinner'
 
 interface Props {
-  partyCode?: string
-  joining?: boolean
+  partyCode: Maybe<string>
+  isJoining: boolean
+  error: Maybe<string>
   onJoinSubmitted(partyCode: string): void
 }
 
@@ -24,10 +26,9 @@ export default class JoinForm extends Component<Props, {}> {
   private partyCode: HTMLInputElement
   private submitButton: HTMLInputElement
 
-  render({partyCode, joining}: Props, {}) {
-    const spinnerHidden = !(joining != null && joining)
-    const submitHidingClass = spinnerHidden && partyCode &&
-      partyCode.trim() ? '' : 'hiding'
+  render(props: Props, {}) {
+    const submitHidingClass = props.partyCode
+      .cata(() => 'hiding', partyCode => partyCode.length ? '' : 'hiding')
 
     return (
       <form id="join" onSubmit={this.onJoinSubmitted}>
@@ -40,19 +41,19 @@ export default class JoinForm extends Component<Props, {}> {
               ref={this.refPartyCode}
               id="partyCode"
               type="text"
-              value={partyCode}
+              value={props.partyCode.cata(() => '', partyCode => partyCode)}
               placeholder="Ab7j"
               autofocus={true}
               autocomplete="off"
               maxLength={4}
-              disabled={!spinnerHidden}
+              disabled={props.isJoining}
               onInput={this.partyCodeInputChange}
               onFocus={this.focusBlurJoinForm}
               onBlur={this.focusBlurJoinForm}
             />
             <input
               ref={this.refSubmitButton}
-              class="hiding"
+              class={submitHidingClass}
               type="submit"
               value="Join"
               title="Join the party"
@@ -60,8 +61,9 @@ export default class JoinForm extends Component<Props, {}> {
               onBlur={this.focusBlurJoinForm}
             />
           </div>
-          <Spinner hidden={spinnerHidden} />
+          <Spinner hidden={!props.isJoining} />
         </div>
+        <p class="error">{props.error.cata(() => '', errStr => errStr)}</p>
       </form>
     )
   }

@@ -2,36 +2,25 @@ import { Either } from 'monet'
 import Promise = require('bluebird')
 import fetch = require('isomorphic-fetch')
 
+import Errors from './request/errors'
+import { ErrorType } from './request/errors'
+import { ApiResponse, joinParams, RequestParam, ResponsePromise } from './request/primitives'
+import * as p from './request/primitives'
+
 Promise.config({
   cancellation: true,
 })
 
 let partyApiHost = 'https://party.chancesnow.me/'
 
+export function setPartyApiHost(host: string) {
+  partyApiHost = host.endsWith('/')
+    ? host
+    : host + '/'
+}
+
 const defaultOptions: RequestInit = {
   credentials: 'include',
-}
-
-export interface RequestParam {name: string, value: string}
-export type Response<T> = Either<Errors, T>
-export type ResponsePromise<T> = Promise<Response<T>>
-export enum RequestStatus {
-  LOADING,
-  COMPLETED,
-}
-
-export interface Error {
-  status: number
-  title: string
-  detail: string
-  meta: {
-    cause: string | null,
-    details: string | null,
-  }
-}
-export interface Errors {
-  responseStatus: number | null
-  errors: Error[]
 }
 
 export function get<T>(path: string, params?: RequestParam[]): ResponsePromise<T> {
@@ -57,48 +46,35 @@ function request<T>(method: 'get' | 'post', path: string, body?: {data: any},
     body: body ? JSON.stringify(body) : undefined,
   }
 
-  return new Promise(resolve => {
+  return new Promise<p.Response<T>>(resolve => {
     fetch(new Request(url, options)).then(response => {
-      response.json().then(data => {
-        const result = response.ok
-          ? Either.Right(data.data)
-          : Either.Left<Errors>({
-            responseStatus: response.status,
-            ...data,
-          })
-        resolve(result)
+      response.json().then((data: ApiResponse<T>) => {
+        if (response.ok && !isErrorResponse(data)) {
+          resolve(Either.Right(data.data) as p.Response<T>)
+        } else if (isErrorResponse(data)) {
+          resolve(Either.Left(new Errors(
+            response.status,
+            data.errors,
+          )) as p.Response<T>)
+        } else {
+          resolve(Either.Left(new Errors(
+            response.status,
+            [ Errors.create(
+              'Request Error',
+              'Party received an invalid response',
+            ) ],
+          )) as p.Response<T>)
+        }
       })
     }).catch(e => {
-      resolve(Either.Left<Errors>({
-        responseStatus: null,
-        errors: [
-          createError('Request Error', 'Party could not complete the request'),
-        ],
-      }))
+      resolve(Either.Left(new Errors(
+        ErrorType.NULL_ERROR,
+        [ Errors.defaultError ],
+      )) as p.Response<T>)
     })
-  }) as ResponsePromise<T>
+  })
 }
 
-export function setPartyApiHost(host: string) {
-  partyApiHost = host.endsWith('/')
-    ? host
-    : host + '/'
-}
-
-function joinParams(params: RequestParam[]): string {
-  return params.map(param => {
-    return encodeURIComponent(param.name) + '=' + encodeURIComponent(param.value)
-  }).join('&')
-}
-
-function createError(title: string, detail: string, cause?: string, details?: string): Error {
-  return {
-    status: -1,
-    title,
-    detail,
-    meta: {
-      cause: cause ? cause : null,
-      details: details ? details : null,
-    },
-  }
+function isErrorResponse<T>(responseData: ApiResponse<T>): responseData is p.ErrorResponse {
+  return (responseData as p.ErrorResponse).errors !== undefined
 }
