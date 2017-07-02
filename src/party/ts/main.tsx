@@ -20,6 +20,11 @@ const composeEnhancers = process.env.NODE_ENV === 'development'
   ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
   : compose
 
+// const augmentedMiddleware = process.env.NODE_ENV === 'development'
+//   // tslint:disable-next-line:no-var-requires
+//   ? [require('redux-immutable-state-invariant').default(), ...middleware]
+//   : [...middleware]
+
 const store = createStore(
   partyApp,
   composeEnhancers(

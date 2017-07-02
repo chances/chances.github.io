@@ -29,6 +29,7 @@
     "envify": "^4.0.0",
     "faucet": "^0.0.1",
     "nyc": "^11.0.2",
+    "redux-immutable-state-invariant": "^2.0.0",
     "sane": "^2.0.0",
     "tap-dot": "^1.0.5",
     "tape": "^4.6.3",
