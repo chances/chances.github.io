@@ -1,6 +1,5 @@
+import { Either, Maybe } from 'monet'
 import { createTransform } from 'redux-persist'
-import Immutable = require('immutable')
-import { Maybe } from 'monet'
 
 import { Party } from '../api/party'
 import curry from '../util'
@@ -16,18 +15,40 @@ export const initialState = {
 type State = typeof initialState
 export default State
 
-const mutator = Immutable.Record(initialState)
-let record: Immutable.Map<string, any> = mutator()
+let record: State = initialState
 
 export function replace(state: State): State {
-  record = new mutator(state)
-  return record.toJS()
+  return record = state
+}
+
+// Monet wrapper
+
+export interface SerializedState {
+  firstLaunch: boolean
+  joining: JoinParty | null
+  party: Party | null
+}
+
+function paintWithMonet(state: SerializedState): State {
+  return {
+    firstLaunch: state.firstLaunch,
+    joining: Maybe.fromNull(state.joining),
+    party: Maybe.fromNull(state.party),
+  }
+}
+
+function paintWithMonetInverse(state: State): SerializedState {
+  return {
+    firstLaunch: state.firstLaunch,
+    joining: state.joining.orNull(),
+    party: state.party.orNull(),
+  }
 }
 
 // Pseudo-mutation helpers
 
 type StateKeys = keyof State
-type StateValues = typeof initialState[keyof typeof initialState]
+type StateValues = State[keyof State]
 
 type MutateFunctions = {
   [F in StateKeys]: (value: State[F]) => State
@@ -38,33 +59,22 @@ interface MutatorFunction {
 
 function generateMutators(): MutateFunctions {
   const mutatorObject: MutatorFunction = {}
+  const clone = {...record}
   Object.keys(initialState).map((key: StateKeys) => {
-    mutatorObject[key] = (value: any) => mutateKey(record.toJS(), key, value)
+    mutatorObject[key] = (value: any) => mutateKey(clone, key, value)
   })
   return mutatorObject as MutateFunctions
 }
 export const mutate = generateMutators()
 
-// export const mutate: MutateFunctions = {
-//   firstLaunch: curry(
-//     (state: State, value: boolean) => mutateKey(state, 'firstLaunch', value),
-//   )(record.toJS()),
-//   joining: curry(
-//     (state: State, value: Maybe<JoinParty>) => mutateKey(state, 'joining', value),
-//   )(record.toJS()),
-//   party: curry(
-//     (state: State, value: Maybe<JoinParty>) => mutateKey(state, 'party', value),
-//   )(record.toJS()),
-// }
 function mutateKey(state: State, key: StateKeys, value: StateValues): State {
   state[key] = value
-  record = new mutator(state)
-  return record.toJS()
+  return record = state
 }
 
-export const persistTransform = createTransform<State, State>(
-  (stateToSerialize, key) => stateToSerialize,
-  (serializedState: State, key) => serializedState,
+export const persistTransform = createTransform<State, SerializedState>(
+  (state, key) => paintWithMonetInverse(state),
+  (serializedState, key) => paintWithMonet(serializedState),
   {
     blacklist: ['joining'],
   },

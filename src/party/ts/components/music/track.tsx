@@ -1,4 +1,3 @@
-import { } from 'immutable'
 import { Maybe } from 'monet'
 import { Component, h } from 'preact'
 

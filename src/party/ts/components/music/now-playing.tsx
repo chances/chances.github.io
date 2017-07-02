@@ -1,4 +1,3 @@
-import { } from 'immutable'
 import { Component, h } from 'preact'
 
 import * as api from '../../api/track'
