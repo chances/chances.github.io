@@ -1,7 +1,8 @@
 import { ActionCreator } from 'react-redux-typescript'
 import { REHYDRATE } from 'redux-persist/constants'
 
-import { JoinParty, Party } from '../api'
+import { Party, Request } from '../api'
+import { JoinParty } from './middleware'
 import State from './state'
 
 function createAction<PayloadType>(name: string) {

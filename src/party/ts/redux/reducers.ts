@@ -1,32 +1,42 @@
 import { Maybe } from 'monet'
 
+import * as util from '../util'
 import Actions from './actions'
 import { Action } from './actions'
-import { initialState, State } from './state'
 
-export type Reducer = (state: State, action: Action) => State | void
+import IState from './state'
+import { initialState } from './state'
+import * as State from './state'
+
+export type Reducer = (state: IState, action: Action) => IState | void
 const reducers: Reducer[] = []
 
 type Rehydrate = typeof Actions.Rehydrate.payload
 type ShowParty = typeof Actions.ShowParty.payload
 type JoinParty = typeof Actions.JoinParty.payload
 
-export default function reducer(state: State = initialState, action: Action) {
+export default function reducer(state = initialState, action: Action) {
   switch (action.type) {
     case Actions.Rehydrate.type:
       const payload = action.payload as Rehydrate
-      return payload.firstLaunch == null ? state
-        : new State({
+      return payload.firstLaunch == null
+        ? state
+        : State.replace({
           ...state,
           firstLaunch: payload.firstLaunch,
           party: payload.party,
         })
 
     case Actions.ShowParty.type:
-      return state.mutate.party(Maybe.Just(action.payload as ShowParty))
+      return State.replace({
+        ...state,
+        firstLaunch: false,
+        joining: Maybe.Nothing<JoinParty>(),
+        party: Maybe.Just(action.payload as ShowParty),
+      })
 
     case Actions.JoinParty.type:
-      return state.mutate.joining(Maybe.Just(action.payload as JoinParty))
+      return State.mutate.joining(Maybe.Just(util.log('Join party:', action.payload as JoinParty)))
 
     default:
       return state

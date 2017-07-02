@@ -27,8 +27,12 @@ export default class JoinForm extends Component<Props, {}> {
   private submitButton: HTMLInputElement
 
   render(props: Props, {}) {
-    const submitHidingClass = props.partyCode
-      .cata(() => 'hiding', partyCode => partyCode.length ? '' : 'hiding')
+    const submitHidingClass = props.isJoining
+      ? 'hiding'
+      : props.partyCode.cata(
+        () => 'hiding',
+        partyCode => partyCode.length ? '' : 'hiding',
+      )
 
     return (
       <form id="join" onSubmit={this.onJoinSubmitted}>
@@ -113,9 +117,6 @@ export default class JoinForm extends Component<Props, {}> {
     e.preventDefault()
 
     if (this.partyCode && this.partyCode.value && this.partyCode.value.trim()) {
-      if (!this.submitButton.classList.contains('hiding')) {
-        this.submitButton.classList.add('hiding')
-      }
       this.partyCode.blur()
       this.submitButton.blur()
 

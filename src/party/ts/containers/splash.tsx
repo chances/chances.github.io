@@ -3,7 +3,7 @@ import { Component, h } from 'preact'
 import { connect } from 'preact-redux'
 import { Dispatch } from 'redux'
 
-import { JoinParty, Request } from '../api'
+import { Request } from '../api'
 import { Actions, State } from '../redux'
 
 import JoinForm from '../components/join-form'
@@ -52,6 +52,8 @@ function stateProps(state: State): SplashStateProps {
     error: maybeError,
   }
 }
+
+type JoinParty = typeof Actions.JoinParty.payload
 
 function dispatchProps(dispatch: Dispatch<any>): SplashDispatchProps {
   return {

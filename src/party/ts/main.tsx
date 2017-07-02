@@ -5,7 +5,7 @@ import { applyMiddleware, compose, createStore } from 'redux'
 import { persistStore } from 'redux-persist'
 
 import * as api from './api'
-import { Middleware, partyApp, persistTransform } from './redux'
+import { middleware, partyApp, persistTransform } from './redux'
 import * as util from './util'
 
 import Party from './components/party'
@@ -28,7 +28,7 @@ const composeEnhancers = process.env.NODE_ENV === 'development'
 const store = createStore(
   partyApp,
   composeEnhancers(
-    applyMiddleware(Middleware.logger, ...api.middleware),
+    applyMiddleware(...middleware),
   ),
 )
 
