@@ -36,7 +36,7 @@ export default function reducer(state = initialState, action: Action) {
       })
 
     case Actions.JoinParty.type:
-      return State.mutate.joining(Maybe.Just(util.log('Join party:', action.payload as JoinParty)))
+      return State.mutate.joining(Maybe.Just(action.payload as JoinParty))
 
     default:
       return state
