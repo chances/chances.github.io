@@ -39,8 +39,8 @@ export const joinParty = async((store, action) => {
     } else {
       payload.response
         .flatMap(eitherResponse => eitherResponse.toMaybe())
-        .map(party => {
-          store.dispatch(Actions.ShowParty.create(party))
+        .map(partyResource => {
+          store.dispatch(Actions.ShowParty.create(partyResource.attributes))
         })
     }
   }

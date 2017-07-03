@@ -46,11 +46,13 @@ function request<T>(method: 'get' | 'post', path: string, body?: {data: any},
     body: body ? JSON.stringify(body) : undefined,
   }
 
+  const ok = (data: p.DataResponse<T>) => Either.Right(data.data) as Either<Errors, p.Data<T>>
+
   return new Promise<p.Response<T>>(resolve => {
     fetch(new Request(url, options)).then(response => {
       response.json().then((data: ApiResponse<T>) => {
         if (response.ok && !isErrorResponse(data)) {
-          resolve(Either.Right(data.data) as p.Response<T>)
+          resolve(ok(data))
         } else if (isErrorResponse(data)) {
           resolve(Either.Left(new Errors(
             response.status,

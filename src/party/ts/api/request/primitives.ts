@@ -44,14 +44,26 @@ export class Request<T> {
 }
 
 export type ApiResponse<T> = DataResponse<T> | ErrorResponse
+// JSON API Specification - Document Structure
+// http://jsonapi.org/format/1.0/#document-structure
 export interface DataResponse<T> {
-  data: T
+  data: Data<T>
 }
+export interface Data<T> {
+  id: string
+  type: string
+  attributes: T
+  links: {
+    self: string,
+  }
+}
+// JSON API Specification - Errors
+// http://jsonapi.org/format/1.0/#errors
 export interface ErrorResponse {
   errors: Error[]
 }
 
-export type Response<T> = Either<Errors, T>
+export type Response<T> = Either<Errors, Data<T>>
 export type ResponsePromise<T> = Promise<Response<T>>
 
 export function joinParams(params: RequestParam[]): string {
