@@ -6,24 +6,18 @@ import { Error, nullErrorToNothing } from './errors'
 
 export interface RequestParam {name: string, value: string}
 export class Request<T> {
-  static complete<T>(response: Response<T>) {
-    return new Request(true, response)
-  }
-
   response: Maybe<Response<T>>
 
-  constructor(private completed: boolean = false, response?: Response<T>) {
-    this.response = response
-      ? Maybe.Just(response)
-      : Maybe.Nothing<Response<T>>()
+  constructor(response?: Response<T>) {
+    this.response = Maybe.fromNull(response)
   }
 
   get isLoading(): boolean {
-    return !this.completed
+    return this.response.isNothing()
   }
 
   get isCompleted(): boolean {
-    return this.completed && this.response.isJust()
+    return this.response.isJust()
   }
 
   get error(): Maybe<Error> {
