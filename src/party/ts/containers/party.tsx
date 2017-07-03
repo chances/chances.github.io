@@ -34,6 +34,14 @@ export class Party extends Component<PartyProps, {}> {
           </div>,
         ],
         party => [
+          <nav id="musicMenu" class="menu secondary">
+            <ul>
+              <li class="selected"><a href="#nowPlaying">Now Playing</a></li>
+              <li><a href="#history">History</a></li>
+              <li id="upNextMenuItem"><a href="#upNext">Up Next</a></li>
+              <li><a href="#contribute">Contribute</a></li>
+            </ul>
+          </nav>,
           <NowPlaying />,
           <nav id="mainMenu" class="menu">
             <ul>
