@@ -7,7 +7,6 @@ import { Request } from '../api'
 import { Actions, State } from '../redux'
 
 import JoinForm from '../components/join-form'
-import header from '../components/logo'
 
 type SplashProps = SplashStateProps & SplashDispatchProps
 interface SplashStateProps {
@@ -21,21 +20,13 @@ interface SplashDispatchProps {
 }
 
 class Splash extends Component<SplashProps, {}> {
-
   render({joinParty, isJoining, partyCode, error}: SplashProps, {}) {
-    return h('main', {}, header(true).concat([
-      <div id="content">
-        <JoinForm
-          onJoinSubmitted={joinParty}
-          isJoining={isJoining}
-          partyCode={partyCode}
-          error={error}
-        />
-      </div>,
-      <div>
-        <p>Made with love in PDX.</p>
-      </div>,
-    ]))
+    return <JoinForm
+      onJoinSubmitted={joinParty}
+      isJoining={isJoining}
+      partyCode={partyCode}
+      error={error}
+    />
   }
 }
 
@@ -53,15 +44,12 @@ function stateProps(state: State): SplashStateProps {
   }
 }
 
-type JoinParty = typeof Actions.JoinParty.payload
+const JoinParty = Actions.JoinParty.request
 
 function dispatchProps(dispatch: Dispatch<any>): SplashDispatchProps {
   return {
     joinParty: partyCode => {
-      const joinRequest = new Request() as JoinParty
-      joinRequest.partyCode = partyCode
-
-      dispatch(Actions.JoinParty.create(joinRequest))
+      dispatch(Actions.JoinParty.create(new JoinParty(partyCode)))
     },
   }
 }

@@ -4,12 +4,12 @@ import * as api from '../../api/track'
 import * as track from './track'
 
 interface State {
-  currentTrack: api.Track
+  track: api.Track
 }
 
-export default class NowPlaying extends Component<{}, State> {
+export default class CurrentTrack extends Component<{}, State> {
   state = {
-    currentTrack: {
+    track: {
       id: '',
       name: 'Worries',
       artists: [{id: '', name: 'Submotion Orchestra'}],
@@ -26,7 +26,7 @@ export default class NowPlaying extends Component<{}, State> {
     },
   }
 
-  render({}, {currentTrack}: State) {
-    return track.block('nowPlaying', 'Now Playing', currentTrack)
+  render({}, state: State) {
+    return track.block('nowPlaying', 'Now Playing', state.track)
   }
 }

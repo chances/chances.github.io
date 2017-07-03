@@ -8,8 +8,7 @@ import * as api from './api'
 import { middleware, partyApp, persistTransform } from './redux'
 import * as util from './util'
 
-import Party from './components/party'
-import Splash from './containers/splash'
+import Party from './containers/party'
 
 declare var window: {
   __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose,
@@ -53,7 +52,7 @@ if (main !== null) {
 
     render(
       <Provider store={store}>
-        <Splash />
+        <Party />
       </Provider>,
       document.body,
     )

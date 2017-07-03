@@ -52,10 +52,9 @@ export const joinParty = async((store, action) => {
         })
       },
       eitherParty => {
-        eitherParty.toMaybe()
-          .map(partyResource => {
-            store.dispatch(Actions.ShowParty.create(partyResource.attributes))
-          })
+        eitherParty.map(partyResource => {
+          store.dispatch(Actions.ShowParty.create(partyResource.attributes))
+        })
       },
     )
   }

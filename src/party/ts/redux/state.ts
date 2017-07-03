@@ -8,6 +8,7 @@ import { JoinParty } from './middleware'
 
 export const initialState = {
   firstLaunch: true,
+  tvMode: false,
   joining: Maybe.Nothing<JoinParty>(),
   party: Maybe.Nothing<Party>(),
 }
