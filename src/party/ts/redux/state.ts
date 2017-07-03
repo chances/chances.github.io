@@ -15,66 +15,36 @@ export const initialState = {
 type State = typeof initialState
 export default State
 
-let record: State = initialState
-
-export function replace(state: State): State {
-  return record = state
-}
-
-// Monet wrapper
-
-export interface SerializedState {
-  firstLaunch: boolean
-  joining: JoinParty | null
-  party: Party | null
-}
-
-function paintWithMonet(state: SerializedState): State {
-  return {
-    firstLaunch: state.firstLaunch,
-    joining: Maybe.fromNull(state.joining),
-    party: Maybe.fromNull(state.party),
-  }
-}
-
-function paintWithMonetInverse(state: State): SerializedState {
-  return {
-    firstLaunch: state.firstLaunch,
-    joining: state.joining.orNull(),
-    party: state.party.orNull(),
-  }
-}
-
-// Pseudo-mutation helpers
-
 type StateKeys = keyof State
 type StateValues = State[keyof State]
 
-type MutateFunctions = {
-  [F in StateKeys]: (value: State[F]) => State
-}
-interface MutatorFunction {
-  [propName: string]: (value: any) => State
+// Monet wrapper
+
+function paintWithMonet(key: StateKeys, state: any): StateValues {
+  switch (key) {
+    case 'joining':
+    case 'party':
+      return Maybe.fromNull(state)
+    default:
+      return state as StateValues
+  }
 }
 
-function generateMutators(): MutateFunctions {
-  const mutatorObject: MutatorFunction = {}
-  const clone = {...record}
-  Object.keys(initialState).map((key: StateKeys) => {
-    mutatorObject[key] = (value: any) => mutateKey(clone, key, value)
-  })
-  return mutatorObject as MutateFunctions
-}
-export const mutate = generateMutators()
-
-function mutateKey(state: State, key: StateKeys, value: StateValues): State {
-  state[key] = value
-  return record = state
+function paintWithMonetInverse(key: StateKeys, state: StateValues): any {
+  switch (key) {
+    case 'joining':
+    case 'party':
+      return (state as Maybe<any>).orNull()
+    default:
+      return state
+  }
 }
 
-export const persistTransform = createTransform<State, SerializedState>(
-  (state, key) => paintWithMonetInverse(state),
-  (serializedState, key) => paintWithMonet(serializedState),
+// redux-persist serializer for monet
+
+export const persistTransform = createTransform<StateValues, any>(
+  (state, key: StateKeys) => paintWithMonetInverse(key, state),
+  (serializedState, key: StateKeys) => paintWithMonet(key, serializedState),
   {
     blacklist: ['joining'],
   },

@@ -21,22 +21,25 @@ export default function reducer(state = initialState, action: Action) {
       const payload = action.payload as Rehydrate
       return payload.firstLaunch == null
         ? state
-        : State.replace({
+        : {
           ...state,
           firstLaunch: payload.firstLaunch,
           party: payload.party,
-        })
+        }
 
     case Actions.ShowParty.type:
-      return State.replace({
+      return {
         ...state,
         firstLaunch: false,
         joining: Maybe.Nothing<JoinParty>(),
         party: Maybe.Just(action.payload as ShowParty),
-      })
+      }
 
     case Actions.JoinParty.type:
-      return State.mutate.joining(Maybe.Just(action.payload as JoinParty))
+      return {
+        ...state,
+        joining: Maybe.Just(action.payload as JoinParty),
+      }
 
     default:
       return state
