@@ -1,2 +1,7 @@
 # Intermediate build files
 js/
+
+# Code coverage
+coverage/
+
+graph.svg

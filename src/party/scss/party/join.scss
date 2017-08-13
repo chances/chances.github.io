@@ -1,0 +1,42 @@
+
+#join {
+  position: relative;
+  top: -1rem;
+}
+
+@media (min-height: 40rem) {
+  #join {
+    top: -2rem;
+  }
+}
+@media (min-width: 56rem) and (orientation: landscape), (min-width: 56rem) {
+  #join {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    top: -2rem;
+  }
+}
+
+#join > .form-group {
+  justify-content: center;
+}
+
+#partyCode {
+  width: 4.5rem;
+  font-family: monospace;
+}
+
+#join input[type=submit] {
+  transition: 300ms opacity ease-out, 0.5s margin-left;
+  transition-delay: 200ms, 0s, 0s;
+  opacity: 1;
+  margin-left: 0;
+
+  &.hiding {
+    opacity: 0;
+    margin-left: -4rem;
+    transition: 100ms opacity ease-in, 0.4s margin-left;
+    transition-delay: 0s, 100ms, 100ms;
+  }
+}

@@ -4,8 +4,9 @@
 
 import           Data.Aeson                 (FromJSON)
 import qualified Data.ByteString.Lazy.Char8 as C
-import           Data.List                  (intercalate, isPrefixOf,
-                                             isSuffixOf, sortBy)
+import           Data.List                  (intercalate, isInfixOf,
+                                             isPrefixOf, isSuffixOf,
+                                             sortBy)
 import           Data.List.Split            (splitOn)
 import qualified Data.Map                   as M
 import           Data.Maybe                 (fromMaybe)
@@ -16,14 +17,12 @@ import           Data.Time.LocalTime        (getCurrentTimeZone, localDay,
                                              utcToLocalTime)
 import           GHC.Generics               (Generic)
 import           Hakyll
-import           Hakyll.Web.Sass            (sassCompiler)
 import           System.FilePath            (takeFileName)
 import           System.FilePath.Posix      (takeBaseName, takeDirectory, (</>))
 import           System.IO.Unsafe           (unsafePerformIO)
 import           System.Process             (system)
 import           Test.RandomStrings         (onlyAlphaNum, randomASCII,
                                              randomString)
-import           Text.Jasmine               as JS
 
 import qualified Projects
 
@@ -40,10 +39,12 @@ conf = defaultConfiguration
     }
 
 filesToIgnore path
-    | "." `isPrefixOf` fileName = True
-    | otherwise                 = False
+    | "." `isPrefixOf` fileName   = True
+    | "coverage" `isInfixOf` path = True
+    | otherwise                   = False
     where
-        fileName = takeFileName path
+        fileName  = takeFileName path
+        directory = takeDirectory path
 
 -- TODO: Modularize this main stuff?
 main :: IO ()
@@ -57,6 +58,7 @@ main = hakyllWith conf $ do
             , "assets/icons/*"
             , "assets/images/*"
             , "assets/images/**/*"
+            , "assets/javascript/*.js"
             , "assets/stylesheets/*.css"
             , "assets/*.*"
             , "humans.txt"
@@ -67,24 +69,7 @@ main = hakyllWith conf $ do
         route   idRoute
         compile copyFileCompiler
 
-    ---------------------
-    -- Compile JS and CSS
-    ---------------------
-
     -- TODO: Parse build rules in html?
-
-    -- Minify JavaScript
-    match "assets/javascript/*.js" $ do
-        -- route   jsMinIdRoute
-        route   idRoute
-        -- compile compressJsCompiler
-        compile copyFileCompiler
-
-    -- Compile Sass stylesheets
-    match "assets/scss/*.scss" $ do
-        route   sassToCssRoute
-        let compressCssItem = fmap compressCss
-        compile (compressCssItem <$> sassCompiler)
 
     ------------------
     -- Posts and Pages
@@ -227,11 +212,6 @@ htmlIdRoute = customRoute createIndexRoute where
             </> takeBaseName p ++ ".html"
         where p = toFilePath ident
 
-sassToCssRoute :: Routes
-sassToCssRoute = composeRoutes
-    (gsubRoute "scss/" $ const "stylesheets/")
-    (setExtension "min.css")
-
 jsMinIdRoute :: Routes
 jsMinIdRoute = setExtension "min.js"
 
@@ -268,7 +248,7 @@ rewriteUrls :: Item String -> Compiler (Item String)
 rewriteUrls item = rewriteCssUrls item
 
 -- | Rewire local, relative CSS URLs in compiles sources to point to their
---   minified counterparts
+--   minified and cache busted counterparts
 rewriteCssUrls :: Item String -> Compiler (Item String)
 rewriteCssUrls = return . fmap (withUrls rewrite) where
   rewrite url
@@ -277,12 +257,6 @@ rewriteCssUrls = return . fmap (withUrls rewrite) where
         not (".min.css" `isSuffixOf` url) =
             intercalate ".min.css" . splitOn ".css" $ url
       | otherwise = url
-
-compressJsCompiler :: Compiler (Item String)
-compressJsCompiler = do
-  let minifyJS = C.unpack . JS.minify . C.pack . itemBody
-  s <- getResourceString
-  return $ itemSetBody (minifyJS s) s
 
 cleanIndexUrls :: Item String -> Compiler (Item String)
 cleanIndexUrls = return . fmap (withUrls clean) where

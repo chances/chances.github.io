@@ -24,4 +24,8 @@ _site/
 node_modules/
 npm-debug.log
 
-.vscode/
+# Code coverage
+.nyc_output/
+
+# Intermediate build files
+src/assets/javascript/party.js
