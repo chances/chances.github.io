@@ -1,3 +1,10 @@
+- name: Party
+  description: 'A party web app to facilitate guest interaction at your parties'
+  logo_url: '/assets/images/party/Party-logo.png'
+  featured: true
+  link: /party
+  github: chances-party
+
 - name: Runaway from enigma!
   short_name: runaway
   description: 'A web-based runaway script. Bringing the sexy back to runaway scripts.'
@@ -13,6 +20,8 @@
 
 - name: Animatum
   description: 'An application providing a simpler alternative for animating RCT3 custom scenery.'
+  logo_url: '/assets/images/animatum.png'
+  featured: true
   link_unused: /projects/animatum
   github: Animatum
 
