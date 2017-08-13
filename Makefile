@@ -1,29 +1,55 @@
+CSS_C=sassc
+CSS_FLAGS=-t compressed
+CSS_SRC=src/assets/scss
+CSS_OUT=site/assets/stylesheets
+CSS_SOURCES=$(shell find $(CSS_SRC) -type f -name "*.scss")
+CSS_TARGETS=$(patsubst $(CSS_SRC)/%.scss,$(CSS_OUT)/%.min.css,$(wildcard $(CSS_SRC)/*.scss))
+
+all: build
+
 build: build-hakyll build-party
 	@echo "Building chances.github.io to ./site ..."
 	@cd src && \
 	stack exec site rebuild
+	@make --quiet css
+.PHONY: build
 
 build-hakyll:
 	@echo "Building Hakyll site builder ..."
 	@stack build
+.PHONY: build-hakyll
 
 build-party:
 	@cd src/party && \
 	make --quiet build
+.PHONY: build-party
 
 clean:
 	@rm -rf dist
 	@cd src && \
 	stack exec site clean
 	@stack clean
+.PHONY: clean
 
 serve: build
 	@cd src && \
 	stack exec site serve
+.PHONY: serve
 
-watch: build
+watch: build-hakyll
 	@cd src && \
 	stack exec site watch
+.PHONY: watch
+
+watch-css:
+	@fswatch -or ./src/assets/scss | xargs -n1 -I {} \
+	make --quiet css
+.PHONY: watch-css
+
+watch-party:
+	@cd src/party && \
+	make --quiet watch
+.PHONY: watch-party
 
 deploy: build
 	@echo "Deploying chances.github.io via master branch"
@@ -43,5 +69,14 @@ deploy: build
 	git add . && \
 	git commit -m "$$(printf "$$MESSAGE")" && \
 	git push origin master
+.PHONY: deploy
 
-.PHONY: clean build build-hakyll deploy
+css: $(CSS_TARGETS)
+.PHONY: css
+
+$(CSS_OUT):
+	mkdir -p $(CSS_OUT)
+
+$(CSS_TARGETS): $(CSS_SOURCES)
+	@echo "Compiling src/assets/stylesheets/$(notdir $(basename $(basename $@))).css"
+	@$(CSS_C) $(CSS_FLAGS) src/assets/scss/$(notdir $(basename $(basename $@))).scss $@

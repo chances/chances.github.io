@@ -24,8 +24,6 @@ executable site
                      , containers == 0.5.*
                      , filepath == 1.4.*
                      , hakyll == 4.7.*
-                     , hakyll-sass == 0.2.*
-                     , hjsmin == 0.1.5.*
                      , process == 1.2.*
                      , random-strings == 0.1.1.*
                      , split == 0.2.3.*
