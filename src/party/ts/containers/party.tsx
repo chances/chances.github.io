@@ -45,6 +45,7 @@ export class Party extends Component<PartyProps, {}> {
           <NowPlaying />,
           <nav id="mainMenu" class="menu">
             <ul>
+              <li><a href="#games">Games</a></li>
               <li class="selected"><a href="#music">Music</a></li>
               <li><a href="#guests">Guests</a></li>
             </ul>
