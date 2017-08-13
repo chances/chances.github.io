@@ -4,9 +4,8 @@
 
 import           Data.Aeson                 (FromJSON)
 import qualified Data.ByteString.Lazy.Char8 as C
-import           Data.List                  (intercalate, isInfixOf,
-                                             isPrefixOf, isSuffixOf,
-                                             sortBy)
+import           Data.List                  (intercalate, isInfixOf, isPrefixOf,
+                                             isSuffixOf, sortBy)
 import           Data.List.Split            (splitOn)
 import qualified Data.Map                   as M
 import           Data.Maybe                 (fromMaybe)
@@ -92,7 +91,7 @@ main = hakyllWith conf $ do
     -- Compile markdown pages
     match (fromRegex "([a-z]*/)*index.md$") $ do
         route   htmlIdRoute
-        compile $ do
+        compile $
             pandocCompiler
                 >>= loadAndApplyTemplate "_layouts/page.html"    pageCtx
                 >>= loadAndApplyTemplate "_layouts/default.html" pageCtx
@@ -106,13 +105,12 @@ main = hakyllWith conf $ do
 
     match htmlPages $ do
         route   idRoute
-        compile $ do
+        compile $
             getResourceBody
                 >>= applyAsTemplate siteCtx
                 >>= loadAndApplyTemplate "_layouts/default.html" siteCtx
                 >>= rewriteUrls
 
-    -- TODO: Implement loading from projects.yml data file
     match "projects/index.html" $ do
         route   idRoute
         compile $ do
@@ -150,10 +148,18 @@ main = hakyllWith conf $ do
     match "index.html" $ do
         route   idRoute
         compile $ do
+            -- Featured projects
+            let projectsData = Projects.featuredProjects $ Projects.loadProjectsData "_data/projects.yml"
+                projectItems = Projects.projectsToItems projectsData
+
+            -- Posts
             posts <- recentFirst =<< loadAll "_posts/*"
+
             let indexCtx =
                     constField "is_index" "True" `mappend`
+                    constField "project_count" (show $ length projectItems) `mappend`
                     listField "posts" postCtx (return posts) `mappend`
+                    listField "projects" Projects.projectCtx (return projectItems) `mappend`
                     siteCtx
 
             getResourceBody
@@ -185,6 +191,7 @@ siteCtx =
     constField "year"         currentYear                           `mappend`
     defaultContext
 
+{-# NOINLINE currentYear #-}
 currentYear :: String
 currentYear = unsafePerformIO $ do
     now <- getCurrentTime
@@ -227,7 +234,7 @@ cleanRoute newRoute = metadataRoute $ \metadata ->
 
 cleanPostRoute :: Routes
 cleanPostRoute = cleanRoute $ \p ->
-    (takeDirectory $ takeDirectory p)
+    takeDirectory (takeDirectory p)
         </> "blog"
         </> takeBaseName p </> "index.html"
 
@@ -238,6 +245,7 @@ cleanPageRoute = cleanRoute $ \p ->
 --------------------------------------------------------------------------------
 -- Compilers
 
+{-# NOINLINE cacheBuster #-}
 cacheBuster :: String
 cacheBuster = unsafePerformIO $ do
     randomHash <- randomString (onlyAlphaNum randomASCII) 8
@@ -245,7 +253,7 @@ cacheBuster = unsafePerformIO $ do
     return randomHash
 
 rewriteUrls :: Item String -> Compiler (Item String)
-rewriteUrls item = rewriteCssUrls item
+rewriteUrls = rewriteCssUrls
 
 -- | Rewire local, relative CSS URLs in compiles sources to point to their
 --   minified and cache busted counterparts
