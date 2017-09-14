@@ -113,6 +113,31 @@ abbr.subtle {
   }
 }
 
+#projects.featured {
+  text-align: center;
+
+  h3, a, img {
+    line-height: 1;
+    display: inline-block;
+  }
+
+  a {
+    width: 12rem;
+    background: #efefef;
+    border-radius: 0.375rem;
+
+    &:hover, &:focus, &:active {
+      transform: scale(1.05);
+      transform-origin: center;
+    }
+  }
+
+  img {
+    margin: 0.5rem;
+    max-height: 3rem;
+  }
+}
+
 .social:not(.footer) {
   margin: 2rem 0;
 }

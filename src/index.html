@@ -1,3 +1,35 @@
+<div id="projects" class="featured">
+  $if(projects)$
+  <h1 class="post-title">
+      Featured Projects
+  </h1>
+
+  <ul>
+    $for(projects)$
+    <li>
+      <h3>
+        $if(has_logo)$
+          $if(has_link)$
+            <a href="$link$"><img src="$logo_url$" alt="$name$" /></a>
+          $else$
+            <a href="https://github.com/chances/$github$">
+              <img src="$logo_url$" alt="$name$" />
+            </a>
+          $endif$
+        $else$
+          $if(has_link)$
+            <a href="$link$">$name$</a>
+          $else$
+            <a href="https://github.com/chances/$github$">$name$</a>
+          $endif$
+        $endif$
+      </h3>
+    </li>
+    $endfor$
+  </ul>
+  $endif$
+</div>
+
 <div class="posts no-footnotes">
   <div>
     <h1 class="post-title">
