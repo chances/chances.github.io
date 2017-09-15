@@ -20,12 +20,5 @@ site/
 _cache/
 _site/
 
-# Node
-node_modules/
-npm-debug.log
-
-# Code coverage
-.nyc_output/
-
 # Intermediate build files
 src/assets/javascript/party.js
