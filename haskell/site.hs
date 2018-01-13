@@ -4,9 +4,8 @@
 
 import           Data.Aeson                 (FromJSON)
 import qualified Data.ByteString.Lazy.Char8 as C
-import           Data.List                  (intercalate, isInfixOf,
-                                             isPrefixOf, isSuffixOf,
-                                             sortBy)
+import           Data.List                  (intercalate, isInfixOf, isPrefixOf,
+                                             isSuffixOf, sortBy)
 import           Data.List.Split            (splitOn)
 import qualified Data.Map                   as M
 import           Data.Maybe                 (fromMaybe)
@@ -39,9 +38,10 @@ conf = defaultConfiguration
     }
 
 filesToIgnore path
-    | "." `isPrefixOf` fileName   = True
-    | "coverage" `isInfixOf` path = True
-    | otherwise                   = False
+    | "." `isPrefixOf` fileName       = True
+    | "node_modules" `isInfixOf` path = True
+    | "coverage" `isInfixOf` path     = True
+    | otherwise                       = False
     where
         fileName  = takeFileName path
         directory = takeDirectory path
