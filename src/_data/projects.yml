@@ -1,5 +1,5 @@
 - name: Party
-  description: 'A party web app to facilitate guest interaction at your parties'
+  description: 'A web app to facilitate guest engagement at your parties.'
   logo_url: '/assets/images/party/Party-logo.png'
   featured: true
   link: /party
@@ -11,7 +11,7 @@
   github: runaway
 
 - name: duk-vis
-  description: 'A JavaScript driven music visualizer'
+  description: 'A JavaScript driven music visualizer.'
   github: duk-vis
 
 - name: YouTunes
