@@ -1,0 +1,8 @@
+- var title = page.title
+
+if plain
+  #{page.content}
+else
+  article.page
+    h1.page-title #{title}
+    #{page.content}

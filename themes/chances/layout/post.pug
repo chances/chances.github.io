@@ -1,0 +1,8 @@
+- var title = post.title
+
+article.post
+  h1.post-title #{title}
+  if post.author
+    span.post-author by #{post.author}
+  span.post-date #{date_verbose}
+  #{post.content}

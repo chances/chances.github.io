@@ -1,0 +1,38 @@
+doctype html
+html(lang="en")
+  include ./_partial/head.pug
+
+  body
+    if plain
+      #{body}
+    else
+      header.masthead
+        .container
+          h3.masthead-title
+            a(href="/", title="Home")
+              img(src="/assets/images/avatar.png", alt="")
+              | #{site.title}
+            small #{site.tagline}
+          nav.masthead-nav
+            a.masthead-nav-item(href="/projects") Projects
+            a.masthead-nav-item(href="/about") About
+            a.masthead-nav-item.github(href="https://github.com/chances")
+              span.devicons.devicons-github_badge(title="Find me on GitHub")
+
+      main.container.content
+        #{post.content}
+
+      footer.container
+        .social.footer
+          .social-row
+            a(href="mailto:#{email}", title="Email")
+              img(src="/assets/icons/email.png" alt="Email")
+            a(href="https://www.github.com/#{github}", title="GitHub")
+              img(src="/assets/icons/github.png" alt="GitHub")
+            a(href="https://www.npmjs.org/~#{npm}", title="npm")
+              img(src="/assets/icons/npm.png" alt="npm")
+            a(href="http://www.linkedin.com/in/#{linked_in}", title="LinkedIn")
+              img(src="/assets/icons/linked-in.png" alt="LinkedIn")
+            a(href="https://www.twitter.com/#{twitter}", title="Twitter")
+              img(src="/assets/icons/twitter.png" alt="Twitter")
+        small Copyright &copy; #{year} Chance Snow. All rights reserved.

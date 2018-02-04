@@ -16,6 +16,11 @@ cabal.sandbox.config
 *.hp
 .stack-work/
 
+# Node.js and Hexo
+node_modules/
+db.json
+*.log
+
 site/
 _cache/
 _site/
