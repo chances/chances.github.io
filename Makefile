@@ -6,18 +6,17 @@ CSS_SOURCES=$(shell find $(CSS_SRC) -type f -name "*.scss")
 CSS_TARGETS=$(patsubst $(CSS_SRC)/%.scss,$(CSS_OUT)/%.min.css,$(wildcard $(CSS_SRC)/*.scss))
 
 all: build
+.DEFAULT_GOAL := build
 
-build: build-hakyll build-party
+bootstrap:
+	@test -d ./node_modules || npm install
+.PHONY: bootstrap
+
+build: bootstrap build-party
 	@echo "Building chances.github.io to ./site ..."
-	@cd src && \
-	stack exec site rebuild
+	@cp src/assets/javascript/* site/assets/javascript
 	@make --quiet css
 .PHONY: build
-
-build-hakyll:
-	@echo "Building Hakyll site builder ..."
-	@stack build
-.PHONY: build-hakyll
 
 build-party:
 	@cd src/party && \
@@ -25,20 +24,24 @@ build-party:
 .PHONY: build-party
 
 clean:
-	@rm -rf dist
+	@rm -rf
 	@cd src && \
 	stack exec site clean
 	@stack clean
 .PHONY: clean
 
+STATIC = ./node_modules/.bin/static
+
 serve: build
-	@cd src && \
-	stack exec site serve
+	@${STATIC} site -z -p 3000
 .PHONY: serve
 
-watch: build-hakyll
-	@cd src && \
-	stack exec site watch
+CONCURRENTLY = ./node_modules/.bin/concurrently
+
+watch: build
+	@${CONCURRENTLY} -n "css,server" -c "magenta,gray.dim" --kill-others \
+		"make --quiet watch-css" \
+		"${STATIC} site -z -p 3000"
 .PHONY: watch
 
 watch-css:
@@ -50,26 +53,6 @@ watch-party:
 	@cd src/party && \
 	make --quiet watch
 .PHONY: watch-party
-
-deploy: build
-	@echo "Deploying chances.github.io via master branch"
-	@echo "  At commit" `git rev-parse --verify HEAD`
-	@rm -rf dist
-	@git clone `git config remote.origin.url` dist
-	@cd dist && \
-	git checkout master
-	@rm -rf dist/*
-	@cp -r site/* src/CNAME .gitattributes README.md LICENSE dist/.
-	@export SHA=`git rev-parse --verify HEAD` && \
-	export SHA_SMALL=`echo $$SHA | cut -c1-7` && \
-	export COMMIT="$$(git log -1 --pretty=medium)" && \
-	export COMMIT_MSG_SUBJECT="$$(git log -1 --pretty=format:%-s)" && \
-	export MESSAGE="$$COMMIT_MSG_SUBJECT ($$SHA_SMALL)\n\nDeploy $$SHA" && \
-	cd dist && \
-	git add . && \
-	git commit -m "$$(printf "$$MESSAGE")" && \
-	git push origin master
-.PHONY: deploy
 
 css: $(CSS_TARGETS)
 .PHONY: css
