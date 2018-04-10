@@ -10,4 +10,4 @@ See the [hakyll](https://github.com/chances/chances.github.io/tree/hakyll) branc
 
 [MIT License](http://opensource.org/licenses/MIT)
 
-Copyright &copy; 2017 Chance Snow. All rights reserved.
+Copyright &copy; 2017-2018 Chance Snow. All rights reserved.
