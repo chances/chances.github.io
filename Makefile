@@ -1,5 +1,5 @@
-CSS_C=sassc
-CSS_FLAGS=-t compressed
+CSS_C=./node_modules/.bin/node-sass
+CSS_FLAGS=--output-style compressed
 CSS_SRC=src/assets/scss
 CSS_OUT=site/assets/stylesheets
 CSS_SOURCES=$(shell find $(CSS_SRC) -type f -name "*.scss")
@@ -24,10 +24,7 @@ build-party:
 .PHONY: build-party
 
 clean:
-	@rm -rf
-	@cd src && \
-	stack exec site clean
-	@stack clean
+	@rm ${CSS_TARGETS}
 .PHONY: clean
 
 STATIC = ./node_modules/.bin/static
@@ -62,4 +59,4 @@ $(CSS_OUT):
 
 $(CSS_TARGETS): $(CSS_SOURCES)
 	@echo "Compiling src/assets/stylesheets/$(notdir $(basename $(basename $@))).css"
-	@$(CSS_C) $(CSS_FLAGS) src/assets/scss/$(notdir $(basename $(basename $@))).scss $@
+	@$(CSS_C) $(CSS_FLAGS) src/assets/scss/$(notdir $(basename $(basename $@))).scss > $@
