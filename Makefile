@@ -9,6 +9,7 @@ all: build
 .DEFAULT_GOAL := build
 
 bootstrap:
+	@test -d ./src/party || git submodule update --init --recursive
 	@test -d ./node_modules || npm install
 .PHONY: bootstrap
 
