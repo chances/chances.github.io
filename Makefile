@@ -10,7 +10,8 @@ all: build
 
 bootstrap:
 	@test -d ./src/party || git submodule update --init --recursive
-	@test -d ./node_modules || npm install
+	@cd src/party && \
+	test -d ./node_modules || npm install
 .PHONY: bootstrap
 
 build: bootstrap build-party
