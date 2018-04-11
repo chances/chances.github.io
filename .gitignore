@@ -9,5 +9,9 @@ coverage/
 _site/
 
 # Intermediate build files
-site/assets/javascript/party.js
+site/assets/stylesheets/style.min.css
+site/assets/stylesheets/birthday.min.css
+site/assets/stylesheets/party.min.css
 src/assets/javascript/party.js
+site/assets/javascript/party.js
+site/party/index.html
