@@ -9,13 +9,13 @@ all: build
 .DEFAULT_GOAL := build
 
 bootstrap:
-	@test -d ./src/party || git submodule update --init --recursive
-	@cd src/party && \
-	test -d ./node_modules || npm install
+	@git submodule update --init --recursive
+	@cd src/party && npm install
 .PHONY: bootstrap
 
 build: bootstrap build-party
 	@echo "Building chances.github.io to ./site ..."
+	@cp src/party/index.html site/party
 	@cp src/assets/javascript/* site/assets/javascript
 	@make --quiet css
 .PHONY: build
