@@ -8,10 +8,12 @@ CSS_TARGETS=$(patsubst $(CSS_SRC)/%.scss,$(CSS_OUT)/%.min.css,$(wildcard $(CSS_S
 all: build
 .DEFAULT_GOAL := build
 
-bootstrap:
+bootstrap: node_modules
 	@git submodule update --init --recursive
-	@cd src/party && npm install
 .PHONY: bootstrap
+
+node_modules:
+	@npm install
 
 build: bootstrap build-party
 	@echo "Building chances.github.io to ./site ..."

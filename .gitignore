@@ -14,4 +14,6 @@ site/assets/stylesheets/birthday.min.css
 site/assets/stylesheets/party.min.css
 src/assets/javascript/party.js
 site/assets/javascript/party.js
+src/assets/javascript/party.map
+site/assets/javascript/party.map
 site/party/index.html
