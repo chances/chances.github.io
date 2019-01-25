@@ -2,6 +2,8 @@
 
 The personal website and portfolio of Chance Snow, transformed with [TypeScript](https://www.typescriptlang.org/).
 
+Hosted on [Netlify](https://www.netlify.com/).
+
 ## License
 
 [MIT License](http://opensource.org/licenses/MIT)
