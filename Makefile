@@ -17,8 +17,7 @@ node_modules:
 
 build: build-party
 	@echo "Building chances.github.io to ./site ..."
-	@cp src/party/index.html site/party
-	@cp src/assets/javascript/* site/assets/javascript
+	@find src/assets/javascript -name \*.js -exec cp {} site/assets/javascript \;
 	@make --quiet css
 .PHONY: build
 
