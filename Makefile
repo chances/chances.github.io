@@ -5,7 +5,7 @@ CSS_OUT=site/assets/stylesheets
 CSS_SOURCES=$(shell find $(CSS_SRC) -type f -name "*.scss")
 CSS_TARGETS=$(patsubst $(CSS_SRC)/%.scss,$(CSS_OUT)/%.min.css,$(wildcard $(CSS_SRC)/*.scss))
 
-all: build
+all: bootstrap-and-build
 .DEFAULT_GOAL := build
 
 bootstrap: node_modules
@@ -15,12 +15,15 @@ bootstrap: node_modules
 node_modules:
 	@npm install
 
-build: bootstrap build-party
+build: build-party
 	@echo "Building chances.github.io to ./site ..."
 	@cp src/party/index.html site/party
 	@cp src/assets/javascript/* site/assets/javascript
 	@make --quiet css
 .PHONY: build
+
+bootstrap-and-build: bootstrap build
+.PHONY: bootstrap-and-build
 
 build-party:
 	@cd src/party && \
