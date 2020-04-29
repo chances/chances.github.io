@@ -8,4 +8,4 @@ Hosted on [Netlify](https://www.netlify.com/).
 
 [MIT License](http://opensource.org/licenses/MIT)
 
-Copyright &copy; 2017-2018 Chance Snow. All rights reserved.
+Copyright &copy; 2015-2020 Chance Snow. All rights reserved.
