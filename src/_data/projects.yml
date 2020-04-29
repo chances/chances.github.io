@@ -4,6 +4,10 @@
   featured: true
   link: https://tunage.app
 
+- name: Teraflop
+  description: 'C# ECS game engine on a <a href="https://veldrid.dev/">Veldrid</a> foundation.'
+  github: teraflop
+
 - name: duk-vis
   description: 'A JavaScript driven music visualizer.'
   github: duk-vis
@@ -16,7 +20,3 @@
   short_name: runaway
   description: 'A web-based runaway script. Bringing the sexy back to runaway scripts.'
   github: runaway
-
-- name: InsultBot
-  description: 'An IRC bot that insults its users with insults provided by its users.'
-  github: insultbot-suggestions
