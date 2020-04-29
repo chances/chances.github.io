@@ -1,4 +1,4 @@
-CSS_C=./node_modules/.bin/node-sass
+CSS_C=npx node-sass
 CSS_FLAGS=--output-style compressed
 CSS_SRC=src/assets/scss
 CSS_OUT=site/assets/stylesheets
