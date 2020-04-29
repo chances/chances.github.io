@@ -6,6 +6,7 @@ on: push
 
 jobs:
   build:
+    name: CI & CD
 
     runs-on: ubuntu-latest
 
@@ -27,7 +28,7 @@ jobs:
     - name: Build Site
       if: success()
       run: |
-        make
+        make all
       env:
         CI: true
         NODE_ENV: production
