@@ -1,29 +1,22 @@
-- name: Runaway from enigma!
-  short_name: runaway
-  description: 'A web-based runaway script. Bringing the sexy back to runaway scripts.'
-  github: runaway
+- name: Tunage
+  description: 'A progressive web app to facilitate guest engagement at your parties.'
+  logo_url: '/assets/images/party/Party-icon-128.png'
+  featured: true
+  link: https://tunage.app
 
 - name: duk-vis
-  description: 'A JavaScript driven music visualizer'
+  description: 'A JavaScript driven music visualizer.'
   github: duk-vis
-
-- name: YouTunes
-  description: 'Turn YouTube into your own personal music player.'
-  github: YouTunes
-
-- name: Animatum
-  description: 'An application providing a simpler alternative for animating RCT3 custom scenery.'
-  link_unused: /projects/animatum
-  github: Animatum
 
 - name: libASE-sharp
   description: 'A C# port of <a href="http://interreality.sourceforge.net/software/libASE/">libASE</a>.'
   github: libASE-sharp
 
-- name: InsultBot
-  description: 'An IRC bot that insults its users.'
-  github: insultbot
+- name: Runaway from enigma!
+  short_name: runaway
+  description: 'A web-based runaway script. Bringing the sexy back to runaway scripts.'
+  github: runaway
 
-- name: DictionaryBot
-  description: 'An IRC bot that defines words.'
-  github: dictionarybot
+- name: InsultBot
+  description: 'An IRC bot that insults its users with insults provided by its users.'
+  github: insultbot-suggestions

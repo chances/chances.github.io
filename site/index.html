@@ -45,62 +45,53 @@
     </div>
   </header>
   <main class="container content">
-    <div id="projects" class="featured">
-    </div>
-    <div class="posts no-footnotes">
-      <div>
-        <h1 class="post-title">
-          Coming Soon:
-          <small>More Blog Posts</small>
-        </h1>
-        <p>
-          I <a href="https://github.com/chances/chances.github.io/issues/10">promise</a>!
-        </p>
-      </div>
-      <hr />
-      <article class="post">
-        <h1 class="post-title">
-          <a href="/./blog/my-newer-blog/">My New(er) Blog</a>
-        </h1>
-        <span class="post-date">January 5, 2018</span>
-        <p>Out with the old, in with the new(er)!</p>
-        <p>Although I enjoyed
-          <a href="/blog/my-new-blog">revamping</a> my website back in 2015, I failed to foresee how much the tools I put in place would get in my way.
-          And, damn, did they get in the way! Making
-          <em>minor</em> changes was hard enough, let alone trying to write a blog post. I was even managing
-          <strong>two</strong>
-          <em>different</em> Git repositories for
-          <strong>one</strong> static website. All these pain points capitalized on each other creating a tooling nightmare.</p>
-        <p>Today, I’ve decided to switch out the toolbox and use something better.</p>
-        <a href="/./blog/my-newer-blog/">Read more &raquo;</a>
-      </article>
-      <article class="post">
-        <h1 class="post-title">
-          <a href="/./blog/my-new-blog/">
-            My New Blog
+    <article id="projects">
+      <h1>Projects</h1>
+      <ul class="featured">
+        <li>
+          <h3>
+            <a href="https://tunage.app">
+              <img src="/assets/images/party/Party-icon-128.png" alt="Tunage" />
+              <span class="project-name">Tunage</span>
+            </a>
+          </h3>
+          <a class="badge" href="#" title="Coming Soon" aria-disabled="true">
+            <img src="/assets/images/play-badge.png" alt="Get it on Google Play" />
           </a>
-        </h1>
-        <span class="post-date">February 20, 2015</span>
-        <p>
-          Check it out, this is my brand new personal website! It’s been over a year since I’ve spent some time to really sit
-          down and work on my website, and even that was only a little podunk, university hosted, placeholder with my face
-          stickered on. For a while now, it’s been time I finally buckled down and created a presence for myself that I could
-          genuinely be proud of, but there’s a problem.
-        </p>
-        <p>
-          I’ve grown increasingly tired, as have many others, of writing web pages from scratch. And yet I am still neglecting
-          to make use of the many tools and utilities available for today’s web developer. Fortunately, my negelct is quickly
-          fading. Things like <a href="http://npmjs.org">npm</a>, <a href="http://bower.io">Bower</a>,
-          <a href="http://yeoman.io">Yeoman</a>, and <a href="http://gulpjs.org">Gulp</a> have been increasing productivity
-          for literally hundreds of thousands of developers.
-        </p>
-        <a href="/./blog/my-new-blog/">Read more &raquo;</a>
-      </article>
-    </div>
-    <div class="pagination">
-      <span class="pagination-item older">Older</span>
-      <span class="pagination-item newer">Newer</span>
-    </div>
+          <a href="https://github.com/chances/party" class="project-link github">
+            <span class="devicons devicons-github_badge" title="View Tunage on GitHub"></span>
+          </a>
+          <p>A progressive web app to facilitate guest engagement at your parties.</p>
+        </li>
+        <li>
+          <h3>
+            <a href="https://github.com/chances/duk-vis">duk-vis</a>
+          </h3>
+          <p>A JavaScript driven music visualizer.</p>
+        </li>
+        <li>
+          <h3>
+            <a href="https://github.com/chances/libASE-sharp">libASE-sharp</a>
+          </h3>
+          <p>A C# port of <a href="http://interreality.sourceforge.net/software/libASE/">libASE</a>.</p>
+        </li>
+        <li>
+          <h3>
+              <a href="https://github.com/chances/runaway">
+                <img src="/assets/images/runner.png" alt="Party" />
+                <span class="project-name">runaway!</span>
+              </a>
+          </h3>
+          <p>A web-based runaway script. Bringing the sexy back to runaway scripts.</p>
+        </li>
+        <li>
+          <h3>
+            <a href="https://github.com/chances/insultbot-suggestions">InsultBot</a>
+          </h3>
+          <p>An IRC bot that insults its users with insults provided by its users.</p>
+        </li>
+      </ul>
+    </article>
   </main>
   <footer class="container">
     <div class="social footer">
@@ -123,6 +114,7 @@
       </div>
     </div>
     <small>Copyright &copy; 2015-2020 Chance Snow. All rights reserved.</small>
+    <small class="attribution">Google Play and the Google Play logo are trademarks of Google LLC.</small>
   </footer>
 </body>
 </html>
