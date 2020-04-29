@@ -15,7 +15,7 @@ bootstrap: node_modules
 node_modules:
 	@npm install
 
-build: build-party
+build:
 	@echo "Building chances.github.io to ./site ..."
 	@find src/assets/javascript -name \*.js -exec cp {} site/assets/javascript \;
 	@make --quiet css
@@ -23,11 +23,6 @@ build: build-party
 
 bootstrap-and-build: bootstrap build
 .PHONY: bootstrap-and-build
-
-build-party:
-	@cd src/party && \
-	make --quiet build
-.PHONY: build-party
 
 clean:
 	@rm ${CSS_TARGETS}
@@ -51,11 +46,6 @@ watch-css:
 	@fswatch -or ./src/assets/scss | xargs -n1 -I {} \
 	make --quiet css
 .PHONY: watch-css
-
-watch-party:
-	@cd src/party && \
-	make --quiet watch
-.PHONY: watch-party
 
 css: $(CSS_TARGETS)
 .PHONY: css
