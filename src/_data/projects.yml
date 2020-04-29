@@ -12,11 +12,11 @@
   description: 'A JavaScript driven music visualizer.'
   github: duk-vis
 
-- name: libASE-sharp
-  description: 'A C# port of <a href="http://interreality.sourceforge.net/software/libASE/">libASE</a>.'
-  github: libASE-sharp
-
 - name: Runaway from enigma!
   short_name: runaway
   description: 'A web-based runaway script. Bringing the sexy back to runaway scripts.'
   github: runaway
+
+- name: libASE-sharp
+  description: 'A C# port of <a href="http://interreality.sourceforge.net/software/libASE/">libASE</a>.'
+  github: libASE-sharp
