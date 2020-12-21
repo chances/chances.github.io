@@ -1,5 +1,5 @@
 # [chancesnow.me](http://chancesnow.me)
-[![Build Status](https://travis-ci.org/chances/chances.github.io.svg?branch=master)](https://travis-ci.org/chances/chances.github.io)
+![CI Build Status](https://github.com/chances/chances.github.io/workflows/chances.github.io%20CI/badge.svg?branch=master)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fchances%2Fchances.github.io.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fchances%2Fchances.github.io?ref=badge_shield)
 
 The personal website and portfolio of Chance Snow, transformed with [TypeScript](https://www.typescriptlang.org/).

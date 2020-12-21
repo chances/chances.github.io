@@ -1,29 +1,22 @@
+- name: Tunage
+  description: 'A progressive web app to facilitate guest engagement at your parties.'
+  logo_url: '/assets/images/party/Party-icon-128.png'
+  featured: true
+  link: https://tunage.app
+
+- name: Teraflop
+  description: 'C# ECS game engine on a <a href="https://veldrid.dev/">Veldrid</a> foundation.'
+  github: teraflop
+
+- name: duk-vis
+  description: 'A JavaScript driven music visualizer.'
+  github: duk-vis
+
 - name: Runaway from enigma!
   short_name: runaway
   description: 'A web-based runaway script. Bringing the sexy back to runaway scripts.'
   github: runaway
 
-- name: duk-vis
-  description: 'A JavaScript driven music visualizer'
-  github: duk-vis
-
-- name: YouTunes
-  description: 'Turn YouTube into your own personal music player.'
-  github: YouTunes
-
-- name: Animatum
-  description: 'An application providing a simpler alternative for animating RCT3 custom scenery.'
-  link_unused: /projects/animatum
-  github: Animatum
-
 - name: libASE-sharp
   description: 'A C# port of <a href="http://interreality.sourceforge.net/software/libASE/">libASE</a>.'
   github: libASE-sharp
-
-- name: InsultBot
-  description: 'An IRC bot that insults its users.'
-  github: insultbot
-
-- name: DictionaryBot
-  description: 'An IRC bot that defines words.'
-  github: dictionarybot

@@ -1,75 +1,51 @@
-CSS_C=sassc
-CSS_FLAGS=-t compressed
+CSS_C=npx node-sass
+CSS_FLAGS=--output-style compressed
 CSS_SRC=src/assets/scss
 CSS_OUT=site/assets/stylesheets
 CSS_SOURCES=$(shell find $(CSS_SRC) -type f -name "*.scss")
 CSS_TARGETS=$(patsubst $(CSS_SRC)/%.scss,$(CSS_OUT)/%.min.css,$(wildcard $(CSS_SRC)/*.scss))
 
-all: build
+all: bootstrap-and-build
+.DEFAULT_GOAL := build
 
-build: build-hakyll build-party
+bootstrap: node_modules
+	@git submodule update --init --recursive
+.PHONY: bootstrap
+
+node_modules:
+	@npm install
+
+build:
 	@echo "Building chances.github.io to ./site ..."
-	@cd src && \
-	stack exec site rebuild
+	@find src/assets/javascript -name \*.js -exec cp {} site/assets/javascript \;
 	@make --quiet css
 .PHONY: build
 
-build-hakyll:
-	@echo "Building Hakyll site builder ..."
-	@stack build
-.PHONY: build-hakyll
-
-build-party:
-	@cd src/party && \
-	make --quiet build
-.PHONY: build-party
+bootstrap-and-build: bootstrap build
+.PHONY: bootstrap-and-build
 
 clean:
-	@rm -rf dist
-	@cd src && \
-	stack exec site clean
-	@stack clean
+	@rm ${CSS_TARGETS}
 .PHONY: clean
 
+STATIC = ./node_modules/.bin/static
+
 serve: build
-	@cd src && \
-	stack exec site serve
+	@${STATIC} site -z -p 3000
 .PHONY: serve
 
-watch: build-hakyll
-	@cd src && \
-	stack exec site watch
+CONCURRENTLY = ./node_modules/.bin/concurrently
+
+watch: build
+	@${CONCURRENTLY} -n "css,server" -c "magenta,gray.dim" --kill-others \
+		"make --quiet watch-css" \
+		"${STATIC} site -z -p 3000"
 .PHONY: watch
 
 watch-css:
 	@fswatch -or ./src/assets/scss | xargs -n1 -I {} \
 	make --quiet css
 .PHONY: watch-css
-
-watch-party:
-	@cd src/party && \
-	make --quiet watch
-.PHONY: watch-party
-
-deploy: build
-	@echo "Deploying chances.github.io via master branch"
-	@echo "  At commit" `git rev-parse --verify HEAD`
-	@rm -rf dist
-	@git clone `git config remote.origin.url` dist
-	@cd dist && \
-	git checkout master
-	@rm -rf dist/*
-	@cp -r site/* src/CNAME .gitattributes README.md LICENSE dist/.
-	@export SHA=`git rev-parse --verify HEAD` && \
-	export SHA_SMALL=`echo $$SHA | cut -c1-7` && \
-	export COMMIT="$$(git log -1 --pretty=medium)" && \
-	export COMMIT_MSG_SUBJECT="$$(git log -1 --pretty=format:%-s)" && \
-	export MESSAGE="$$COMMIT_MSG_SUBJECT ($$SHA_SMALL)\n\nDeploy $$SHA" && \
-	cd dist && \
-	git add . && \
-	git commit -m "$$(printf "$$MESSAGE")" && \
-	git push origin master
-.PHONY: deploy
 
 css: $(CSS_TARGETS)
 .PHONY: css
@@ -79,4 +55,4 @@ $(CSS_OUT):
 
 $(CSS_TARGETS): $(CSS_SOURCES)
 	@echo "Compiling src/assets/stylesheets/$(notdir $(basename $(basename $@))).css"
-	@$(CSS_C) $(CSS_FLAGS) src/assets/scss/$(notdir $(basename $(basename $@))).scss $@
+	@$(CSS_C) $(CSS_FLAGS) src/assets/scss/$(notdir $(basename $(basename $@))).scss > $@
