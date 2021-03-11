@@ -28,10 +28,10 @@ clean:
 	@rm ${CSS_TARGETS}
 .PHONY: clean
 
-STATIC = ./node_modules/.bin/static
+SERVE = npx serve
 
 serve: build
-	@${STATIC} site -z -p 3000
+	@${SERVE} site -z -p 3000
 .PHONY: serve
 
 CONCURRENTLY = ./node_modules/.bin/concurrently
@@ -39,7 +39,7 @@ CONCURRENTLY = ./node_modules/.bin/concurrently
 watch: build
 	@${CONCURRENTLY} -n "css,server" -c "magenta,gray.dim" --kill-others \
 		"make --quiet watch-css" \
-		"${STATIC} site -z -p 3000"
+		"${SERVE} site -p 3000"
 .PHONY: watch
 
 watch-css:
