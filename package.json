@@ -3,7 +3,11 @@
   "version": "2.0.0",
   "description": "JavaScript assets for https://chancesnow.me",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "install": "make all",
+    "start": "make serve",
+    "watch": "make watch"
+  },
   "repository": "git+https://github.com/chances/chances.github.io.git",
   "author": "Chance Snow <git@chancesnow.me>",
   "license": "MIT",
