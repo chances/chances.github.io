@@ -1,0 +1,29 @@
+/*
+ * Designed, built, and released under MIT license by @chances. Learn more at
+ * https://github.com/chances/chances.github.io.
+ */
+
+a[type=button]:hover {
+  text-decoration: none;
+}
+
+.sponsor-calls-to-action {
+  display: flex;
+  justify-content: space-evenly;
+
+  & > .patreon-button {
+    display: flex;
+    align-items: center;
+    padding: 0 12px 0 4px;
+    color: white;
+    font-size: 14px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    border-radius: 8px;
+    background-color: #FC414C;
+
+    img {
+      margin: 0 8px 0;
+    }
+  }
+}
