@@ -3,6 +3,59 @@
  * https://github.com/chances/chances.github.io.
  */
 
+header.masthead {
+  position: fixed;
+  width: 100%;
+  padding-bottom: 0.55rem;
+  background: white;
+  z-index: 500;
+
+  @media (min-width: 38rem) {
+    padding-bottom: 0.55rem;
+  }
+}
+
+.masthead-nav-item {
+  margin-left: 0.75rem;
+
+  &:not(:first-child) {
+    padding-left: 0;
+  }
+}
+
+.masthead-nav-item.github {
+  display: none;
+  color: #313131;
+  text-decoration: none;
+  margin-left: 0.625rem;
+  padding-left: 0;
+  transition: color linear 150ms;
+
+  &:hover {
+    color: #268bd2;
+  }
+
+  @media (min-width: 25rem) {
+    display: inline-block;
+  }
+}
+
+.masthead-nav-item .devicons {
+  font-size: 125%;
+  line-height: 0;
+  position: relative;
+  top: 0.2rem;
+  margin-right: 0.125rem;
+}
+
+main {
+  margin-top: 5.825rem;
+}
+
+.anchor {
+  position: relative; top: -4rem;
+}
+
 a[type=button]:hover {
   text-decoration: none;
 }

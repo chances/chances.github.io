@@ -81,33 +81,7 @@
   }
 }
 
-.masthead-nav-item.github {
-  display: none;
-  color: #313131;
-  text-decoration: none;
-  padding-left: 0.625rem;
-  transition: color linear 150ms;
-
-  &:hover {
-    color: #268bd2;
-  }
-}
-
-@media (min-width: 25rem) {
-  .masthead-nav-item.github {
-    display: inline-block;
-  }
-}
-
-.masthead-nav-item .devicons {
-  font-size: 125%;
-  line-height: 0;
-  position: relative;
-  top: 0.2rem;
-  margin-right: 0.125rem;
-}
-
-//Sidebar
+// Sidebar
 .sidebar-nav-separator {
   display: block;
   border-top: 0.175rem solid rgba(255, 255, 255, 0.2);
