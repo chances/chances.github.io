@@ -3,6 +3,26 @@
  * https://github.com/chances/chances.github.io.
  */
 
+header.masthead {
+  position: fixed;
+  width: 100%;
+  padding-bottom: 0.55rem;
+  background: white;
+  z-index: 500;
+
+  @media (min-width: 38rem) {
+    padding-bottom: 0.55rem;
+  }
+}
+
+main {
+  margin-top: 5.825rem;
+}
+
+.anchor {
+  position: relative; top: -4rem;
+}
+
 a[type=button]:hover {
   text-decoration: none;
 }
